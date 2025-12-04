@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovate & Elevate - Your Future Starts Here</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6A00FF; /* Deep Purple */
+            --secondary-color: #00DBFF; /* Electric Blue */
+            --accent-color: #FF0077; /* Neon Pink */
+            --text-color: #E0E7FF;
+            --soft-text-color: #A0B3D3;
+            --bg-dark-start: #0A0A0F;
+            --bg-dark-end: #1A1A2A;
+            --card-bg: rgba(255, 255, 255, 0.08); /* Glassmorphism effect */
+            --border-light: rgba(255, 255, 255, 0.15);
+            --gradient-1: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-2: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            --shadow-light: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+            --shadow-glow: 0 0 25px rgba(106, 0, 255, 0.6);
+            --border-radius-lg: 20px;
+            --border-radius-md: 12px;
+            --font-inter: 'Inter', sans-serif;
+            --font-bebas: 'Bebas Neue', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-inter);
+            color: var(--text-color);
+            background: linear-gradient(180deg, var(--bg-dark-start), var(--bg-dark-end));
+            min-height: 100vh;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Global Styles */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-bebas);
+            letter-spacing: 0.05em;
+            color: var(--text-color);
+            margin-bottom: 0.5em;
+        }
+
+        h1 { font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.1; }
+        h2 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1em;}
+        h3 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+        p { font-size: clamp(1rem, 2vw, 1.15rem); color: var(--soft-text-color); }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: var(--font-inter);
+            font-size: 1rem;
+        }
+
+        .btn--primary {
+            background: var(--gradient-1);
+            color: var(--text-color);
+            box-shadow: 0 4px 15px rgba(106, 0, 255, 0.4);
+        }
+        .btn--primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 219, 255, 0.5);
+        }
+
+        .btn--secondary {
+            background: none;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 0.9rem 2.4rem;
+        }
+        .btn--secondary:hover {
+            background: var(--secondary-color);
+            color: var(--bg-dark-start);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 219, 255, 0.3);
+        }
+
+        .text-center { text-align: center; }
+        .grid { display: grid; gap: 2rem; }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        section:not(:last-of-type) {
+            margin-bottom: 4rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            min-height: 90vh;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding-top: 80px; /* Space for fixed header */
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle at top left, var(--primary-color) 0%, transparent 60%);
+            opacity: 0.3;
+            filter: blur(80px);
+            z-index: -1;
+            animation: moveGradient1 15s infinite alternate ease-in-out;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            right: -20%;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle at bottom right, var(--secondary-color) 0%, transparent 60%);
+            opacity: 0.25;
+            filter: blur(80px);
+            z-index: -1;
+            animation: moveGradient2 18s infinite alternate ease-in-out;
+        }
+        
+        @keyframes moveGradient1 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 50px) scale(1.1); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        @keyframes moveGradient2 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-70px, -70px) scale(1.05); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        .hero p {
+            margin-top: 1.5rem;
+            margin-bottom: 2.5rem;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            backdrop-filter: blur(15px);
+            background: rgba(10, 10, 15, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+            transition: background 0.3s ease;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .logo {
+            font-family: var(--font-bebas);
+            font-size: 2rem;
+            color: var(--text-color);
+            letter-spacing: 0.1em;
+        }
+        .logo span {
+            color: var(--secondary-color);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        nav a {
+            color: var(--soft-text-color);
+            font-weight: 500;
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Features Section */
+        #features .grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        #features .glass-card {
+            text-align: center;
+        }
+        #features .glass-card h3 {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+            margin-top: 1rem;
+        }
+        #features .glass-card p {
+            color: var(--soft-text-color);
+            font-size: 1rem;
+        }
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 15px rgba(255, 0, 119, 0.4);
+        }
+        .icon-wrapper svg {
+            width: 40px;
+            height: 40px;
+            color: var(--text-color);
+        }
+
+        /* About Section */
+        #about .grid {
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        @media (min-width: 768px) {
+            #about .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .about-image img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+            display: block;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-color);
+            opacity: 0.2;
+            filter: blur(30px);
+            border-radius: var(--border-radius-lg);
+            z-index: 0;
+        }
+        .about-content h2 {
+           color: var(--text-color);
+           font-size: clamp(2rem, 5vw, 3.5rem);
+           margin-bottom: 0.8em;
+           text-align: left;
+        }
+        .about-content p {
+            margin-bottom: 1.5rem;
+            color: var(--soft-text-color);
+        }
+
+        /* Testimonials Section */
+        #testimonials {
+            background: linear-gradient(135deg, var(--bg-dark-end), var(--bg-dark-start));
+            padding: 8rem 0;
+        }
+        #testimonials h2 {
+            margin-bottom: 3rem;
+        }
+        #testimonials .grid {
+             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-md);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-light);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 219, 255, 0.4);
+        }
+        .testimonial-card blockquote {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--soft-text-color);
+            margin-bottom: 1rem;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: auto; /* Pushes content to bottom if varying heights */
+        }
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--secondary-color);
+        }
+        .testimonial-author-info strong {
+            display: block;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+        .testimonial-author-info span {
+            color: var(--soft-text-color);
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        #cta {
+            text-align: center;
+        }
+        #cta .glass-card {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+        }
+        #cta h2 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+        #cta p {
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark-start);
+            color: var(--soft-text-color);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .footer-logo {
+            font-family: var(--font-bebas);
+            font-size: 2.5rem;
+            color: var(--text-color);
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+        .footer-nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            list-style: none;
+            padding: 0;
+        }
+        .footer-nav a {
+            color: var(--soft-text-color);
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+        .footer-nav a:hover {
+            color: var(--accent-color);
+        }
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .social-links a {
+            color: var(--soft-text-color);
+            font-size: 1.5rem;
+            display: block;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .social-links a:hover {
+            color: var(--secondary-color);
+            transform: translateY(-3px) scale(1.1);
+        }
+        .footer-bottom {
+            margin-top: 2rem;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 0.8rem;
+                text-align: center;
+            }
+            nav a::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 80%;
+                max-width: 300px;
+            }
+            #cta .glass-card {
+                padding: 2rem 1rem;
+            }
+            #about .about-content {
+                text-align: center;
+            }
+            #about .about-content h2 {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.9rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">INNOVATE<span>X</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#cta">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="container hero-content">
+            <h1>Innovate & Elevate Your Digital Presence</h1>
+            <p>We craft cutting-edge solutions that redefine user experiences and drive unparalleled growth. Propel your business into the future with our innovative strategies.</p>
+            <div class="hero-buttons">
+                <a href="#cta" class="btn btn--primary">Get Started Today</a>
+                <a href="#features" class="btn btn--secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container text-center">
+            <h2>OUR CORE CAPABILITIES</h2>
+            <p>Discover how our unique blend of technology and creativity can transform your vision into reality.</p>
+            <div class="grid">
+                <div class="glass-card">
+                    <div class="icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1H14m-1.5-6.5L11 9.5V10l3.5-3v0L14 3h-3.5L10 6.5V6l-3.5 3v0L6 14h3.5l1 1h3l1-1H14m-1.5 6.5l.5-1.5h1l.5-1.5h-1l.5-1.5h-1l.5-1.5h-1L14 17h-1m-1.5-6h-1l-1-1h1l1-1h1.5zm-.5-2.5h-1l-1-1h1l1-1h1.5z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2.25m4.5-4.471a9.55 9.55 0 01-9 0M10.875 18H5.7a2.25 2.25 0 01-2.25-2.25A2.25 2.25 0 015.7 13.5h.363zm4.443 0l.4-4.5h-9.916l.4 4.5h9.116zM13.5 13.5h.363a2.25 2.25 0 012.25 2.25A2.25 2.25 0 0113.863 18h-.363z"></path>
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                    </div>
+                    <h3>Advanced AI Integration</h3>
+                    <p>Harness the power of AI to automate tasks, personalize experiences, and gain deeper insights into your operations.</p>
+                </div>
+                <div class="glass-card">
+                    <div class="icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                        </svg>
+                    </div>
+                    <h3>Seamless Cloud Solutions</h3>
+                    <p>Scale effortlessly with robust, secure, and flexible cloud infrastructure tailored to your business needs.</p>
+                </div>
+                <div class="glass-card">
+                    <div class="icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20.364l-3.54-3.54a7 7 0 010-9.9L12 3.54l5.54 5.54a7 7 0 010 9.9l-3.54 3.54m-4.95-4.945l-3.54-3.54a7 7 0 010-9.9L12 3.54l5.54 5.54a7 7 0 010 9.9l-3.54 3.54m-4.95-4.945l-3.54-3.54a7 7 0 010-9.9L12 3.54l5.54 5.54a7 7 0 010 9.9l-3.54 3.54"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20.364l-3.54-3.54a7 7 0 010-9.9L12 3.54l5.54 5.54a7 7 0 010 9.9l-3.54 3.54"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 100-18 9 9 0 000 18z"></path>
+                        </svg>
+                    </div>
+                    <h3>Intuitive UX/UI Design</h3>
+                    <p>Engage your audience with stunning, user-centric interfaces meticulously designed for optimal usability and visual appeal.</p>
+                </div>
+                <div class="glass-card">
+                    <div class="icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20.25c0 .323-.049.627-.14 1.25H4.25a.75.75 0 01-.75-.75V3.5a.75.75 0 01.75-.75h15.5a.75.75 0 01.75.75v17.5c0 .323-.049.627-.14 1.25H10zM6.75 3.5h10.5m-3.993 15.007L12 16.5m-3 3.75l-.946-.946a.75.75 0 01-.22-.53A.75.75 0 018.75 18h6.5a.75.75 0 01.53-.22c.197.026.387.051.577.075"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 8V6.5a1.5 1.5 0 011.5-1.5h5A1.5 1.5 0 0116 6.5V8m-5 9v1m-2.5-4a2.5 2.5 0 110-5 2.5 2.5 0 010 5zm5 0a2.5 2.5 0 110-5 2.5 2.5 0 010 5zm-5 5h5m-2.5-2.5L12 18.25m-2.5-2.25L12 16.5"></path>
+                        </svg>
+                    </div>
+                    <h3>Future-Proof Development</h3>
+                    <p>Build on a foundation of scalable, clean code using the latest frameworks and technologies for sustainable growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container grid">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1510519153579-dac13ed0d8c0?auto=format&fit=crop&q=80&w=1950&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Team collaborating on a project">
+            </div>
+            <div class="about-content">
+                <h2>Our Vision: Shaping Tomorrow's Digital Landscape</h2>
+                <p>At InnovateX, we believe in the power of technology to unlock unprecedented potential. Founded in 2020 by a team of visionary engineers and designers, our mission is to empower businesses to thrive in the complex digital ecosystem of 2025 and beyond.</p>
+                <p>We're more than just developers; we're partners dedicated to your success. Our agile approach ensures transparency, flexibility, and tangible results, always staying ahead of market trends to deliver solutions that matter.</p>
+                <a href="#cta" class="btn btn--secondary">Connect With Us</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="container text-center">
+            <h2>WHAT OUR CLIENTS SAY</h2>
+            <p>Don't just take our word for it. Hear from the businesses we've helped elevate.</p>
+            <div class="grid">
+                <div class="testimonial-card">
+                    <blockquote>"InnovateX transformed our outdated platform into a sleek, AI-driven powerhouse. The user engagement has quadrupled, and their team was incredibly responsive and insightful throughout the entire process."</blockquote>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client Avatar">
+                        <div class="testimonial-author-info">
+                            <strong>Dr. Evelyn Reed</strong>
+                            <span>CEO, Quantum Analytics</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <blockquote>"The cloud migration was seamless, and the new UI is simply stunning. InnovateX didn't just build a product; they built a future for our company. Highly recommend their expertise!"</blockquote>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client Avatar">
+                        <div class="testimonial-author-info">
+                            <strong>Mr. Julian Vance</strong>
+                            <span>Founder, Horizon Labs</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <blockquote>"From concept to launch, InnovateX provided unparalleled support and innovative thinking. Their custom software solution has drastically improved our operational efficiency and customer satisfaction."</blockquote>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client Avatar">
+                        <div class="testimonial-author-info">
+                            <strong>Ms. Clara Ngo</strong>
+                            <span>Operations Lead, Synergy Corp</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta">
+        <div class="container">
+            <div class="glass-card">
+                <h2>Ready to Transform Your Business?</h2>
+                <p>Let's collaborate on your next big idea. Our team is eager to provide tailored solutions that drive innovation and growth.</p>
+                <a href="mailto:info@innovatex.com" class="btn btn--primary">Get a Free Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <a href="#" class="footer-logo">INNOVATE<span>X</span></a>
+            <div class="footer-nav">
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#cta">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="#" aria-label="Twitter">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.791-1.574 2.162-2.722-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.071 1.623-4.661 2.59-7.09 2.598-.363-.003-.728-.024-1.09-.069 2.158 1.399 4.757 2.211 7.548 2.211 9.173 0 14.15-7.618 14.15-14.15 0-.219-.005-.436-.014-.653.974-.704 1.884-1.597 2.576-2.769z"/></svg>
+                </a>
+                <a href="#" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.304.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576c4.765-1.589 8.197-6.086 8.197-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+            </div>
+            <p class="footer-bottom">&copy; 2025 InnovateX. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
