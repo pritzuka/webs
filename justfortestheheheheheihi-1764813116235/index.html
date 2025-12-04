@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #A855F7 0%, #EC4899 100%); /* Purple to Pink */
+            --background-gradient: radial-gradient(circle at top left, #1f2937, #111827); /* Darker radial */
+            --text-color: #f3f4f6;
+            --glass-background: rgba(255, 255, 255, 0.08); /* Lighter glass */
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --transition-speed: 0.4s ease-in-out;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: var(--background-gradient);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; /* Prevent scrollbar from animation */
+        }
+
+        .container {
+            text-align: center;
+            background: var(--glass-background);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem 4rem;
+            box-shadow: 0 15px 30px var(--shadow-color);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: center/cover no-repeat url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" /></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.05"/></svg>');
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        h1 {
+            font-size: 6rem;
+            letter-spacing: -2px;
+            margin: 0;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: bounceIn 1s ease-out forwards;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 60%;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+            transition: transform 0.5s ease;
+        }
+
+        .container:hover h1::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        .animated-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .animated-background .shape {
+            position: absolute;
+            background: rgba(236, 72, 153, 0.3); /* Pink */
+            border-radius: 50%;
+            filter: blur(50px);
+            opacity: 0;
+            animation: floatAndFade 15s infinite ease-in-out;
+        }
+
+        .animated-background .shape:nth-child(even) {
+            background: rgba(168, 85, 247, 0.3); /* Purple */
+            animation-delay: -7s;
+            animation-duration: 18s;
+        }
+
+        .animated-background .shape:nth-child(1) { top: 10%; left: 10%; width: 100px; height: 100%; }
+        .animated-background .shape:nth-child(2) { top: 70%; left: 80%; width: 120px; height: 120px; animation-delay: -3s; }
+        .animated-background .shape:nth-child(3) { top: 20%; left: 60%; width: 80px; height: 80px; animation-delay: -5s; }
+        .animated-background .shape:nth-child(4) { top: 40%; left: 20%; width: 150px; height: 150px; animation-delay: -9s; }
+        .animated-background .shape:nth-child(5) { top: 5%; left: 45%; width: 90px; height: 90px; animation-delay: -12s; }
+
+
+        /* Keyframes */
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+                filter: blur(10px);
+            }
+            60% {
+                transform: scale(1.1);
+                opacity: 1;
+                filter: blur(0px);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+                 filter: blur(0px);
+            }
+        }
+
+        @keyframes floatAndFade {
+            0% {
+                transform: translateY(0) translateX(0) scale(0.8);
+                opacity: 0;
+            }
+            25% {
+                transform: translateY(-20%) translateX(10%) scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-40%) translateX(-10%) scale(1.2);
+                opacity: 0.15;
+            }
+            75% {
+                transform: translateY(-60%) translateX(5%) scale(1);
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-80%) translateX(-5%) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 4rem;
+            }
+            .container {
+                padding: 2rem 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 3rem;
+            }
+            .container {
+                padding: 1.5rem 2rem;
+                margin: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <div class="container">
+        <h1>Hi</h1>
+    </div>
+</body>
+</html>
