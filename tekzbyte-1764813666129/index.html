@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeckzByte AI Web Builder - Future of Web Creation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #7F00FF, #E100FF); /* Purple to Magenta */
+            --secondary-gradient: linear-gradient(135deg, #00C9FF, #92FE9D); /* Sky Blue to Mint Green */
+            --dark-bg: #1a1a2e;
+            --light-bg: #ffffff;
+            --text-color-light: #e0e0e0;
+            --text-color-dark: #333333;
+            --glass-bg: rgba(255, 255, 255, 0.08); /* Lighter for contrast */
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --card-glass-bg: rgba(255, 255, 255, 0.05); /* Slightly darker for cards */
+            --card-glass-border: rgba(255, 255, 255, 0.1);
+            --shadow-light: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --shadow-dark: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --spacing-unit: 1.5rem;
+        }
+
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-light);
+            background: var(--dark-bg);
+            background-attachment: fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: var(--spacing-unit);
+            color: #fff;
+        }
+        h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: calc(2 * var(--spacing-unit));
+            letter-spacing: -0.05em;
+        }
+        p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #92FE9D; /* Light green */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        section {
+            padding: calc(4 * var(--spacing-unit)) 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Glassmorphism effect */
+        .glass-card, .glass-element {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: var(--shadow-light);
+        }
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: #fff;
+            border: none;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(127, 0, 255, 0.4);
+            filter: brightness(1.1);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 0.7rem 1.8rem;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--secondary-gradient);
+            color: #92FE9D;
+            transform: translateY(-3px);
+        }
+
+        /* Header */
+        .main-header {
+            background: var(--glass-bg);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.05em;
+        }
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+        }
+        .nav-menu ul li {
+            margin-left: 2.5rem;
+        }
+        .nav-menu ul li a {
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        .nav-menu ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-gradient);
+            transition: width 0.3s ease;
+        }
+        .nav-menu ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to bottom, var(--dark-bg) 0%, rgba(0,0,0,0.8) 100%);
+            padding: calc(6 * var(--spacing-unit)) 0 calc(8 * var(--spacing-unit));
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 80%;
+            height: 80%;
+            background: rgba(127, 0, 255, 0.1);
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            animation: moveBlob1 15s infinite alternate ease-in-out;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            right: -20%;
+            width: 70%;
+            height: 70%;
+            background: rgba(0, 201, 255, 0.1);
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            animation: moveBlob2 18s infinite alternate-reverse ease-in-out;
+        }
+        @keyframes moveBlob1 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30%, 20%) scale(1.1); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        @keyframes moveBlob2 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-20%, -30%) scale(1.2); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.08em;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+        .hero .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        /* Features Section */
+        .features .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: calc(3 * var(--spacing-unit));
+        }
+        .feature-card {
+            padding: calc(2 * var(--spacing-unit));
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: var(--card-glass-bg);
+            border: 1px solid var(--card-glass-border);
+            height: 100%; /* Ensure cards are same height */
+        }
+        .feature-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            color: #fff;
+        }
+        .feature-card p {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            flex-grow: 1; /* Pushes content to bottom if needed */
+        }
+
+        /* How It Works Section */
+        .how-it-works .container {
+            max-width: 900px;
+        }
+        .steps {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: calc(2 * var(--spacing-unit));
+            margin-top: calc(3 * var(--spacing-unit));
+        }
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            background: var(--card-glass-bg);
+            border: 1px solid var(--card-glass-border);
+            padding: calc(1.5 * var(--spacing-unit));
+        }
+        .step-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+        .step-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        .step-content p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* About Section (Simplified) */
+        .about-us {
+            text-align: center;
+            padding: calc(6 * var(--spacing-unit)) 0;
+        }
+        .about-us p {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+        .about-us .btn-primary {
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        .main-footer {
+            background: var(--dark-bg);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: calc(2 * var(--spacing-unit)) 0;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: auto; /* Pushes footer to the bottom */
+            position: relative;
+            z-index: 1;
+        }
+        .main-footer .footer-nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .main-footer .footer-nav ul li a {
+            color: var(--text-color-light);
+        }
+        .main-footer .footer-nav ul li a:hover {
+            color: #92FE9D;
+        }
+
+        /* Utility classes for animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            .hero p {
+                font-size: 1.3rem;
+            }
+            .nav-menu ul li {
+                margin-left: 1.8rem;
+            }
+            .feature-card {
+                padding: calc(1.5 * var(--spacing-unit));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-menu ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            .nav-menu ul li {
+                margin: 0;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .hero .btn-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .btn {
+                width: 80%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            .features .container {
+                grid-template-columns: 1fr;
+            }
+            .step-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .step-number {
+                margin-bottom: 0.5rem;
+            }
+            .about-us p {
+                font-size: 1rem;
+            }
+            section {
+                padding: calc(3 * var(--spacing-unit)) 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            .nav-menu ul li a {
+                font-size: 0.9rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 0.7rem 1.5rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .feature-card h3 {
+                font-size: 1.4rem;
+            }
+            .feature-card p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Third-party icons (Font Awesome) - for demonstration */
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">TeckzByte AI</div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#about-us">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero fade-in">
+            <div class="container">
+                <h1>Craft Your Vision with AI Precision.</h1>
+                <p>Unlock the power of artificial intelligence to design, build, and launch stunning websites faster than ever before. TeckzByte AI is your co-pilot in web creation.</p>
+                <div class="btn-group">
+                    <a href="#" class="btn btn-primary">Start Building Now</a>
+                    <a href="#features" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="fade-in">Intelligent Features, Effortless Creation</h2>
+                <div class="container fade-in">
+                    <div class="feature-card glass-card">
+                        <i class="fas fa-brain"></i>
+                        <h3>AI-Powered Design</h3>
+                        <p>Leverage algorithms to generate unique layouts, color palettes, and typography tailored to your brand in seconds.</p>
+                    </div>
+                    <div class="feature-card glass-card">
+                        <i class="fas fa-magic"></i>
+                        <h3>Drag & Drop Simplicity</h3>
+                        <p>Intuitive interface lets you customize every element with ease. No coding required, just pure creative flow.</p>
+                    </div>
+                    <div class="feature-card glass-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Responsive by Default</h3>
+                        <p>All websites built with TeckzByte AI are perfectly optimized for desktop, tablet, and mobile devices, automatically.</p>
+                    </div>
+                    <div class="feature-card glass-card">
+                        <i class="fas fa-code"></i>
+                        <h3>Clean & Modern Code</h3>
+                        <p>Our AI generates clean, semantic HTML and CSS, ensuring blazing-fast performance and SEO readiness.</p>
+                    </div>
+                    <div class="feature-card glass-card">
+                        <i class="fas fa-bezier-curve"></i>
+                        <h3>Advanced Customization</h3>
+                        <p>Dive deep with advanced options for fonts, animations, and interactive elements – all controllable through our AI studio.</p>
+                    </div>
+                    <div class="feature-card glass-card">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Instant Deployment</h3>
+                        <p>Publish your website live with a single click. TeckzByte AI handles the hosting and deployment for you.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <h2 class="fade-in">Your AI Web Building Journey</h2>
+                <div class="steps">
+                    <div class="step-item glass-card fade-in">
+                        <span class="step-number">01</span>
+                        <div class="step-content">
+                            <h3>Describe Your Vision</h3>
+                            <p>Tell our AI what your website is about, your industry, and your target audience. Input keywords or a brief description.</p>
+                        </div>
+                    </div>
+                    <div class="step-item glass-card fade-in">
+                        <span class="step-number">02</span>
+                        <div class="step-content">
+                            <h3>AI Generates Options</h3>
+                            <p>Watch as TeckzByte AI instantly presents multiple unique design concepts, layouts, and content structures for you to choose from.</p>
+                        </div>
+                    </div>
+                    <div class="step-item glass-card fade-in">
+                        <span class="step-number">03</span>
+                        <div class="step-content">
+                            <h3>Customize & Refine</h3>
+                            <p>Use our intuitive editor to personalize text, images, colors, and layouts. The AI assists you with suggestions and optimizations.</p>
+                        </div>
+                    </div>
+                    <div class="step-item glass-card fade-in">
+                        <span class="step-number">04</span>
+                        <div class="step-content">
+                            <h3>Launch Your Masterpiece</h3>
+                            <p>Once satisfied, hit publish! Your professional, AI-crafted website is live and ready to impress the world.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about-us" class="about-us">
+            <div class="container">
+                <h2 class="fade-in">About TeckzByte AI</h2>
+                <p class="fade-in">
+                    At TeckzByte AI, we believe that exceptional web design should be accessible to everyone. We engineered a revolutionary AI platform that simplifies the complex process of web development, empowering entrepreneurs, small businesses, and creative professionals to build a powerful online presence without the need for coding expertise or high costs. Our mission is to democratize web creation, making it faster, smarter, and more beautiful than ever. Join us in shaping the future of the web.
+                </p>
+                <a href="#" class="btn btn-primary fade-in">Explore Our Journey</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </nav>
+            <p>&copy; TeckzByte AI Web Builder. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const observerOptions = {
+            root: null, // viewport
+            rootMargin: '0px',
+            threshold: 0.2 // Trigger when 20% of the element is visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                    observer.unobserve(entry.target); // Stop observing once it appears
+                }
+            });
+        }, observerOptions);
+
+        fadeElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initial check for elements already in viewport on load
+        window.addEventListener('load', () => {
+            fadeElements.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight) {
+                    el.classList.add('appear');
+                    observer.unobserve(el); // Stop observing
+                }
+            });
+        });
+    </script>
+</body>
+</html>
