@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newell Eyebursts - Discover Your Vision</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6C5CE7; /* Vibrant Purple */
+            --secondary-color: #00D2B8; /* Teal */
+            --accent-color: #FDC700; /* Golden Yellow */
+            --dark-bg: #1A1A2E; /* Dark Blue-Purple */
+            --light-bg: #E0E0F0; /* Off-white */
+            --text-color: #F8F8F8;
+            --dark-text: #333;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --gradient-hero: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-button: linear-gradient(45deg, var(--accent-color), #ED8E20);
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-dark: rgba(0, 0, 0, 0.3);
+            --border-radius-lg: 16px;
+            --border-radius-md: 10px;
+            --transition-speed: 0.3s ease-in-out;
+        }
+
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            background-color: var(--dark-bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Oswald', sans-serif;
+            margin-bottom: 0.8em;
+            color: var(--primary-color);
+        }
+
+        h1 { font-size: 3.5em; }
+        h2 { font-size: 2.5em; }
+        h3 { font-size: 1.8em; }
+
+        p {
+            margin-bottom: 1em;
+            font-weight: 300;
+        }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            position: relative;
+            z-index: 1; /* For stacking context with background effects */
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Utility buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all var(--transition-speed);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary {
+            background: var(--gradient-button);
+            color: var(--dark-bg);
+            background-size: 200% auto;
+        }
+        .btn-primary:hover {
+            background-position: right center;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: none;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+        .btn-secondary:hover {
+            background-color: var(--secondary-color);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+        }
+
+        /* Glassmorphism card */
+        .glass-card {
+            background: var(--glass-bg);
+            border-radius: var(--border-radius-lg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: transform var(--transition-speed);
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Navigation */
+        .header {
+            background-color: rgba(26, 26, 46, 0.85); /* Slightly transparent dark-bg */
+            backdrop-filter: blur(8px);
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--secondary-color);
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 5px rgba(255,255,255,0.2);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            left: 0;
+            bottom: 0;
+            transition: width var(--transition-speed);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-hero);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px; /* Account for fixed header */
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1549729864-28b96f131a29?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTQzMjB8MHwxfHNlYXJjaHw3MzB8fG15c3RpYyUyMGV5ZSUyMGxhc2VyfGVufDB8fHx8MTY5OTk2Nzk2NHww&ixlib=rb-4.0.3&q=80&w=1080') center center/cover no-repeat; /* Replace with your desired image for visual impact */
+            opacity: 0.1;
+            filter: blur(5px);
+            z-index: -1;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4.8em;
+            margin-bottom: 0.3em;
+            line-height: 1.1;
+            background: linear-gradient(90deg, var(--text-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.4em;
+            margin-bottom: 2.5em;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero .btn {
+            font-size: 1.1em;
+            padding: 1.2rem 3rem;
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow: hidden;
+        }
+
+        .about .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            padding: 1rem;
+        }
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+            transform: rotate(3deg) scale(1.02);
+            transition: transform var(--transition-speed);
+        }
+        .about-image img:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .about-content h2 {
+            color: var(--secondary-color);
+        }
+        .about-content p {
+            font-size: 1.1em;
+            margin-bottom: 2em;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Features Section */
+        .features {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            position: relative;
+            padding: 8rem 0;
+        }
+
+        .features::before, .features::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            filter: blur(50px);
+            z-index: 0;
+            animation: pulse 6s infinite ease-in-out;
+        }
+        .features::before {
+            width: 300px;
+            height: 300px;
+            top: -50px;
+            left: -100px;
+            background-color: rgba(108, 92, 231, 0.15); /* primary-color */
+        }
+        .features::after {
+            width: 400px;
+            height: 400px;
+            bottom: -80px;
+            right: -150px;
+            background-color: rgba(0, 210, 184, 0.15); /* secondary-color */
+            animation-delay: 2s;
+        }
+
+
+        .features h2 {
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            background: linear-gradient(145deg, #f0f0f0, #e0e0e0);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            border-bottom: 5px solid var(--primary-color);
+            transition: all var(--transition-speed);
+            position: relative;
+            overflow: hidden;
+            color: var(--dark-text);
+        }
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-hero);
+            transform: translateX(-100%);
+            transition: transform var(--transition-speed);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border-bottom-color: var(--secondary-color);
+        }
+        .feature-item:hover::before {
+            transform: translateX(0);
+        }
+
+        .feature-item .icon {
+            font-size: 3em;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            transition: transform var(--transition-speed);
+        }
+        .feature-item:hover .icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-item h3 {
+            color: var(--dark-text);
+            margin-bottom: 0.8em;
+        }
+
+        /* Vision Section */
+        .vision {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            background-image: url('https://images.unsplash.com/photo-1510972560731-ef171d9d71c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTQzMjB8MHwxfHNlYXJjaHwyMDh8fGludGVsaWdlbnQlMjBlaWQlMjRuY2V8ZW58MHx8fHwxNzAzNDMwNjcxfDA&ixlib=rb-4.0.3&q=80&w=1080'); /* Abstract network/eye-like pattern */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .vision::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 46, 0.8); /* Dark overlay */
+            z-index: 0;
+        }
+
+        .vision .container {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .vision-text h2 {
+            color: var(--accent-color);
+        }
+
+        .vision-point {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            background: var(--glass-bg);
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform var(--transition-speed);
+        }
+        .vision-point:hover {
+            transform: translateX(10px);
+        }
+
+        .vision-point .icon {
+            font-size: 2em;
+            color: var(--primary-color);
+            margin-right: 1em;
+            flex-shrink: 0;
+        }
+
+        .vision-point p {
+            margin: 0;
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            padding-bottom: 8rem;
+        }
+
+        .testimonials h2 {
+            color: var(--primary-color);
+            margin-bottom: 4rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .testimonial-card {
+            background-color: #fff;
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: 0 10px 20px var(--shadow-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border-top: 5px solid var(--secondary-color);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            color: var(--dark-text);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .testimonial-card blockquote {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        .testimonial-card .author-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .testimonial-card .author-name {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-top: 0.5rem;
+        }
+
+        .testimonial-card .author-title {
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark-bg);
+            color: var(--text-color);
+            padding-bottom: 8rem;
+        }
+
+        .contact h2 {
+            color: var(--accent-color);
+            margin-bottom: 4rem;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            background: var(--glass-bg);
+            padding: 1.5rem;
+            border-radius: var(--border-radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform var(--transition-speed);
+        }
+        .contact-item:hover {
+            transform: translateX(10px);
+        }
+
+        .contact-item .icon {
+            font-size: 2.2em;
+            color: var(--secondary-color);
+            margin-right: 1.2em;
+        }
+
+        .contact-item p {
+            margin: 0;
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-form .glass-card {
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.05); /* Slightly lighter glass for form */
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8em;
+            font-weight: 500;
+            color: var(--primary-color);
+            font-size: 1.1em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-md);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1em;
+            transition: border-color var(--transition-speed), background-color var(--transition-speed);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 3px rgba(0, 210, 184, 0.2);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #0E0E1A; /* Even darker shade */
+            color: rgba(255, 255, 255, 0.7);
+            padding: 4rem 0 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer .logo {
+            font-size: 2.5em;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .footer p {
+            margin-bottom: 1.5rem;
+            font-size: 0.95em;
+        }
+
+        .social-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--secondary-color);
+            font-size: 1.8em;
+            transition: color var(--transition-speed);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.1; }
+            50% { transform: scale(1.05); opacity: 0.2; }
+            100% { transform: scale(0.95); opacity: 0.1; }
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 3.8em; }
+            .hero p { font-size: 1.2em; }
+            h1 { font-size: 3em; }
+            h2 { font-size: 2em; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+            .nav-links a {
+                font-size: 0.9em;
+            }
+
+            .hero {
+                padding-top: 120px;
+                min-height: 80vh;
+            }
+            .hero h1 {
+                font-size: 2.8em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            .hero .btn {
+                padding: 1rem 2rem;
+                font-size: 1em;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .about .container,
+            .vision .container,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image img {
+                transform: rotate(0deg);
+            }
+
+            .feature-grid, .testimonial-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .glass-card, .feature-item, .testimonial-card, .contact-item {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.8em;
+            }
+            .nav-links {
+                gap: 1rem;
+            }
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero p {
+                font-size: 0.9em;
+            }
+            h2 { font-size: 1.8em; }
+            h3 { font-size: 1.4em; }
+
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.9em;
+            }
+
+            .feature-item, .testimonial-card, .glass-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <header class="header">
+        <div class="container navbar">
+            <a href="#" class="logo">Newell Eyebursts</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#vision">Our Vision</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="container hero-content">
+                <h1>Unlock Your Full Visual Potential.</h1>
+                <p>Newell Eyebursts delivers groundbreaking solutions that redefine perception and elevate your sight to new dimensions.</p>
+                <a href="#features" class="btn btn-primary">Discover Eyebursts</a>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1576020516421-2e6b7d3f23a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTQzMjB8MHwxfHNlYXJjaHwxNXx8cHJlY2lzaW9uJTIwdGVjaG5vbG9neXxlbnwwfHx8fDE3MDkyMjY2OTN8MA&ixlib=rb-4.0.3&q=80&w=1080" alt="Advanced Eye Technology">
+                </div>
+                <div class="about-content">
+                    <h2>About Newell Eyebursts</h2>
+                    <p>At Newell Eyebursts, we are pioneers in ocular enhancement technology. Founded on the principle that sight should be limitless, we've spent years developing proprietary systems that not only correct vision but augment it, providing clarity, depth, and insight never before experienced. Our innovative approach merges bio-optics with advanced AI, creating a symbiotic relationship between man and machine for unparalleled visual acuity.</p>
+                    <p>Our team comprises leading scientists, ophthalmologists, and visionaries dedicated to pushing the boundaries of human perception. We believe the future of sight is here, and it's brighter than ever.</p>
+                    <a href="#vision" class="btn btn-secondary">Learn Our Vision</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features text-center">
+            <div class="container">
+                <h2>Experience the Future of Sight</h2>
+                <p>Our core technologies are designed to integrate seamlessly, offering a revolutionary visual journey.</p>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-eye icon"></i>
+                        <h3>Enhanced Acuity</h3>
+                        <p>See every detail with astounding clarity, far beyond conventional limits, in any environment.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-brain icon"></i>
+                        <h3>Cognitive Integration</h3>
+                        <p>Real-time data overlays and intuitive visual processing directly augment your understanding.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt icon"></i>
+                        <h3>Adaptive Protection</h3>
+                        <p>Intelligent filters adjust to light, glare, and environmental hazards instantly for optimal safety.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-infinity icon"></i>
+                        <h3>Limitless Perspective</h3>
+                        <p>Zoom, focus, and perceive across different spectra, opening new dimensions of perception.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="vision" class="vision">
+            <div class="container">
+                <div class="vision-text">
+                    <h2>Our Vision for a Brighter Tomorrow</h2>
+                    <p>We envision a world where every individual can experience the richness of their surroundings without visual impediment. Newell Eyebursts isn't just about correcting sight; it's about expanding human capability and enriching lives through a truly immersive visual experience.</p>
+                    <div class="vision-point">
+                        <i class="fas fa-lightbulb icon"></i>
+                        <p>Empowering individuals with enhanced perception for work, education, and daily life.</p>
+                    </div>
+                    <div class="vision-point">
+                        <i class="fas fa-globe-americas icon"></i>
+                        <p>Contributing to scientific discovery and exploration through advanced visual data acquisition.</p>
+                    </div>
+                    <div class="vision-point">
+                        <i class="fas fa-hands-helping icon"></i>
+                        <p>Making cutting-edge vision accessible to all, improving quality of life globally.</p>
+                    </div>
+                </div>
+                <div>
+                    <!-- Could be an image or a 3D rendering of the technology here -->
+                    <div class="glass-card">
+                        <h3>Breakthrough Innovation</h3>
+                        <p>Our commitment to R&D ensures we're always at the forefront, continually pushing what's possible in ocular science. Join us on this journey of visual revolution.</p>
+                        <a href="#contact" class="btn btn-primary">Join the Revolution</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials text-center">
+            <div class="container">
+                <h2>What Our Pioneers Say</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <blockquote>"Newell Eyebursts changed my life. The world is so much clearer, more vibrant. It's like seeing for the very first time, every day."</blockquote>
+                        <div class="author-info">
+                            <span class="author-name">Alex M.</span>
+                            <span class="author-title">Researcher</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <blockquote>"The cognitive integration is mind-blowing. I process information faster, react quicker. It's an unfair advantage in the best possible way."</blockquote>
+                        <div class="author-info">
+                            <span class="author-name">Dr. Eva R.</span>
+                            <span class="author-title">Engineer</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <blockquote>"I never knew what I was missing. Newell Eyebursts doesn't just fix sight; it upgrades your entire visual existence. Truly transformative."</blockquote>
+                        <div class="author-info">
+                            <span class="author-name">Samantha K.</span>
+                            <span class="author-title">Artist</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact text-center">
+            <div class="container">
+                <h2>Connect With Newell Eyebursts</h2>
+                <p>Have questions or ready to embark on your visual journey? Reach out to us.</p>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt icon"></i>
+                            <p>123 Visionary Drive, Optima City, OD 90210</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope icon"></i>
+                            <p><a href="mailto:info@newelleyebursts.com">info@newelleyebursts.com</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt icon"></i>
+                            <p><a href="tel:+1-800-EYEBURST">+1 (800) EYE-BURST</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form action="#" method="POST" class="glass-card">
+                            <h3>Send Us a Message</h3>
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Your Email</label>
+                                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" placeholder="Type your message here..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <a href="#" class="logo">Newell Eyebursts</a>
+            <p>&copy; 2025 Newell Eyebursts. All rights reserved. Pioneering the future of vision.</p>
+            <ul class="social-links">
+                <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+</html>
