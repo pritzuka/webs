@@ -1,0 +1,171 @@
+<!-- Full Calculator Code -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Calculator 2025</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --accent: #8b5cf6;
+            --bg-section: #f8fafc;
+            --text-dark: #0f172a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-section); min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        
+        .calculator {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 320px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .display {
+            grid-column: span 4;
+            background: #0f172a;
+            color: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            font-size: 2rem;
+            text-align: right;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        button {
+            background: var(--accent);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            padding: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            background: #5c54e5;
+            box-shadow: 0 8px 25px #5c54e5;
+        }
+
+        .operator {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .equals {
+            background: linear-gradient(45deg, #ec4899 0%, #d32f9b 100%);
+            grid-column: span 2;
+        }
+
+        .clear {
+            background: #e3e6ed;
+            color: var(--text-dark);
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button onclick="appendNumber('7')">7</button>
+        <button onclick="appendNumber('8')">8</button>
+        <button onclick="appendNumber('9')">9</button>
+        <button class="operator" onclick="setOperation('+')">+</button>
+        
+        <button onclick="appendNumber('4')">4</button>
+        <button onclick="appendNumber('5')">5</button>
+        <button onclick="appendNumber('6')">6</button>
+        <button class="operator" onclick="setOperation('-')">-</button>
+        
+        <button onclick="appendNumber('1')">1</button>
+        <button onclick="appendNumber('2')">2</button>
+        <button onclick="appendNumber('3')">3</button>
+        <button class="operator" onclick="setOperation('*')">×</button>
+        
+        <button onclick="appendNumber('0')" style="grid-column: span 2;">0</button>
+        <button onclick="appendNumber('.')">.</button>
+        <button class="equals" onclick="calculate()">=</button>
+        <button class="operator" onclick="setOperation('/')">÷</button>
+    </div>
+
+    <script>
+        let currentInput = '0';
+        let previousInput = null;
+        let operation = null;
+
+        const display = document.getElementById('display');
+
+        function appendNumber(number) {
+            if (currentInput === '0' && number !== '.') {
+                currentInput = number;
+            } else if (number === '.' && currentInput.includes('.')) {
+                return;
+            } else {
+                currentInput += number;
+            }
+            display.textContent = currentInput;
+        }
+
+        function setOperation(op) {
+            if (currentInput === '') return;
+            if (previousInput === null) {
+                previousInput = parseFloat(currentInput);
+            } else {
+                calculate();
+            }
+            operation = op;
+            currentInput = '';
+        }
+
+        function calculate() {
+            if (!operation || previousInput === null || currentInput === '') return;
+            
+            const previous = parseFloat(previousInput);
+            const current = parseFloat(currentInput);
+            let result;
+
+            switch(operation) {
+                case '+':
+                    result = previous + current;
+                    break;
+                case '-':
+                    result = previous - current;
+                    break;
+                case '*':
+                    result = previous * current;
+                    break;
+                case '/':
+                    if (current === 0) {
+                        display.textContent = 'Error';
+                        return;
+                    }
+                    result = previous / current;
+                    break;
+                default:
+                    return;
+            }
+
+            display.textContent = result;
+            previousInput = result;
+            operation = null;
+            currentInput = '';
+        }
+
+        function clearDisplay() {
+            currentInput = '0';
+            previousInput = null;
+            operation = null;
+            display.textContent = currentInput;
+        }
+    </script>
+</body>
+</html>
