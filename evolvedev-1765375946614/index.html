@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en" style="pointer-events: auto;"><head style="pointer-events: auto;">
+    <meta charset="UTF-8" style="pointer-events: auto;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" style="pointer-events: auto;">
+    <title style="pointer-events: auto;">Evolve – Your Future, Today.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" style="pointer-events: auto;">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" style="pointer-events: auto;">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet" style="pointer-events: auto;">
+    <style style="pointer-events: auto;">
+        :root {
+            --primary-bg: #0A0A0F;
+            --secondary-bg: #1B1B25;
+            --accent-color: #6C5CE7; /* A vibrant purple */
+            --accent-light: #A294F0;
+            --text-color: #E0E0E0;
+            --text-light: #B0B0B0;
+            --glass-color-light: rgba(255, 255, 255, 0.08); /* Lighter for prominent elements */
+            --glass-color-dark: rgba(255, 255, 255, 0.03); /* Darker for subtle effects */
+            --gradient-1: linear-gradient(135deg, #6C5CE7 0%, #A294F0 100%);
+            --gradient-2: linear-gradient(135deg, #4A00E0 0%, #8E2DE2 100%);
+            --border-radius-lg: 18px;
+            --border-radius-md: 12px;
+            --font-display: 'Montserrat', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--primary-bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: var(--accent-light);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            color: var(--text-color);
+            margin-bottom: 0.8em;
+            line-height: 1.2;
+        }
+
+        p {
+            margin-bottom: 1em;
+            color: var(--text-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 2.2rem;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--gradient-2);
+            box-shadow: 0 12px 25px rgba(108, 92, 231, 0.6);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background-color: var(--glass-color-light);
+            color: var(--accent-light);
+            border: 1px solid var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Glassmorphism card effect */
+        .glass-card {
+            background: var(--glass-color-dark);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-color-light);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section:nth-of-type(odd) {
+            background-color: var(--secondary-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 3rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 0.5em;
+            color: var(--text-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-1);
+            border-radius: 5px;
+        }
+
+        /* --- Header --- */
+        .site-header {
+            background: var(--primary-bg);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-color-dark);
+            backdrop-filter: blur(10px);
+        }
+
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            letter-spacing: -0.05em;
+        }
+        .logo span {
+            color: var(--accent-light);
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-menu a {
+            font-weight: 500;
+            color: var(--text-light);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+        .nav-menu a:hover {
+            color: var(--accent-light);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            padding: 12rem 0;
+            text-align: center;
+            background: radial-gradient(circle at top left, var(--accent-color) 0%, transparent 40%),
+                        radial-gradient(circle at bottom right, #4A00E0 0%, transparent 50%),
+                        var(--primary-bg);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(108,92,231,0.2) 0%, transparent 20%),
+                        radial-gradient(circle, rgba(162,148,240,0.1) 0%, transparent 15%);
+            background-size: 800px 800px, 600px 600px;
+            animation: moveGradient 30s linear infinite alternate;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        @keyframes moveGradient {
+            0% { background-position: 0% 0%, 100% 100%; }
+            100% { background-position: 100% 100%, 0% 0%; }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 800;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.03em;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            color: var(--text-light);
+            font-weight: 300;
+            z-index: 1;
+            position: relative;
+        }
+
+        .hero .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            z-index: 1;
+            position: relative;
+        }
+
+
+        /* --- Features Section --- */
+        .features .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-item .icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 5px 20px rgba(108, 92, 231, 0.4);
+        }
+        .feature-item h3 {
+            font-size: 1.7rem;
+            margin-bottom: 0.8rem;
+            color: var(--accent-light);
+        }
+        .feature-item p {
+            font-size: 1.05rem;
+            color: var(--text-light);
+        }
+
+        /* --- About Section --- */
+        .about .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .about-image img {
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--glass-color-light);
+            transform: rotate(-3deg);
+            transition: transform 0.4s ease;
+        }
+        .about-image img:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .about h2 {
+            text-align: left;
+        }
+        .about h2::after {
+            margin-left: 0;
+            transform: none;
+        }
+
+        /* --- Testimonials Section --- */
+        .testimonials .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .testimonial-card {
+            text-align: left;
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .testimonial-card blockquote {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            font-size: 1.15rem;
+        }
+
+        .testimonial-card .author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-card .author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 0 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .testimonial-card .author-info strong {
+            display: block;
+            font-weight: 600;
+            color: var(--accent-light);
+        }
+
+        .testimonial-card .author-info span {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .testimonial-card::before {
+            content: '“';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-size: 5rem;
+            color: var(--accent-color);
+            opacity: 0.1;
+            font-family: serif;
+            line-height: 1;
+        }
+
+        /* --- Call to Action (CTA) Section --- */
+        .cta {
+            text-align: center;
+            background: var(--gradient-1);
+            padding: 8rem 0;
+        }
+
+        .cta h2 {
+            color: white;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            max-width: 700px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .cta .btn-cta {
+            background-color: white;
+            color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .cta .btn-cta:hover {
+            background-color: var(--accent-light);
+            color: white;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- Footer --- */
+        .site-footer {
+            background: var(--primary-bg);
+            padding: 4rem 0;
+            text-align: center;
+            border-top: 1px solid var(--glass-color-dark);
+        }
+
+        .site-footer .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-nav a {
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-light);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .site-header .container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .nav-menu ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            .hero {
+                padding: 8rem 0;
+            }
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .hero .btn-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            section {
+                padding: 6rem 0;
+            }
+            .about .container {
+                flex-direction: column;
+            }
+            .about-image {
+                order: -1; /* Image appears above content on mobile */
+            }
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+            .cta p {
+                font-size: 1rem;
+            }
+            .footer-nav ul {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons (optional, replace with SVG if needed for full control) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlalY8K4vBq1f6oH3k2O3s1g0lF0+6pD2zM7gVlP3q6t2zU+7q6eO2K6m1+61f+8f5+x+7+9o+7+7+7+7+7+7+9+7+6+8+7+1+4+3+2+5+4+9+8+7+8+4+7+9+6+4+7+2+1+3+2+1+4+7+8+6+7+8+9+7+6+5+4+3+2+1+0+9+8+7+6+5+4+3+2+1+0+9+8+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7+7" crossorigin="anonymous" referrerpolicy="no-referre" style="pointer-events: auto;">
+</head>
+<body style="pointer-events: auto;">
+
+    <header class="site-header" style="pointer-events: auto;">
+        <div class="container" style="pointer-events: auto;">
+            <a href="#" class="logo" style="pointer-events: auto;">Evolve.dev<span style="pointer-events: auto;">.</span></a>
+            <nav class="nav-menu" style="pointer-events: auto;">
+                <ul style="pointer-events: auto;">
+                    <li style="pointer-events: auto;"><a href="#hero" class="active" style="pointer-events: auto;">Home</a></li>
+                    <li style="pointer-events: auto;"><a href="#features" style="pointer-events: auto;">Features</a></li>
+                    <li style="pointer-events: auto;"><a href="#about" style="pointer-events: auto;">About Us</a></li>
+                    <li style="pointer-events: auto;"><a href="#testimonials" style="pointer-events: auto;">Testimonials</a></li>
+                    <li style="pointer-events: auto;"><a href="#contact" style="pointer-events: auto;">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main style="pointer-events: auto;">
+        <section id="hero" class="hero" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <h1 style="pointer-events: auto;">Unlock Your Full Potential with Evolve landing page demo</h1>
+                <p style="pointer-events: auto;">
+                    Experience the future of productivity and innovation. Evolve provides cutting-edge solutions to streamline your workflow and amplify your success.
+                </p>
+                <div class="btn-group" style="pointer-events: auto;">
+                    <a href="#features" class="btn btn-primary" style="pointer-events: auto;">Discover Solutions</a>
+                    <a href="#contact" class="btn btn-secondary" style="pointer-events: auto;">Get Started Today</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <h2 class="section-title" style="pointer-events: auto;">Revolutionary Features</h2>
+                <div class="grid" style="pointer-events: auto;">
+                    <div class="feature-item glass-card" style="pointer-events: auto;">
+                        <div class="icon" style="pointer-events: auto;"><i class="fas fa-magic" style="pointer-events: auto;"></i></div>
+                        <h3 style="pointer-events: auto;">Smart Automation</h3>
+                        <p style="pointer-events: auto;">Automate repetitive tasks and focus on what truly matters. Our AI-powered system adapts to your needs.</p>
+                    </div>
+                    <div class="feature-item glass-card" style="pointer-events: auto;">
+                        <div class="icon" style="pointer-events: auto;"><i class="fas fa-chart-line" style="pointer-events: auto;"></i></div>
+                        <h3 style="pointer-events: auto;">Insightful Analytics</h3>
+                        <p style="pointer-events: auto;">Gain deep insights with intuitive dashboards and real-time data visualization to make informed decisions.</p>
+                    </div>
+                    <div class="feature-item glass-card" style="pointer-events: auto;">
+                        <div class="icon" style="pointer-events: auto;"><i class="fas fa-globe" style="pointer-events: auto;"></i></div>
+                        <h3 style="pointer-events: auto;">Global Collaboration</h3>
+                        <p style="pointer-events: auto;">Seamlessly connect with your team, partners, and clients across the globe, enhancing teamwork.</p>
+                    </div>
+                    <div class="feature-item glass-card" style="pointer-events: auto;">
+                        <div class="icon" style="pointer-events: auto;"><i class="fas fa-shield-alt" style="pointer-events: auto;"></i></div>
+                        <h3 style="pointer-events: auto;">Fortified Security</h3>
+                        <p style="pointer-events: auto;">Your data is our top priority. We employ industry-leading encryption and security protocols.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <div class="about-content" style="pointer-events: auto;">
+                    <h2 class="section-title" style="pointer-events: auto;">Who We Are</h2>
+                    <p style="pointer-events: auto;">
+                        At Evolve, we believe in pushing boundaries. Founded in 2023, our mission has been to develop transformative technologies that empowers individuals and organizations to achieve unprecedented levels of efficiency and creativity. We are a team of passionate innovators, designers, and engineers dedicated to building the tools of tomorrow.
+                    </p>
+                    <p style="pointer-events: auto;">
+                        Our agile approach ensures we continuously adapt, innovate, and deliver solutions that are not just state-of-the-art, but also intuitively easy to use. Join us in shaping the future.
+                    </p>
+                    <a href="#contact" class="btn btn-primary" style="pointer-events: auto;">Learn More</a>
+                </div>
+                <div class="about-image" style="pointer-events: auto;">
+                    <img src="https://via.placeholder.com/600x400/6C5CE7/A294F0?text=Innovation+at+Core" alt="Abstract innovation graphics" style="pointer-events: auto;">
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <h2 class="section-title" style="pointer-events: auto;">What Our Clients Say</h2>
+                <div class="grid" style="pointer-events: auto;">
+                    <div class="testimonial-card glass-card" style="pointer-events: auto;">
+                        <blockquote style="pointer-events: auto;">“Evolve has transformed how we operate. The automation features saved us countless hours, and the insights are invaluable. Truly a game-changer for our business.”</blockquote>
+                        <div class="author" style="pointer-events: auto;">
+                            <img src="https://i.pravatar.cc/150?img=1" alt="Client 1" style="pointer-events: auto;">
+                            <div class="author-info" style="pointer-events: auto;">
+                                <strong style="pointer-events: auto;">Jane Doe</strong>
+                                <span style="pointer-events: auto;">CEO, Innovate Corp.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-card" style="pointer-events: auto;">
+                        <blockquote style="pointer-events: auto;">“The global collaboration tools are fantastic. Our distributed team feels more connected and productive than ever before. Highly recommend Evolve!”</blockquote>
+                        <div class="author" style="pointer-events: auto;">
+                            <img src="https://i.pravatar.cc/150?img=2" alt="Client 2" style="pointer-events: auto;">
+                            <div class="author-info" style="pointer-events: auto;">
+                                <strong style="pointer-events: auto;">John Smith</strong>
+                                <span style="pointer-events: auto;">Lead Engineer, TechGen</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-card" style="pointer-events: auto;">
+                        <blockquote style="pointer-events: auto;">“Security was a major concern for us, and Evolve delivered. Their robust protocols give us peace of mind, allowing us to focus on growth.”</blockquote>
+                        <div class="author" style="pointer-events: auto;">
+                            <img src="https://i.pravatar.cc/150?img=3" alt="Client 3" style="pointer-events: auto;">
+                            <div class="author-info" style="pointer-events: auto;">
+                                <strong style="pointer-events: auto;">Alice Williams</strong>
+                                <span style="pointer-events: auto;">CTO, Secure Solutions</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <h2 style="pointer-events: auto;">Ready to Evolve Your Workflow?</h2>
+                <p style="pointer-events: auto;">Don't get left behind. Join the countless businesses already benefiting from Evolve's cutting-edge platform. Contact us today to explore how we can help your organization thrive.</p>
+                <a href="mailto:info@evolve.com" class="btn btn-cta" style="pointer-events: auto;">Schedule a Demo</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" style="pointer-events: auto;">
+        <div class="container footer-content" style="pointer-events: auto;">
+            <a href="#" class="logo footer-logo" style="pointer-events: auto;">Evolve<span style="pointer-events: auto;">.</span></a>
+            <nav class="footer-nav" style="pointer-events: auto;">
+                <ul style="pointer-events: auto;">
+                    <li style="pointer-events: auto;"><a href="#" style="pointer-events: auto;">Privacy Policy</a></li>
+                    <li style="pointer-events: auto;"><a href="#" style="pointer-events: auto;">Terms of Service</a></li>
+                    <li style="pointer-events: auto;"><a href="#" style="pointer-events: auto;">Sitemap</a></li>
+                    <li style="pointer-events: auto;"><a href="#" style="pointer-events: auto;">Careers</a></li>
+                </ul>
+            </nav>
+            <div class="social-links" style="pointer-events: auto;">
+                <a href="#" aria-label="Facebook" style="pointer-events: auto;"><i class="fab fa-facebook-f" style="pointer-events: auto;"></i></a>
+                <a href="#" aria-label="Twitter" style="pointer-events: auto;"><i class="fab fa-twitter" style="pointer-events: auto;"></i></a>
+                <a href="#" aria-label="LinkedIn" style="pointer-events: auto;"><i class="fab fa-linkedin-in" style="pointer-events: auto;"></i></a>
+                <a href="#" aria-label="Instagram" style="pointer-events: auto;"><i class="fab fa-instagram" style="pointer-events: auto;"></i></a>
+            </div>
+            <p class="copyright" style="pointer-events: auto;">© 2026 Evolve. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script style="pointer-events: auto;">
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+                // Update active link class
+                document.querySelectorAll('.nav-menu a').forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Set active class on initial load/refresh for the current section
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.7 // Section is considered active when 70% visible
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${entry.target.id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // Handle initial active link on page load
+        window.addEventListener('load', () => {
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                const targetLink = document.querySelector(`.nav-menu a[href="${currentHash}"]`);
+                if (targetLink) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    targetLink.classList.add('active');
+                }
+            } else {
+                 document.querySelector('.nav-menu a[href="#hero"]').classList.add('active');
+            }
+        });
+    </script>
+
+
+</body></html>
