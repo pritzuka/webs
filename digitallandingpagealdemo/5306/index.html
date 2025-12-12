@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolve Digital - Future-Forward Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght=400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #0d1a26;
+            --accent-color: #FFC107;
+            --text-color-light: #f4f7f6;
+            --text-color-dark: #333;
+            --bg-dark: #1A2E3C;
+            --bg-light: #FFFFFF;
+            --gradient-primary: linear-gradient(45deg, #6C63FF, #A16CFF);
+            --gradient-secondary: linear-gradient(45deg, #0d1a26, #2c3e50);
+            --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --border-radius-lg: 15px;
+            --border-radius-md: 8px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
+        h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h3 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-light);
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--text-color-light);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(108, 99, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(108, 99, 255, 0.2);
+        }
+
+        .section-padding {
+            padding: 8rem 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .line-heading {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .line-heading::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: var(--bg-light);
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 1.05rem;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            justify-content: space-between;
+        }
+
+        .hamburger .bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--secondary-color);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background-color: var(--bg-dark);
+            color: var(--text-color-light);
+            background-image: url('https://images.unsplash.com/photo-1516387938699-a93567ec168e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcyODN8MHwxfHNlYXJjaHw4Nnx8ZGlnaXRhbCUyMHRlY2hub2xvZ3l8ZW58MHx8fHwxNzA4NjQwOTUwfDA&ixlib=rb-4.0.3&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding: 10rem 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(13, 26, 38, 0.85), rgba(108, 99, 255, 0.7));
+        }
+
+        .hero .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            color: var(--text-color-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            max-width: 800px;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero .btn {
+            font-size: 1.1rem;
+            padding: 1.2rem 3rem;
+        }
+
+        /* --- About Section --- */
+        .about-section {
+            background-color: var(--bg-light);
+            padding: 8rem 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-color-dark);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+        }
+
+        /* --- Services Section --- */
+        .services-section {
+            background-color: var(--bg-dark);
+            color: var(--text-color-light);
+            padding: 8rem 0;
+        }
+
+        .services-section h2, .services-section p {
+            color: var(--text-color-light);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background-color: rgba(255, 255, 255, 0.08); /* Slightly transparent white for glass effect */
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-dark);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            backdrop-filter: blur(5px); /* Glass effect */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .service-card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* --- Portfolio Section --- */
+        .portfolio-section {
+            background-color: var(--bg-light);
+            padding: 8rem 0;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .portfolio-item {
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        .portfolio-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .portfolio-info p {
+            font-size: 0.95rem;
+            color: var(--text-color-dark);
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-info a {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--primary-color);
+        }
+
+        /* --- Testimonials Section --- */
+        .testimonials-section {
+            background-color: var(--bg-dark);
+            color: var(--text-color-light);
+            padding: 8rem 0;
+            text-align: center;
+        }
+
+        .testimonials-section h2, .testimonials-section p {
+            color: var(--text-color-light);
+        }
+
+        .testimonial-slider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap; 
+            margin-top: 4rem;
+            gap: 2rem; 
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            max-width: 400px;
+            text-align: left;
+            box-shadow: var(--shadow-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            margin: 1rem; /* Adjust margin for spacing in wrap */
+            flex: 1 1 300px; /* Allow cards to grow/shrink but maintain a min-width */
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .client-info img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+            border: 3px solid var(--accent-color);
+        }
+
+        .client-info h4 {
+            color: var(--accent-color);
+            margin-bottom: 0.2rem;
+            font-size: 1.2rem;
+        }
+
+        .client-info span {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* --- CTA Section --- */
+        .cta-section {
+            background: var(--gradient-primary);
+            padding: 6rem 0;
+            text-align: center;
+            color: var(--text-color-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            transform: rotate(30deg);
+        }
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            transform: rotate(30deg);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            color: var(--text-color-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+        }
+
+        /* --- Contact Section --- */
+        .contact-section {
+            background-color: var(--bg-light);
+            padding: 8rem 0;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            color: var(--text-color-dark);
+        }
+
+        .contact-info p strong {
+            margin-right: 10px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            background-color: #f8f8f8;
+            padding: 3rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+        }
+
+        .contact-form h3 {
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-form .btn-primary {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--secondary-color);
+            color: var(--text-color-light);
+            padding: 4rem 0;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color-light);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .footer-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-section h4 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-contact p {
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: flex-start;
+        }
+        .footer-contact p strong {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .social-icons {
+            display: flex;
+            margin-top: 1.5rem;
+        }
+
+        .social-icons a {
+            color: var(--text-color-light);
+            font-size: 1.5rem;
+            margin-right: 1.2rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--bg-light);
+                position: absolute;
+                top: 70px; /* Adjust based on navbar height */
+                left: 0;
+                padding: 1rem 0;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease-in-out;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0.5rem 2rem;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero {
+                padding: 8rem 0;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 8vw, 3.5rem);
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            .about-image {
+                order: -1; /* Image appears above text on mobile */
+            }
+
+            .service-grid, .portfolio-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            
+            .testimonial-slider {
+                flex-direction: column;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            .contact-info {
+                text-align: center;
+            }
+            .contact-info p {
+                justify-content: center;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-logo, .footer-contact p {
+                justify-content: center;
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: clamp(2rem, 9vw, 3rem);
+            }
+            .hero p {
+                font-size: clamp(1rem, 3vw, 1.4rem);
+            }
+
+            .section-padding {
+                padding: 6rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <img src="https://assets.website-files.com/62c0e816a7f0eebc8f69b183/62c0e817a7f0eeb41369b20b_Vector.svg" alt="Evolve Digital Logo">
+                Evolve Digital
+            </a>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="hero" class="hero">
+        <div class="container">
+            <h1 class="animate-on-scroll">Transform Your Vision into Digital Reality</h1>
+            <p class="animate-on-scroll delay-1">We craft cutting-edge digital experiences that drive growth and innovation for businesses in 2025 and beyond.</p>
+            <div class="hero-actions animate-on-scroll delay-2">
+                <a href="#contact" class="btn btn-primary">Get a Free Consultation</a>
+                <a href="#portfolio" class="btn btn-secondary">See Our Work</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="about-section section-padding">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="line-heading animate-on-scroll">About Evolve Digital</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text animate-on-scroll left-to-right">
+                    <p>Founded in 2018, Evolve Digital has rapidly grown into a leading digital agency, specializing in bespoke web development, advanced UI/UX design, and strategic digital marketing. We are a team of passionate innovators, dedicated to pushing the boundaries of technology to deliver measurable results for our clients.</p>
+                    <p>Our philosophy is centered around a client-first approach, ensuring every solution is tailored to meet unique business objectives. We believe in transparent communication, agile methodologies, and continuous learning to stay ahead in the ever-evolving digital landscape. Our commitment to excellence has forged long-lasting partnerships and celebrated countless success stories.</p>
+                    <a href="#contact" class="btn btn-primary">Learn More About Us</a>
+                </div>
+                <div class="about-image animate-on-scroll right-to-left">
+                    <img src="https://images.unsplash.com/photo-1549666687-8495a639739a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcyODN8MHwxfHNlYXJjaHwyMDF8fGRpZ2l0YWwlMjBhZ2VuY3l8ZW58MHx8fHwxNzA4NjQzNTg2fDA&ixlib=rb-4.0.3&q=80&w=1920" alt="Team collaborating on digital strategy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services-section section-padding">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="line-heading animate-on-scroll">Our Core Services</h2>
+                <p class="animate-on-scroll delay-1">Empowering your business with a comprehensive suite of digital solutions.</p>
+            </div>
+            <div class="service-grid">
+                <div class="service-card animate-on-scroll bottom-to-top delay-2">
+                    <img src="https://img.icons8.com/wired/64/FFFFFF/code.png" alt="Web Development Icon">
+                    <h3>Custom Web Development</h3>
+                    <p>Crafting responsive, secure, and scalable websites and web applications tailored to your exact needs. From robust backends to dynamic frontends, we build for performance.</p>
+                </div>
+                <div class="service-card animate-on-scroll bottom-to-top delay-3">
+                    <img src="https://img.icons8.com/wired/64/FFFFFF/design.png" alt="UI/UX Design Icon">
+                    <h3>UI/UX Design & Branding</h3>
+                    <p>Designing intuitive user interfaces and unforgettable user experiences that captivate your audience and align with your brand identity. We focus on aesthetics and usability.</p>
+                </div>
+                <div class="service-card animate-on-scroll bottom-to-top delay-4">
+                    <img src="https://img.icons8.com/wired/64/FFFFFF/marketing.png" alt="Digital Marketing Icon">
+                    <h3>Digital Marketing Strategy</h3>
+                    <p>Developing data-driven marketing strategies including SEO, PPC, social media, and content marketing to boost visibility, engagement, and conversion rates.</p>
+                </div>
+                <div class="service-card animate-on-scroll bottom-to-top delay-5">
+                    <img src="https://img.icons8.com/wired/64/FFFFFF/cloud-storage.png" alt="Cloud Solutions Icon">
+                    <h3>Cloud & DevOps Solutions</h3>
+                    <p>Implementing modern cloud infrastructures and DevOps practices for continuous delivery, scalability, and improved operational efficiency. Azure, AWS, GCP expertise.</p>
+                </div>
+                <div class="service-card animate-on-scroll bottom-to-top delay-6">
+                    <img src="https://img.icons8.com/wired/64/FFFFFF/artificial-intelligence.png" alt="AI/ML Icon">
+                    <h3>AI & Machine Learning</h3>
+                    <p>Integrating intelligent automation, predictive analytics, and machine learning models to provide deep insights and enhance operational capabilities for future readiness.</p>
+                </div>
+                <div class="service-card animate-on-scroll bottom-to-top delay-7">
+                    <img src="https://img.icons8.com/wired/64/FFFFFF/security-shield.png" alt="Cybersecurity Icon">
+                    <h3>Cybersecurity Consulting</h3>
+                    <p>Protecting your digital assets with comprehensive cybersecurity audits, threat detection, and implementation of robust security protocols to ensure data integrity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio-section section-padding">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="line-heading animate-on-scroll">Our Latest Projects</h2>
+                <p class="animate-on-scroll delay-1">A showcase of our diverse capabilities and successful client collaborations.</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item animate-on-scroll bottom-to-top delay-2">
+                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f945c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcyODN8MHwxfHNlYXJjaHwyMHx8d2ViJTIwZGV2ZWxvcG1lbnQlMjBwcm9qZWN0fGVufDB8fHx8MTcwODY0MzY0OHww&ixlib=rb-4.0.3&q=80&w=1920" alt="E-commerce Platform Project">
+                    <div class="portfolio-info">
+                        <h3>E-commerce Solutions for 'ShopSphere'</h3>
+                        <p>Developed a scalable e-commerce platform with integrated AI-driven recommendation engine, boosting sales by 30%.</p>
+                        <a href="#">View Case Study &rarr;</a>
+                    </div>
+                </div>
+                <div class="portfolio-item animate-on-scroll bottom-to-top delay-3">
+                    <img src="https://images.unsplash.com/photo-1596701072971-d6159c3a3233?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcyODN8MHwxfHNlYXJjaHwxNXx8bW9iaWxlJTIwYXBwJTIwZGVzaWdufGVufDB8fHx8MTcwODY0MzY2Mnww&ixlib=rb-4.0.3&q=80&w=1920" alt="Mobile App Design Project">
+                    <div class="portfolio-info">
+                        <h3>Intuitive Mobile App for 'HealthFlow'</h3>
+                        <p>Designed and developed a cross-platform mobile app focused on user engagement, achieving 4.8-star rating on app stores.</p>
+                        <a href="#">View Case Study &rarr;</a>
+                    </div>
+                </div>
+                <div class="portfolio-item animate-on-scroll bottom-to-top delay-4">
+                    <img src="https://images.unsplash.com/photo-1517048676732-c7f38071852c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcyODN8MHwxfHNlYXJjaHwxNnx8c2FhcyUyMGRhc2hib2FyZHxlbnwwfHx8fDE3MDg2NDM2NzN8MA&ixlib=rb-4.0.3&q=80&w=1920" alt="SaaS Dashboard Project">
+                    <div class="portfolio-info">
+                        <h3>Analytics Dashboard for 'DataVista' SaaS</h3>
+                        <p>Engineered a robust, real-time analytics dashboard, providing crucial insights for a leading B2B SaaS platform.</p>
+                        <a href="#">View Case Study &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials-section section-padding">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="line-heading animate-on-scroll">What Our Clients Say</h2>
+                <p class="animate-on-scroll delay-1">Hear directly from the businesses we've helped achieve their digital goals.</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial-card animate-on-scroll left-to-right delay-2">
+                    <p>"Evolve Digital completely transformed our online presence. Their team understood our vision perfectly and delivered a website that exceeded all expectations. Professional, creative, and highly responsive!"</p>
+                    <div class="client-info">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcyODN8MHwxfHNlYXJjaHw0OXx8YnVzaW5lc3NtYW58ZW58MHx8fHwxNzA4NjQzNTg2fDA&ixlib=rb-4.0.3&q=80&w=1920" alt="Client 1">
+                        <div>
+                            <h4>Jane Doe</h4>
+                            <span>CEO, Tech Innovations</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll zoom-in delay-3">
+                    <p>"Their expertise in digital marketing helped us reach a wider audience and significantly increase our lead generation. The results were outstanding and their strategic insights were invaluable."</p>
+                    <div class="client-info">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcyODN8MHwxfHNlYXJjaHw3OXx8YnVzaW5lc3N3b21hbnxlbnwwfHx8fDE3MDg2NDM1ODZ8MA&ixlib=rb-4.0.3&q=80&w=1920" alt="Client 2">
+                        <div>
+                            <h4>John Smith</h4>
+                            <span>Marketing Director, Global Dynamics</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll right-to-left delay-4">
+                    <p>"From initial concept to final deployment, Evolve Digital demonstrated exceptional technical skill and commitment. Their agile approach kept us informed and involved every step of the way."</p>
+                    <div class="client-info">
+                        <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d951147?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcyODN8MHwxfHNlYXJjaHwxMDF8fG1hbiUyMGhlYWRzaG90fGVufDB8fHx8MTcwODY0MzU4Nnww&ixlib=rb-4.0.3&q=80&w=1920" alt="Client 3">
+                        <div>
+                            <h4>Emily White</h4>
+                            <span>Founder, Creative Solutions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section animate-on-scroll">
+        <div class="container cta-content">
+            <h2 class="animate-on-scroll">Ready to Elevate Your Digital Footprint?</h2>
+            <p class="animate-on-scroll delay-1">Let's collaborate to build something extraordinary. Contact us today for a personalized consultation.</p>
+            <a href="#contact" class="btn btn-primary animate-on-scroll delay-2">Start Your Project Now</a>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section section-padding">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="line-heading animate-on-scroll">Get In Touch</h2>
+                <p class="animate-on-scroll delay-1">We'd love to hear from you. Send us a message or find us on social media.</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info animate-on-scroll left-to-right">
+                    <h3>Contact Information</h3>
+                    <p><strong><img src="https://img.icons8.com/ios-filled/24/6C63FF/address.png" alt="Address Icon"/></strong> 123 Digital Drive, Innovation City, 90210</p>
+                    <p><strong><img src="https://img.icons8.com/ios-filled/24/6C63FF/phone.png" alt="Phone Icon"/></strong> +1 (555) 123-4567</p>
+                    <p><strong><img src="https://img.icons8.com/ios-filled/24/6C63FF/filled-message.png" alt="Email Icon"/></strong> info@evolvedigital.com</p>
+                    <p><strong><img src="https://img.icons8.com/ios-filled/24/6C63FF/time--v1.png" alt="Hours Icon"/></strong> Mon - Fri: 9:00 AM - 6:00 PM</p>
+                </div>
+                <div class="contact-form animate-on-scroll right-to-left">
+                    <h3>Send Us a Message</h3>
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section footer-about">
+                    <a href="#" class="footer-logo">
+                        <img src="https://assets.website-files.com/62c0e816a7f0eebc8f69b183/62c0e817a7f0eeb41369b20b_Vector.svg" alt="Evolve Digital Logo - White">
+                        Evolve Digital
+                    </a>
+                    <p>Driving digital transformation through innovative solutions and strategic partnerships. Your success is our mission.</p>
+                    <div class="social-icons">
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><img src="https://img.icons8.com/ios-filled/24/FFFFFF/facebook-new.png" alt="Facebook Icon"/></a>
+                        <a href="https://twitter.com" target="_blank" aria-label="Twitter"><img src="https://img.icons8.com/ios-filled/24/FFFFFF/twitter--v1.png" alt="Twitter Icon"/></a>
+                        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><img src="https://img.icons8.com/ios-filled/24/FFFFFF/linkedin.png" alt="LinkedIn Icon"/></a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><img src="https://img.icons8.com/ios-filled/24/FFFFFF/instagram-new--v1.png" alt="Instagram Icon"/></a>
+                    </div>
+                </div>
+                <div class="footer-section footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Our Services</a></li>
+                        <li><a href="#portfolio">Our Work</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><strong><img src="https://img.icons8.com/ios-filled/24/FFC107/address.png" alt="Address Icon"/></strong> 123 Digital Drive, Innovation City, 90210</p>
+                    <p><strong><img src="https://img.icons8.com/ios-filled/24/FFC107/phone.png" alt="Phone Icon"/></strong> +1 (555) 123-4567</p>
+                    <p><strong><img src="https://img.icons8.com/ios-filled/24/FFC107/filled-message.png" alt="Email Icon"/></strong> info@evolvedigital.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 Evolve Digital. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const navItems = document.querySelectorAll('.nav-links li a');
+
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Intersection Observer for scroll animations
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Trigger when 15% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        if (entry.target.classList.contains('left-to-right')) {
+                            entry.target.style.animation = 'slideInLeft 1s ease-out forwards';
+                        } else if (entry.target.classList.contains('right-to-left')) {
+                            entry.target.style.animation = 'slideInRight 1s ease-out forwards';
+                        } else if (entry.target.classList.contains('bottom-to-top')) {
+                            entry.target.style.animation = 'slideInUp 1s ease-out forwards';
+                        } else if (entry.target.classList.contains('zoom-in')) {
+                            entry.target.style.animation = 'zoomIn 1s ease-out forwards';
+                        } else {
+                            entry.target.style.animation = 'fadeIn 1s ease-out forwards';
+                        }
+                        
+                        // Add delays
+                        const delayClass = Array.from(entry.target.classList).find(cls => cls.startsWith('delay-'));
+                        if (delayClass) {
+                            const delaySeconds = parseInt(delayClass.split('-')[1]) * 0.2;
+                            entry.target.style.animationDelay = `${delaySeconds}s`;
+                        }
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animateElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Dynamic CSS for animations
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .animate-on-scroll {
+                opacity: 0;
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes slideInLeft {
+                from { opacity: 0; transform: translateX(-50px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes slideInRight {
+                from { opacity: 0; transform: translateX(50px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes slideInUp {
+                from { opacity: 0; transform: translateY(50px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+             @keyframes zoomIn {
+                from { opacity: 0; transform: scale(0.8); }
+                to { opacity: 1; transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+```
