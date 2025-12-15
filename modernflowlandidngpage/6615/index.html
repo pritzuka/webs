@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumFlow - Ultra Modern Solutions</title>
+    <link rel="icon" href="https://img.icons8.com/?size=100&id=16029&format=png&color=000000" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #00C6FF, #0072FF);
+            --secondary-gradient: linear-gradient(135deg, #FF7B00, #FFC700);
+            --dark-bg: #0A0A0A;
+            --mid-bg: #1A1A1A;
+            --light-bg: #2A2A2A;
+            --text-color: #E0E0E0;
+            --heading-color: #FFFFFF;
+            --accent-color: #00C6FF;
+            --border-color: #333333;
+            --font-poppins: 'Poppins', sans-serif;
+            --font-montserrat: 'Montserrat', sans-serif;
+            --spacing-unit: 1rem; /* 16px */
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-poppins);
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            background-image: url('https://images.unsplash.com/photo-1549060037-ce9d53359d9c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Subtle background texture */
+            background-size: cover;
+            background-attachment: fixed;
+            background-blend-mode: overlay;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-montserrat);
+            color: var(--heading-color);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            font-weight: 700;
+        }
+
+        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
+        h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h3 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+        p { margin-bottom: var(--spacing-unit); }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #00B1E6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            background: var(--primary-gradient);
+            color: var(--heading-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.6);
+        }
+
+        .button.secondary {
+            background: var(--secondary-gradient);
+            box-shadow: 0 4px 15px rgba(255, 123, 0, 0.4);
+        }
+
+        .button.secondary:hover {
+            box-shadow: 0 8px 20px rgba(255, 123, 0, 0.6);
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s ease;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-montserrat);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--heading-color);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav ul li a {
+            color: var(--heading-color);
+            font-weight: 500;
+            font-size: 1.05rem;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--mid-bg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 100px; /* Account for fixed header */
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.85) 100%);
+            z-index: 1;
+        }
+
+        #hero .container {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        #hero h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            margin-bottom: var(--spacing-unit);
+            line-height: 1.1;
+            background: linear-gradient(45deg, #00C6FF, #0072FF, #FFC700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGradient 5s ease infinite alternate;
+        }
+
+        @keyframes textGradient {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+
+        #hero p {
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            max-width: 700px;
+            margin: 0 auto 3rem auto;
+            color: #C0C0C0;
+            font-weight: 300;
+        }
+
+        /* Features Section */
+        #features {
+            text-align: center;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-header h2 {
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            font-size: 1.15rem;
+            color: #A0A0A0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background-color: var(--light-bg);
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 198, 255, 0.1) 0%, rgba(0, 114, 255, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 114, 255, 0.3);
+        }
+
+        .feature-card svg {
+            color: var(--accent-color);
+            background: rgba(0, 198, 255, 0.1);
+            padding: 0.8rem;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 15px rgba(0, 114, 255, 0.3);
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--heading-color);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #B0B0B0;
+        }
+
+        /* About Section */
+        #about {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        #about .about-content {
+            flex: 1;
+        }
+
+        #about .about-image {
+            flex: 1;
+            min-width: 400px;
+            position: relative;
+        }
+
+        #about .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            object-fit: cover;
+            transform: rotate(-3deg);
+            transition: transform 0.5s ease;
+        }
+
+        #about .about-image img:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        #about .about-content h2 {
+            margin-bottom: 1.5rem;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+        }
+
+        #about .about-content strong {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        #about .about-content p {
+            margin-bottom: 1.2rem;
+            color: #C0C0C0;
+            font-size: 1.05rem;
+        }
+
+        /* Services Section */
+        #services {
+            text-align: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background-color: var(--light-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease-in-out;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 198, 255, 0.3);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .service-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .service-card-content {
+            padding: 2.5rem 2rem;
+        }
+
+        .service-card-content h3 {
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            color: var(--heading-color);
+        }
+
+        .service-card-content p {
+            font-size: 1rem;
+            color: #B0B0B0;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Testimonials Section */
+        #testimonials {
+            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)), url('https://images.unsplash.com/photo-1579547621113-e4c622a5786f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 10rem 0;
+            position: relative;
+        }
+
+        #testimonials .container {
+            max-width: 900px;
+        }
+
+        .testimonial-carousel {
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            border-radius: 15px;
+            margin-top: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            min-height: 350px;
+            align-items: center;
+        }
+
+        .testimonial-slide {
+            flex: 0 0 100%;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            transform: translateX(0); /* Initial state */
+            transition: transform 0.5s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            pointer-events: all;
+            position: relative;
+            transform: translateX(0) !important; /* Ensure active slide is not transformed by JS */
+        }
+
+        .testimonial-slide img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 15px rgba(0, 198, 255, 0.4);
+        }
+
+        .testimonial-slide p {
+            font-style: italic;
+            font-size: 1.15rem;
+            color: #DBDBDB;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+        }
+
+        .testimonial-slide .author {
+            font-weight: 600;
+            color: var(--heading-color);
+            font-size: 1.1rem;
+        }
+
+        .testimonial-slide .author span {
+            display: block;
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: #A0A0A0;
+        }
+
+        .carousel-nav-buttons button {
+            background: transparent;
+            border: none;
+            color: var(--accent-color);
+            font-size: 2.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .carousel-nav-buttons button:hover {
+            color: #00B1E6;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-nav-buttons button#prevBtn {
+            left: -50px;
+        }
+
+        .carousel-nav-buttons button#nextBtn {
+            right: -50px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+            gap: 0.8rem;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--primary-gradient);
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(0, 114, 255, 0.6);
+        }
+
+
+        /* CTA Section */
+        #cta {
+            text-align: center;
+            background: var(--dark-bg);
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 198, 255, 0.1) 0%, rgba(0, 114, 255, 0.05) 50%, transparent 100%);
+            opacity: 0.5;
+            z-index: 1;
+        }
+
+        #cta .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        #cta h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            color: var(--heading-color);
+        }
+
+        #cta p {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            max-width: 700px;
+            margin: 0 auto 3rem auto;
+            color: #C0C0C0;
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: var(--mid-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        #contact .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-color);
+        }
+        .contact-info-item svg {
+            color: var(--accent-color);
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+        }
+        .contact-info-item span, .contact-info-item a {
+            font-size: 1.1rem;
+            color: #C0C0C0;
+        }
+
+        .contact-form {
+            background-color: var(--light-bg);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            grid-column: span 2; /* Spans two columns on larger screens */
+        }
+
+        .contact-form h3 {
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--heading-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--mid-bg);
+            color: var(--text-color);
+            font-family: var(--font-poppins);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.3);
+            outline: none;
+            background-color: var(--dark-bg);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 1.1rem;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 4rem 0 2rem 0;
+            text-align: center;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+
+        .footer-col h4 {
+            color: var(--heading-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            position: relative;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: #B0B0B0;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        .footer-col p {
+            color: #B0B0B0;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--heading-color);
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-bg);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-gradient);
+            transform: translateY(-3px) scale(1.05);
+            color: var(--heading-color);
+        }
+
+        .social-links svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: #A0A0A0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            #about {
+                flex-direction: column;
+                text-align: center;
+            }
+            #about .about-image {
+                min-width: unset;
+                max-width: 600px;
+                margin-top: 3rem;
+            }
+            #about .about-image img {
+                transform: rotate(0deg);
+            }
+            #about .about-image img:hover {
+                transform: scale(1.02);
+            }
+            .testimonial-carousel {
+                margin-left: 50px;
+                margin-right: 50px;
+            }
+            .carousel-nav-buttons button#prevBtn { left: 0; }
+            .carousel-nav-buttons button#nextBtn { right: 0; }
+
+            .contact-form {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none; /* Hide nav for mobile, could add a hamburger menu */
+            }
+            header .container {
+                justify-content: center;
+            }
+            #hero {
+                padding: 10rem 0;
+            }
+            #hero h1 {
+                font-size: clamp(2.5rem, 8vw, 4rem);
+            }
+            #hero p {
+                font-size: clamp(1rem, 2.5vw, 1.3rem);
+            }
+            .section-header h2 {
+                font-size: clamp(1.8rem, 7vw, 3rem);
+            }
+            .features-grid, .services-grid, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-card, .service-card {
+                margin: 0 auto;
+                max-width: 400px;
+            }
+            #testimonials {
+                padding: 6rem 0;
+            }
+            .testimonial-slide {
+                padding: 2rem;
+            }
+            .carousel-nav-buttons button#prevBtn { left: 10px; }
+            .carousel-nav-buttons button#nextBtn { right: 10px; }
+            .carousel-nav-buttons button { font-size: 2rem; }
+            .contact-form {
+                padding: 2rem;
+            }
+            .footer-grid {
+                text-align: center;
+            }
+            .footer-col h4::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            .button {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.9rem;
+            }
+            .feature-card, .service-card {
+                padding: 2rem 1.5rem;
+            }
+            .feature-card h3 {
+                font-size: 1.4rem;
+            }
+            .service-card-content h3 {
+                font-size: 1.5rem;
+            }
+            #cta p {
+                font-size: 1rem;
+            }
+            .contact-info-item span, .contact-info-item a {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1 class="logo">Quantum<span>Flow</span></h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Unlock Your Potential with QuantumFlow</h1>
+                <p>Revolutionizing industries with state-of-the-art technology and visionary solutions. Experience the future, today.</p>
+                <a href="#contact" class="button">Get Started Now</a>
+                <a href="#services" class="button secondary" style="margin-left: 1.5rem;">Explore Solutions</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Advanced Capabilities</h2>
+                    <p>Discover the core innovations that set QuantumFlow apart and empower your success in the digital age.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Leverage our optimized infrastructure and algorithms designed for unparalleled speed and efficiency.</p>
+                    </div>
+                    <div class="feature-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        <h3>Ironclad Security</h3>
+                        <p>Your data is protected by multiple layers of encryption and advanced threat detection systems.</p>
+                    </div>
+                    <div class="feature-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        <h3>Global Scalability</h3>
+                        <p>Expand effortlessly with our cloud-native architecture, built to grow with your ambitions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        <h3>Seamless Integration</h3>
+                        <p>Connect with your existing tools and workflows through our robust API and flexible platform.</p>
+                    </div>
+                    <div class="feature-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rbg x="9" y="9" width="6" height="6"></rbg><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="15" x2="4" y2="15"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="15" x2="23" y2="15"></line></svg>
+                        <h3>Intelligent Automation</h3>
+                        <p>Automate complex tasks with AI-driven insights, freeing up your team for strategic initiatives.</p>
+                    </div>
+                    <div class="feature-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-headphones"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+                        <h3>24/7 Expert Support</h3>
+                        <p>Our dedicated team is always available to provide assistance and ensure your operations run smoothly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="section-header" style="text-align: left; margin-left: 0; margin-right: 0;">
+                        <h2>Our Vision: Shaping Tomorrow's Digital Landscape</h2>
+                        <p style="text-align: left;">At QuantumFlow, we believe in the transformative power of technology. We are a collective of innovators, engineers, and strategists committed to building solutions that not only solve today's complex challenges but also anticipate tomorrow's demands.</p>
+                    </div>
+                    <p>Founded in 2020, our journey began with a simple idea: to create a platform that is as intelligent as it is intuitive. We've grown exponentially, fueled by a passion for excellence and a relentless pursuit of innovation. Our multidisciplinary team brings together expertise in <strong>AI, data science, cloud computing, and user experience design</strong>, ensuring that every product we launch is at the forefront of technological advancement.</p>
+                    <p>We are more than just a tech company; we are partners in your evolution. We work closely with our clients to understand their unique needs, crafting bespoke solutions that drive growth, enhance efficiency, and unlock new opportunities. Join us as we redefine what's possible.</p>
+                    <a href="#services" class="button">Learn More About Us</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1596556116630-f4ca67923485?q=80&w=1956&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Abstract city skyline with network connections">
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Spectrum of Services</h2>
+                    <p>From foundational infrastructure to advanced analytics, QuantumFlow offers a comprehensive suite of services to propel your business forward.</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Software Development">
+                        <div class="service-card-content">
+                            <h3>Custom Software Development</h3>
+                            <p>Tailored software solutions engineered to meet your specific business logic and operational needs.</p>
+                            <a href="#contact" class="button button-small">Inquire Now</a>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1556740758-9448325efb0e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="AI & Machine Learning">
+                        <div class="service-card-content">
+                            <h3>AI & Machine Learning</h3>
+                            <p>Harness artificial intelligence to gain insights, automate processes, and create predictive models.</p>
+                            <a href="#contact" class="button button-small">Inquire Now</a>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1582213782179-e0d0fccd0320?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cloud Solutions">
+                        <div class="service-card-content">
+                            <h3>Cloud Infrastructure & DevOps</h3>
+                            <p>Build, deploy, and manage scalable cloud solutions with expert DevOps implementation.</p>
+                            <a href="#contact" class="button button-small">Inquire Now</a>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1605810230438-005602492f58?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Data Analytics">
+                        <div class="service-card-content">
+                            <h3>Data Analytics & Visualization</h3>
+                            <p>Transform raw data into actionable insights through advanced analytics and interactive dashboards.</p>
+                            <a href="#contact" class="button button-small">Inquire Now</a>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cybersecurity Consulting">
+                        <div class="service-card-content">
+                            <h3>Cybersecurity Consulting</h3>
+                            <p>Protect your digital assets with strategic security assessments, planning, and implementation.</p>
+                            <a href="#contact" class="button button-small">Inquire Now</a>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1454165205744-bdc315bc127f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="IT Consulting">
+                        <div class="service-card-content">
+                            <h3>Strategic IT Consulting</h3>
+                            <p>Expert guidance and strategic planning to optimize your technology investments and roadmap.</p>
+                            <a href="#contact" class="button button-small">Inquire Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2 style="color: var(--heading-color);">What Our Clients Say</h2>
+                    <p style="color: #DBDBDB;">Hear directly from the leaders and innovators who have partnered with QuantumFlow to achieve remarkable results.</p>
+                </div>
+                <div class="testimonial-carousel">
+                    <div class="testimonial-slide active">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Client 1">
+                        <p>"QuantumFlow transformed our operations. Their AI solutions gave us unprecedented insights and efficiency gains. A truly visionary team!"</p>
+                        <div class="author">Alex Chen<span>CEO, InnovateTech</span></div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <img src="https://images.unsplash.com/photo-1529626465613-d3a3_b6e4e5e?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB4_MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Client 2">
+                        <p>"The cybersecurity consulting from QuantumFlow was exceptional. We feel more secure and confident in our digital presence than ever before."</p>
+                        <div class="author">Maria Garcia<span>CTO, GlobalSecure</span></div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Client 3">
+                        <p>"Their custom software development team delivered exactly what we needed, on time and above expectations. A fantastic partnership!"</p>
+                        <div class="author">David Lee<span>Founder, NextGen Games</span></div>
+                    </div>
+                    <div class="carousel-nav-buttons">
+                        <button id="prevBtn">&lt;</button>
+                        <button id="nextBtn">&gt;</button>
+                    </div>
+                </div>
+                <div class="carousel-dots"></div>
+            </div>
+        </section>
+
+        <section id="cta">
+            <div class="container">
+                <h2>Ready to Elevate Your Business?</h2>
+                <p>Join the ranks of forward-thinking organizations leveraging QuantumFlow's cutting-edge technology. Let's build something extraordinary together.</p>
+                <a href="#contact" class="button">Start Your Journey</a>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <div class="section-header" style="text-align: center;">
+                    <h2>Connect With Us</h2>
+                    <p>Have questions, need support, or ready to discuss your next project? Reach out to QuantumFlow today.</p>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-info-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <span>123 Synergy Drive, Technocity, TX 78701</span>
+                    </div>
+                    <div class="contact-info-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                    </div>
+                    <div class="contact-info-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <a href="mailto:info@quantumflow.com">info@quantumflow.com</a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" required placeholder="john.doe@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Regarding a new project...">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" required placeholder="Tell us more about your needs..."></textarea>
+                        </div>
+                        <button type="submit" class="button">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Quantum<span>Flow</span></h4>
+                    <p>Driving innovation and transforming businesses with cutting-edge technology solutions.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c11 3 21-1 21-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Our Services</a></li>
+                        <li><a href="#features">Key Features</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Support</a></li>
+                        <li><a href="#">Knowledge Base</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#testimonials">Client Stories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p>Stay updated with our latest innovations and insights.</p>
+                    <form action="#" method="POST" style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <input type="email" placeholder="Your email" style="padding: 0.8rem; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--mid-bg); color: var(--text-color); flex-grow: 1;">
+                        <button type="submit" class="button" style="padding: 0.8rem 1.2rem; border-radius: 8px;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 QuantumFlow. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Testimonial Carousel
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const dotsContainer = document.querySelector('.carousel-dots');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                slide.style.transform = `translateX(${(i - index) * 100}%)`;
+            });
+            slides[index].classList.add('active');
+
+            dotsContainer.innerHTML = '';
+            slides.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.classList.add('carousel-dot');
+                if (i === index) {
+                    dot.classList.add('active');
+                }
+                dot.addEventListener('click', () => showSlide(i));
+                dotsContainer.appendChild(dot);
+            });
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', nextSlide);
+        document.getElementById('prevBtn').addEventListener('click', prevSlide);
+
+        // Auto-advance carousel
+        let autoSlideInterval = setInterval(nextSlide, 7000); // Change slide every 7 seconds
+
+        // Pause auto-advance on hover
+        const testimonialCarousel = document.querySelector('.testimonial-carousel');
+        testimonialCarousel.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+        testimonialCarousel.addEventListener('mouseleave', () => autoSlideInterval = setInterval(nextSlide, 7000));
+
+        // Initialize carousel
+        if (slides.length > 0) {
+            showSlide(currentSlide);
+        }
+    </script>
+</body>
+</html>
