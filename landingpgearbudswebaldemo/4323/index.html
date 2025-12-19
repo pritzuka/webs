@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraFlow Earbuds - Immerse in Pure Sound</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #6c757d;
+            --accent-color: #28a745;
+            --dark-bg: #1c1c1c;
+            --light-bg: #f8f9fa;
+            --text-color-light: #e0e0e0;
+            --text-color-dark: #333;
+            --card-bg: #272727;
+            --gradient-hero: linear-gradient(135deg, #0f2027, #2c5364, #203A43);
+            --gradient-cta: linear-gradient(45deg, #0056b3, #007bff);
+            --border-radius: 12px;
+            --font-family-body: 'Poppins', sans-serif;
+            --font-family-heading: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-body);
+            line-height: 1.6;
+            color: var(--text-color-light);
+            background-color: var(--dark-bg);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-heading);
+            color: var(--text-color-light);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        section {
+            padding: 80px 5%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: rgba(28, 28, 28, 0.9);
+            padding: 1.5rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-family-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color-light);
+            font-weight: 600;
+            font-size: 1.05rem;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color-light);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: var(--gradient-hero);
+            color: var(--text-color-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding-top: 120px; /* Adjust for fixed header */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(0, 123, 255, 0.1) 0%, rgba(0, 123, 255, 0) 70%);
+            animation: pulse 10s infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 1;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            margin-bottom: 25px;
+            line-height: 1.1;
+            font-weight: 700;
+            background: linear-gradient(45deg, #fff, var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: #fff;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+        }
+
+        .btn:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(40, 167, 69, 0.5);
+        }
+
+        .hero-image {
+            margin-top: 50px;
+            max-width: 500px;
+            width: 100%;
+            object-fit: contain;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- Features Section --- */
+        .features {
+            background-color: var(--dark-bg);
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .features .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            justify-content: center;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 10%, rgba(0, 123, 255, 0.05) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card svg {
+            color: var(--accent-color);
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: rgba(40, 167, 69, 0.1);
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .feature-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .feature-card p {
+            color: var(--text-color-light);
+            opacity: 0.8;
+            font-size: 1.05rem;
+        }
+
+        /* --- Sound Experience Section --- */
+        .sound-experience {
+            background: linear-gradient(135deg, #1A1A1A, #0A0A0A);
+            color: var(--text-color-light);
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .sound-experience::before {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 123, 255, 0.3) 0%, transparent 70%);
+            animation: swirl 10s ease-in-out infinite alternate;
+            z-index: 0;
+        }
+         .sound-experience::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(40, 167, 69, 0.3) 0%, transparent 70%);
+            animation: swirl-reverse 8s ease-in-out infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes swirl {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 50px) scale(1.2); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        @keyframes swirl-reverse {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-50px, -50px) scale(1.1); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+
+        .sound-experience .container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .sound-experience h2 {
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .sound-experience p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            opacity: 0.85;
+        }
+
+        .sound-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            width: 100%;
+        }
+
+        .sound-item {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .sound-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--primary-color);
+        }
+
+        .sound-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 5px 15px rgba(0, 123, 255, 0.3));
+        }
+
+        .sound-item h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .sound-item p {
+            font-size: 0.95rem;
+            color: var(--text-color-light);
+            opacity: 0.7;
+            margin-bottom: 0;
+        }
+
+        /* --- Testimonials --- */
+        .testimonials {
+            background-color: var(--dark-bg);
+            text-align: center;
+            color: var(--text-color-light);
+        }
+
+        .testimonials h2 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--text-color-light);
+            line-height: 1.8;
+            opacity: 0.9;
+            flex-grow: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .testimonial-author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 10px rgba(40, 167, 69, 0.4);
+        }
+
+        .author-info strong {
+            display: block;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .author-info span {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        /* --- CTA Section --- */
+        .cta {
+            background: var(--gradient-cta);
+            color: #fff;
+            text-align: center;
+            padding: 100px 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 25px;
+            color: #fff;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta p {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #121212;
+            color: var(--text-color-light);
+            padding: 60px 5%;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+        }
+
+        .footer-col h3 {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-color-light);
+            transition: color 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+            opacity: 1;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            font-size: 1.5rem;
+            color: var(--text-color-light);
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--secondary-color);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 75px; 
+                left: 0;
+                width: 100%;
+                background-color: rgba(28, 28, 28, 0.9);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                padding: 20px 5%;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                text-align: center;
+                gap: 1rem;
+                backdrop-filter: blur(10px);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 10px 0;
+                display: block;
+            }
+
+            .nav-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 6px);
+            }
+            .nav-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .nav-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -6px);
+            }
+
+            .hero {
+                padding-top: 100px;
+            }
+            
+            .hero-image {
+                max-width: 350px;
+                margin-top: 30px;
+            }
+
+            .features .container, .sound-grid, .testimonial-grid, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card, .sound-item, .testimonial-card {
+                padding: 25px;
+            }
+
+            .cta {
+                padding: 80px 5%;
+            }
+            
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+
+            .cta p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 15px 25px;
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 60px 4%;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#" class="logo">AuraFlow</a>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#sound-experience">Experience</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#contact">Buy Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Immerse Yourself in Pure, Unrivaled Sound</h1>
+                <p>Discover AuraFlow Earbuds: Where exceptional audio meets unparalleled comfort and cutting-edge technology. Elevate every moment.</p>
+                <a href="#contact" class="btn">Get Your AuraFlow Now</a>
+            </div>
+            <img src="https://images.unsplash.com/photo-1601938997970-2216694e1cf6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="AuraFlow Earbuds" class="hero-image">
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Experience the AuraFlow Difference</h2>
+                <div class="container">
+                    <div class="feature-card">
+                        <i class="fas fa-headphones-alt"></i>
+                        <h3>Superior Audio Fidelity</h3>
+                        <p>Powered by advanced acoustic drivers, AuraFlow delivers crystal-clear highs, rich mids, and deep, resonant bass, ensuring every note is heard as intended.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-volume-mute"></i>
+                        <h3>Active Noise Cancellation</h3>
+                        <p>Block out the world with our state-of-the-art ANC technology. Immerse yourself completely in your music, podcasts, or calls, free from distractions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-battery-full"></i>
+                        <h3>All-Day Power</h3>
+                        <p>Enjoy up to 8 hours of listening on a single charge, and an additional 32 hours with the sleek, portable charging case. Your soundtrack never stops.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-headset"></i>
+                        <h3>Seamless Connectivity</h3>
+                        <p>Instant pairing with Bluetooth 5.3 ensures a stable, lag-free connection to all your devices, providing a truly wireless and hassle-free experience.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-cloud-sun"></i>
+                        <h3>Sweat & Water Resistant</h3>
+                        <p>With an IPX7 rating, AuraFlow earbuds are built to withstand your toughest workouts and unexpected drizzles, making them your perfect active companion.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-ear"></i>
+                        <h3>Ergonomic Comfort Fit</h3>
+                        <p>Designed for prolonged wear, our lightweight, ergonomic earbuds come with multiple ear tip sizes to ensure a secure and comfortable fit for every ear.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sound Experience Section -->
+        <section id="sound-experience" class="sound-experience">
+            <div class="container">
+                <h2>Tailored for Every Sound Enthusiast</h2>
+                <p>Whether you're a bass-head, an audiophile, or love crystal-clear calls, AuraFlow's adaptive sound profiles and intuitive controls elevate your auditory journey.</p>
+                <div class="sound-grid">
+                    <div class="sound-item">
+                        <img src="https://images.unsplash.com/photo-1621345524278-f3162391b1fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Music listening icon">
+                        <h3>Music Aficionado</h3>
+                        <p>Experience studio-quality sound, vibrant highs, and soul-thumping bass that brings your favorite tracks to life.</p>
+                    </div>
+                    <div class="sound-item">
+                        <img src="https://images.unsplash.com/photo-1627945763660-f04bf402ac37?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Podcast icon">
+                        <h3>Podcast & Audiobook Lover</h3>
+                        <p>Enjoy crisp, clear vocal reproduction with balanced tones that make every word effortlessly audible.</p>
+                    </div>
+                    <div class="sound-item">
+                        <img src="https://images.unsplash.com/photo-1632731835697-ce74620df38a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Gaming icon">
+                        <h3>Mobile Gamer</h3>
+                        <p>Pinpoint audio cues with ultra-low latency, giving you an edge in competitive mobile gaming.</p>
+                    </div>
+                    <div class="sound-item">
+                        <img src="https://images.unsplash.com/photo-1601614761427-4a0b2fe46d74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Call icon">
+                        <h3>Clear Communication</h3>
+                        <p>Dual beamforming microphones ensure your voice is heard loud and clear, even in noisy environments.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <h2>What Our Customers Say</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <p>"AuraFlow completely changed my commuting experience. The ANC is phenomenal, and the sound quality is mind-blowing for earbuds this size. Highly recommend!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1544005313-94c030999afc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&h=80&q=80" alt="Amanda L.">
+                            <div class="author-info">
+                                <strong>Amanda L.</strong>
+                                <span>Music Producer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"I've tried countless earbuds, but AuraFlow stands out. The comfort is unmatched, and I can wear them for hours. Plus, the battery life is insane!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cfdce593?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&h=80&q=80" alt="Robert P.">
+                            <div class="author-info">
+                                <strong>Robert P.</strong>
+                                <span>Software Engineer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"As a fitness enthusiast, I needed earbuds that could keep up. AuraFlow's water resistance and secure fit make them perfect for my workouts. The sound quality is a huge bonus!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&h=80&q=80" alt="Jessica B.">
+                            <div class="author-info">
+                                <strong>Jessica B.</strong>
+                                <span>Personal Trainer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="contact" class="cta">
+            <div class="cta-content">
+                <h2>Ready to Elevate Your Audio?</h2>
+                <p>Don't just listen to music, feel it. Order your AuraFlow Earbuds today and step into a world of pristine sound.</p>
+                <a href="#" class="btn">Shop Now & Get 15% Off!</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>AuraFlow</h3>
+                <p>Experience sound redefined. AuraFlow Earbuds bring you the perfect blend of innovation, comfort, and unparalleled audio quality.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#sound-experience">Sound Experience</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Shop Now</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Contact Support</a></li>
+                    <li><a href="#">Warranty</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AuraFlow Earbuds. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('navToggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerOffset = document.querySelector('header').offsetHeight;
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                    const offsetPosition = elementPosition - headerOffset - 20; // Added 20px extra padding
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+
+                    // Close mobile menu after clicking a link
+                    if (document.getElementById('navLinks').classList.contains('active')) {
+                        document.getElementById('navToggle').classList.remove('active');
+                        document.getElementById('navLinks').classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
