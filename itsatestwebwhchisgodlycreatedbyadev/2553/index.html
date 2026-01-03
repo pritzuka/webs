@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en" style="pointer-events: auto;"><head style="pointer-events: auto;">
+    <meta charset="UTF-8" style="pointer-events: auto;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" style="pointer-events: auto;">
+    <title style="pointer-events: auto;">Aurora Digital - Portfolio &amp; Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet" style="pointer-events: auto;">
+    <style style="pointer-events: auto;">
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #00A6FB;
+            --accent-color: #FF6B6B;
+            --dark-color: #1a1a2e;
+            --light-color: #f7faff;
+            --text-color-dark: #333;
+            --text-color-light: #f0f0f0;
+            --gradient-hero: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-card: linear-gradient(145deg, #f0f0f0, #e0e0e0);
+            --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-bold: 0 15px 45px rgba(0, 0, 0, 0.15);
+            --border-radius-lg: 15px;
+            --border-radius-md: 10px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background-color: var(--light-color);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        .header {
+            background-color: var(--dark-color);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-light);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: var(--light-color);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--light-color);
+            font-weight: 600;
+            font-size: 1.05rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .burger-menu span {
+            height: 3px;
+            width: 25px;
+            background-color: var(--light-color);
+            margin-bottom: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-hero);
+            color: var(--light-color);
+            padding: 15rem 0 10rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 50%;
+            animation: float 12s infinite reverse ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(20px, 30px) scale(1.05); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-content p {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            padding: 15px 30px;
+            border-radius: var(--border-radius-md);
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-light);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-bold);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--light-color);
+            color: var(--light-color);
+            margin-left: 20px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section:nth-of-type(even) {
+            background-color: #f0f3f8;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            color: var(--dark-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .about-content p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .about-content ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+        .about-content ul li {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+            position: relative;
+            padding-left: 30px;
+        }
+        .about-content ul li::before {
+            content: '✓';
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image img {
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-bold);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--light-color);
+            padding: 40px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-bold);
+        }
+
+        .service-card .icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            display: inline-block;
+            background-color: rgba(108, 99, 255, 0.1);
+            padding: 20px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .service-card:hover .icon {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        .service-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: #555;
+            flex-grow: 1;
+        }
+
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .portfolio-item {
+            background-color: var(--light-color);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-bold);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-content {
+            padding: 25px;
+        }
+
+        .portfolio-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        .portfolio-content p {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .portfolio-content .tags {
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: 8rem 0;
+        }
+
+        .testimonials .section-title {
+            color: var(--light-color);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: #31314a;
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .testimonial-card .quote-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .testimonial-card p {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #e0e0e0;
+            flex-grow: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .testimonial-author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 3px solid var(--primary-color);
+        }
+
+        .author-info h5 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--light-color);
+        }
+
+        .author-info span {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        /* Call To Action Section */
+        .cta {
+            background: var(--gradient-hero);
+            color: var(--light-color);
+            text-align: center;
+            padding: 6rem 0;
+            border-radius: var(--border-radius-lg);
+            margin: 8rem auto;
+            max-width: 90%;
+            box-shadow: var(--shadow-bold);
+        }
+
+        .cta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            margin-bottom: 20px;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-info {
+            padding: 30px;
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-bold);
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin-bottom: 30px;
+            color: var(--light-color);
+        }
+
+        .contact-details div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-details div span {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-right: 20px;
+            min-width: 30px;
+        }
+
+        .contact-details p {
+            font-size: 1.05rem;
+            color: #eee;
+        }
+
+        .contact-form {
+            background-color: var(--light-color);
+            padding: 40px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-bold);
+        }
+
+        .contact-form h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin-bottom: 30px;
+            color: var(--dark-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color-dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 15px 30px;
+            border-radius: var(--border-radius-md);
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-light);
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-bold);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: var(--light-color);
+        }
+
+        .footer-col p, .footer-col ul li {
+            font-size: 0.95rem;
+            color: #e0e0e0;
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li a {
+            color: #e0e0e0;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            font-size: 1.8rem;
+            color: var(--light-color);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            margin-top: 30px;
+        }
+
+        .footer-bottom p {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background-color: var(--dark-color);
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                z-index: 999;
+                padding-bottom: 20px;
+                box-shadow: var(--shadow-bold);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+                text-align: center;
+            }
+
+            .burger-menu {
+                display: flex;
+            }
+
+            .burger-menu.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .burger-menu.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .burger-menu.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding-top: 10rem;
+                padding-bottom: 8rem;
+            }
+
+            .hero-content h1 {
+                font-size: clamp(2.5rem, 6vw, 4.5rem);
+            }
+            .hero-content p {
+                font-size: clamp(1rem, 2.5vw, 1.2rem);
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            .btn-outline {
+                margin-left: 10px;
+            }
+            .about-image {
+                order: -1;
+            }
+            .section {
+                padding: 6rem 0;
+            }
+            .section-title {
+                font-size: clamp(2rem, 4.5vw, 3.5rem);
+                margin-bottom: 40px;
+            }
+            .services-grid, .portfolio-grid, .testimonial-grid, .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .contact-form, .contact-info {
+                padding: 30px;
+            }
+            .cta {
+                padding: 4rem 20px;
+                margin: 6rem auto;
+            }
+            .cta h2 {
+                font-size: clamp(2rem, 4vw, 3.5rem);
+            }
+            .cta p {
+                 font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            }
+            .footer-grid {
+                text-align: center;
+            }
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.8rem;
+            }
+            .hero {
+                padding-top: 8rem;
+                padding-bottom: 6rem;
+            }
+            .btn {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            .btn.btn-outline {
+                margin-left: 0;
+            }
+            .section-title::after {
+                width: 60px;
+                height: 3px;
+                bottom: -10px;
+            }
+            .hero-content h1 {
+                font-size: clamp(2.2rem, 8vw, 3.8rem);
+            }
+            .hero-content p {
+                font-size: clamp(0.9rem, 3vw, 1.1rem);
+            }
+        }
+
+         /* Icons for services and contact */
+        .icon-web-design:before { content: "🎨"; } /* Unicode for 'Artist Palette' */
+        .icon-dev:before { content: "💻"; } /* Unicode for 'Laptop' */
+        .icon-seo:before { content: "📈"; } /* Unicode for 'Chart Increasing' */
+        .icon-branding:before { content: "💡"; } /* Unicode for 'Light Bulb' */
+        .icon-marketing:before { content: " funnel"; } /* Unicode for 'Megaphone' */
+        .icon-analysis:before { content: " analytics"; } /* Unicode for 'Magnifying Glass Tilted Left' */
+
+        .icon-envelope:before { content: "📧"; } /* Unicode for 'E-Mail Symbol' */
+        .icon-phone:before { content: "📞"; } /* Unicode for 'Telephone Receiver' */
+        .icon-map:before { content: "📍"; } /* Unicode for 'Round Pushpin' */
+        .icon-linkedin:before { content: "IN"; font-family: 'Font Awesome 5 Brands'; } /* Placeholder for a real icon */
+        .icon-github:before { content: "GH"; font-family: 'Font Awesome 5 Brands'; } /* Placeholder for a real icon */
+        .icon-twitter:before { content: "TW"; font-family: 'Font Awesome 5 Brands'; } /* Placeholder for a real icon */
+        .icon-instagram:before { content: "IG"; font-family: 'Font Awesome 5 Brands'; } /* Placeholder for a real icon */
+        .icon-quote:before { content: "❝"; } /* Unicode for 'Left Double Quotation Mark' */
+
+        /* Add FontAwesome for actual icons if needed, this is just for demonstration */
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+        .icon-web-design:before { content: "\f109"; font-family: 'Font Awesome 5 Free'; font-weight: 900;}
+        .icon-dev:before { content: "\f121"; font-family: 'Font Awesome 5 Free'; font-weight: 900;}
+        .icon-seo:before { content: "\f201"; font-family: 'Font Awesome 5 Free'; font-weight: 900;}
+        .icon-branding:before { content: "\f0eb"; font-family: 'Font Awesome 5 Free'; font-weight: 900;}
+        .icon-marketing:before { content: "\f670"; font-family: 'Font Awesome 5 Free'; font-weight: 900;}
+        .icon-analysis:before { content: "\f002"; font-family: 'Font Awesome 5 Free'; font-weight: 900;}
+
+        .icon-envelope:before { content: "\f0e0"; font-family: 'Font Awesome 5 Free'; font-weight: 900;}
+        .icon-phone:before { content: "\f095"; font-family: 'Font Awesome 5 Free'; font-weight: 900;}
+        .icon-map:before { content: "\f3c5"; font-family: 'Font Awesome 5 Free'; font-weight: 900;}
+
+        .icon-linkedin:before { content: "\f08c"; font-family: 'Font Awesome 5 Brands'; }
+        .icon-github:before { content: "\f09b"; font-family: 'Font Awesome 5 Brands'; }
+        .icon-twitter:before { content: "\f099"; font-family: 'Font Awesome 5 Brands'; }
+        .icon-instagram:before { content: "\f16d"; font-family: 'Font Awesome 5 Brands'; }
+        .icon-quote:before { content: "\f10d"; font-family: 'Font Awesome 5 Free'; font-weight: 900;}
+
+    </style>
+</head>
+<body style="pointer-events: auto;">
+
+    <header class="header" style="pointer-events: auto;">
+        <div class="container navbar" style="pointer-events: auto;">
+            <a href="#hero" class="logo" style="pointer-events: auto;">Aurora Digital</a>
+            <nav style="pointer-events: auto;">
+                <ul class="nav-links" style="pointer-events: auto;">
+                    <li style="pointer-events: auto;"><a href="#about" style="pointer-events: auto;">About</a></li>
+                    <li style="pointer-events: auto;"><a href="#services" style="pointer-events: auto;">Services</a></li>
+                    <li style="pointer-events: auto;"><a href="#portfolio" style="pointer-events: auto;">Portfolio</a></li>
+                    <li style="pointer-events: auto;"><a href="#testimonials" style="pointer-events: auto;">Testimonials</a></li>
+                    <li style="pointer-events: auto;"><a href="#contact" style="pointer-events: auto;">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="burger-menu" style="pointer-events: auto;">
+                <span style="pointer-events: auto;"></span>
+                <span style="pointer-events: auto;"></span>
+                <span style="pointer-events: auto;"></span>
+            </div>
+        </div>
+    </header>
+
+    <main style="pointer-events: auto;">
+        <!-- Hero Section -->
+        <section id="hero" class="hero" style="pointer-events: auto;">
+            <div class="container hero-content" style="pointer-events: auto;">
+                <h1 style="pointer-events: auto;">Crafting Digital Experiences That Resonate</h1>
+                <p style="pointer-events: auto;">We blend innovative design with robust development to build stunning websites, powerful applications, and memorable brands for the modern age.</p>
+                <div style="pointer-events: auto;">
+                    <a href="#portfolio" class="btn" style="pointer-events: auto;">View Our Work</a>
+                    <a href="#contact" class="btn btn-outline" style="pointer-events: auto;">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <h2 class="section-title" style="pointer-events: auto;">Who We Are</h2>
+                <div class="about-grid" style="pointer-events: auto;">
+                    <div class="about-content" style="pointer-events: auto;">
+                        <h3 style="pointer-events: auto;">Innovative Solutions for a Digital World</h3>
+                        <p style="pointer-events: auto;">Aurora Digital is a dynamic team of creative designers and skilled developers dedicated to bringing your digital vision to life. We believe in the power of well-crafted online presences to transform businesses and connect with audiences.</p>
+                        <p style="pointer-events: auto;">Our approach is centered around understanding your unique goals, combining strategic thinking with cutting-edge technology to deliver results that don't just look good, but truly perform.</p>
+                        <ul style="pointer-events: auto;">
+                            <li style="pointer-events: auto;">User-Centered Design Principles</li>
+                            <li style="pointer-events: auto;">Responsive &amp; Accessible Development</li>
+                            <li style="pointer-events: auto;">Data-Driven Strategy &amp; Optimization</li>
+                            <li style="pointer-events: auto;">Transparent Collaboration &amp; Communication</li>
+                        </ul>
+                    </div>
+                    <div class="about-image" style="pointer-events: auto;">
+                        <img src="https://images.unsplash.com/photo-1596541223969-eecfcadc5226?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=774&amp;q=80" alt="Team collaborating on digital design" style="pointer-events: auto;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <h2 class="section-title" style="pointer-events: auto;">Our Expertise</h2>
+                <div class="services-grid" style="pointer-events: auto;">
+                    <div class="service-card" style="pointer-events: auto;">
+                        <span class="icon icon-web-design" style="pointer-events: auto;"></span>
+                        <h4 style="pointer-events: auto;">Web Design &amp; UI/UX</h4>
+                        <p style="pointer-events: auto;">Creating intuitive, aesthetically pleasing, and highly functional user interfaces that captivate your audience and ensure a seamless user experience.</p>
+                    </div>
+                    <div class="service-card" style="pointer-events: auto;">
+                        <span class="icon icon-dev" style="pointer-events: auto;"></span>
+                        <h4 style="pointer-events: auto;">Full-Stack Development</h4>
+                        <p style="pointer-events: auto;">Building robust, scalable, and secure web applications from front-end to back-end, using the latest technologies and best practices.</p>
+                    </div>
+                    <div class="service-card" style="pointer-events: auto;">
+                        <span class="icon icon-seo" style="pointer-events: auto;"></span>
+                        <h4 style="pointer-events: auto;">SEO &amp; Digital Strategy</h4>
+                        <p style="pointer-events: auto;">Enhancing your online visibility and driving organic traffic with tailored SEO strategies, content optimization, and performance analysis.</p>
+                    </div>
+                    <div class="service-card" style="pointer-events: auto;">
+                        <span class="icon icon-branding" style="pointer-events: auto;"></span>
+                        <h4 style="pointer-events: auto;">Brand Identity &amp; Consulting</h4>
+                        <p style="pointer-events: auto;">Developing compelling brand identities and offering strategic consulting to shape your brand narrative and market position.</p>
+                    </div>
+                    <div class="service-card" style="pointer-events: auto;">
+                        <span class="icon icon-marketing" style="pointer-events: auto;"></span>
+                        <h4 style="pointer-events: auto;">Content &amp; Marketing Solutions</h4>
+                        <p style="pointer-events: auto;">Crafting engaging content and implementing digital marketing campaigns that resonate with your target audience and convert leads.</p>
+                    </div>
+                    <div class="service-card" style="pointer-events: auto;">
+                        <span class="icon icon-analysis" style="pointer-events: auto;"></span>
+                        <h4 style="pointer-events: auto;">Analytics &amp; Optimization</h4>
+                        <p style="pointer-events: auto;">Monitoring performance, analyzing data, and continuously optimizing your digital assets for maximum efficiency and return on investment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="section" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <h2 class="section-title" style="pointer-events: auto;">Our Latest Projects</h2>
+                <div class="portfolio-grid" style="pointer-events: auto;">
+                    <div class="portfolio-item" style="pointer-events: auto;">
+                        <img src="https://images.unsplash.com/photo-1542831371-d36ec08a952c?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80" alt="Project: E-commerce Website Redesign" style="pointer-events: auto;">
+                        <div class="portfolio-content" style="pointer-events: auto;">
+                            <h3 style="pointer-events: auto;">QuantumMart E-commerce</h3>
+                            <p style="pointer-events: auto;">Complete redesign and development of a high-performance e-commerce platform, focusing on mobile responsiveness and conversion rates.</p>
+                            <div class="tags" style="pointer-events: auto;">#WebDesign #Ecommerce #UI/UX #ReactJS</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" style="pointer-events: auto;">
+                        <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55152?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1695&amp;q=80" alt="Project: SaaS Dashboard Development" style="pointer-events: auto;">
+                        <div class="portfolio-content" style="pointer-events: auto;">
+                            <h3 style="pointer-events: auto;">AnalyticsFlow SaaS Dashboard</h3>
+                            <p style="pointer-events: auto;">Developed an intuitive and powerful analytics dashboard for a B2B SaaS startup, providing real-time data visualization.</p>
+                            <div class="tags" style="pointer-events: auto;">#SaaS #Dashboard #DataViz #VueJS #API</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" style="pointer-events: auto;">
+                        <img src="https://images.unsplash.com/photo-1621609764095-b32ddcd08ce0?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80" alt="Project: Mobile App for Fitness" style="pointer-events: auto;">
+                        <div class="portfolio-content" style="pointer-events: auto;">
+                            <h3 style="pointer-events: auto;">MindBody Fitness App</h3>
+                            <p style="pointer-events: auto;">Designed and built a cross-platform mobile application for personalized fitness and wellness tracking. Available on iOS &amp; Android.</p>
+                            <div class="tags" style="pointer-events: auto;">#MobileApp #ReactNative #UX #HealthTech</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" style="pointer-events: auto;">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.acGPQ-I10Kk8kae3ncYQFQHaE8?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt="Project: Corporate Website" style="pointer-events: auto;">
+                        <div class="portfolio-content" style="pointer-events: auto;">
+                            <h3 style="pointer-events: auto;">InnovateCo Corporate Site</h3>
+                            <p style="pointer-events: auto;">A sleek, modern corporate website reflecting InnovateCo's leadership in tech, optimized for lead generation and brand authority.</p>
+                            <div class="tags" style="pointer-events: auto;">#CorporateWeb #Branding #ContentStrategy #CMS</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" style="pointer-events: auto;">
+                        <img src="https://images.unsplash.com/photo-1593642532400-26497b79a8d0?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80" alt="Project: Art Gallery Online Presence" style="pointer-events: auto;">
+                        <div class="portfolio-content" style="pointer-events: auto;">
+                            <h3 style="pointer-events: auto;">Artisan Gallery Online</h3>
+                            <p style="pointer-events: auto;">Developed an immersive online art gallery experience, allowing artists to showcase their work and collectors to browse easily.</p>
+                            <div class="tags" style="pointer-events: auto;">#ArtWebsite #DigitalShowcase #ResponsiveDesign</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" style="pointer-events: auto;">
+                        <img src="https://images.unsplash.com/photo-1547394765-185e1e13886f?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80" alt="Project: Fintech Startup Landing Page" style="pointer-events: auto;">
+                        <div class="portfolio-content" style="pointer-events: auto;">
+                            <h3 style="pointer-events: auto;">FinFlow Landing Page</h3>
+                            <p style="pointer-events: auto;">Designed and optimized a high-converting landing page for a new fintech startup, generating significant early-stage sign-ups.</p>
+                            <div class="tags" style="pointer-events: auto;">#LandingPage #Fintech #Marketing #Conversion</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials section" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <h2 class="section-title" style="pointer-events: auto;">What Our Clients Say</h2>
+                <div class="testimonial-grid" style="pointer-events: auto;">
+                    <div class="testimonial-card" style="pointer-events: auto;">
+                        <span class="quote-icon icon-quote" style="pointer-events: auto;"></span>
+                        <p style="pointer-events: auto;">"Aurora Digital exceeded our expectations! Their team delivered a stunning website that perfectly captures our brand. The communication was excellent throughout the entire process."</p>
+                        <div class="testimonial-author" style="pointer-events: auto;">
+                            <img src="https://images.unsplash.com/photo-1599566150163-29194d6b620b?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=774&amp;q=80" alt="Client Avatar 1" style="pointer-events: auto;">
+                            <div class="author-info" style="pointer-events: auto;">
+                                <h5 style="pointer-events: auto;">Jane Doe</h5>
+                                <span style="pointer-events: auto;">CEO, InnovateCo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card" style="pointer-events: auto;">
+                        <span class="quote-icon icon-quote" style="pointer-events: auto;"></span>
+                        <p style="pointer-events: auto;">"The new e-commerce platform built by Aurora Digital has significantly boosted our sales and improved customer satisfaction. Their attention to detail and technical expertise are top-notch."</p>
+                        <div class="testimonial-author" style="pointer-events: auto;">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=764&amp;q=80" alt="Client Avatar 2" style="pointer-events: auto;">
+                            <div class="author-info" style="pointer-events: auto;">
+                                <h5 style="pointer-events: auto;">John Smith</h5>
+                                <span style="pointer-events: auto;">Founder, QuantumMart</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card" style="pointer-events: auto;">
+                        <span class="quote-icon icon-quote" style="pointer-events: auto;"></span>
+                        <p style="pointer-events: auto;">"Working with Aurora Digital was a truly collaborative experience. They listened to our needs and transformed our ideas into a beautiful, functional mobile application. Highly recommended!"</p>
+                        <div class="testimonial-author" style="pointer-events: auto;">
+                            <img src="https://images.unsplash.com/photo-1507003211169-e69fe254be2e?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=774&amp;q=80" alt="Client Avatar 3" style="pointer-events: auto;">
+                            <div class="author-info" style="pointer-events: auto;">
+                                <h5 style="pointer-events: auto;">Emily White</h5>
+                                <span style="pointer-events: auto;">Director, MindBody Fitness</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <h2 style="pointer-events: auto;">Ready to Transform Your Digital Presence?</h2>
+                <p style="pointer-events: auto;">Let's build something extraordinary together. Reach out to discuss your project and discover how Aurora Digital can help you achieve your goals.</p>
+                <a href="#contact" class="btn" style="pointer-events: auto;">Start Your Project Today</a>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <h2 class="section-title" style="pointer-events: auto;">Connect With Us</h2>
+                <div class="contact-grid" style="pointer-events: auto;">
+                    <div class="contact-info" style="pointer-events: auto;">
+                        <h3 style="pointer-events: auto;">Get in Touch</h3>
+                        <p style="pointer-events: auto;">Have a question or a project idea? We'd love to hear from you. Fill out the form or reach us through the channels below.</p>
+                        <div class="contact-details" style="pointer-events: auto;">
+                            <div style="pointer-events: auto;">
+                                <span class="icon icon-envelope" style="pointer-events: auto;"></span>
+                                <p style="pointer-events: auto;">info@auroradigital.com</p>
+                            </div>
+                            <div style="pointer-events: auto;">
+                                <span class="icon icon-phone" style="pointer-events: auto;"></span>
+                                <p style="pointer-events: auto;">+1 (555) 123-4567</p>
+                            </div>
+                            <div style="pointer-events: auto;">
+                                <span class="icon icon-map" style="pointer-events: auto;"></span>
+                                <p style="pointer-events: auto;">123 Digital Way, Suite 400, Innovation City, DX 67890</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form" style="pointer-events: auto;">
+                        <h3 style="pointer-events: auto;">Send Us a Message</h3>
+                        <form action="#" method="POST" style="pointer-events: auto;">
+                            <div class="form-group" style="pointer-events: auto;">
+                                <label for="name" style="pointer-events: auto;">Name</label>
+                                <input type="text" id="name" name="name" required="" style="pointer-events: auto;">
+                            </div>
+                            <div class="form-group" style="pointer-events: auto;">
+                                <label for="email" style="pointer-events: auto;">Email</label>
+                                <input type="email" id="email" name="email" required="" style="pointer-events: auto;">
+                            </div>
+                            <div class="form-group" style="pointer-events: auto;">
+                                <label for="subject" style="pointer-events: auto;">Subject</label>
+                                <input type="text" id="subject" name="subject" style="pointer-events: auto;">
+                            </div>
+                            <div class="form-group" style="pointer-events: auto;">
+                                <label for="message" style="pointer-events: auto;">Message</label>
+                                <textarea id="message" name="message" required="" style="pointer-events: auto;"></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn" style="pointer-events: auto;">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" style="pointer-events: auto;">
+        <div class="container footer-grid" style="pointer-events: auto;">
+            <div class="footer-col" style="pointer-events: auto;">
+                <h4 style="pointer-events: auto;">Aurora Digital</h4>
+                <p style="pointer-events: auto;">Crafting exceptional digital experiences since 2015. We are passionate about innovation, design, and delivering outstanding results.</p>
+                <div class="social-links" style="pointer-events: auto;">
+                    <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn" style="pointer-events: auto;"><i class="fab fa-linkedin icon-linkedin" style="pointer-events: auto;"></i></a>
+                    <a href="https://github.com" target="_blank" aria-label="GitHub" style="pointer-events: auto;"><i class="fab fa-github icon-github" style="pointer-events: auto;"></i></a>
+                    <a href="https://twitter.com" target="_blank" aria-label="Twitter" style="pointer-events: auto;"><i class="fab fa-twitter icon-twitter" style="pointer-events: auto;"></i></a>
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram" style="pointer-events: auto;"><i class="fab fa-instagram icon-instagram" style="pointer-events: auto;"></i></a>
+                </div>
+            </div>
+            <div class="footer-col" style="pointer-events: auto;">
+                <h4 style="pointer-events: auto;">Quick Links</h4>
+                <ul style="pointer-events: auto;">
+                    <li style="pointer-events: auto;"><a href="#about" style="pointer-events: auto;">About Us</a></li>
+                    <li style="pointer-events: auto;"><a href="#services" style="pointer-events: auto;">Our Services</a></li>
+                    <li style="pointer-events: auto;"><a href="#portfolio" style="pointer-events: auto;">Our Portfolio</a></li>
+                    <li style="pointer-events: auto;"><a href="#testimonials" style="pointer-events: auto;">Testimonials</a></li>
+                    <li style="pointer-events: auto;"><a href="#contact" style="pointer-events: auto;">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col" style="pointer-events: auto;">
+                <h4 style="pointer-events: auto;">Services</h4>
+                <ul style="pointer-events: auto;">
+                    <li style="pointer-events: auto;"><a href="#services" style="pointer-events: auto;">Web Design</a></li>
+                    <li style="pointer-events: auto;"><a href="#services" style="pointer-events: auto;">Web Development</a></li>
+                    <li style="pointer-events: auto;"><a href="#services" style="pointer-events: auto;">SEO &amp; Marketing</a></li>
+                    <li style="pointer-events: auto;"><a href="#services" style="pointer-events: auto;">UI/UX Design</a></li>
+                    <li style="pointer-events: auto;"><a href="#services" style="pointer-events: auto;">Brand Strategy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col" style="pointer-events: auto;">
+                <h4 style="pointer-events: auto;">Privacy &amp; Terms</h4>
+                <ul style="pointer-events: auto;">
+                    <li style="pointer-events: auto;"><a href="#" style="pointer-events: auto;">Privacy Policy</a></li>
+                    <li style="pointer-events: auto;"><a href="#" style="pointer-events: auto;">Terms of Service</a></li>
+                    <li style="pointer-events: auto;"><a href="#" style="pointer-events: auto;">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom" style="pointer-events: auto;">
+            <p style="pointer-events: auto;">© 2025 Aurora Digital. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script style="pointer-events: auto;">
+        document.addEventListener('DOMContentLoaded', () => {
+            const burger = document.querySelector('.burger-menu');
+            const nav = document.querySelector('.nav-links');
+            const navLinks = document.querySelectorAll('.nav-links li a');
+
+            burger.addEventListener('click', () => {
+                nav.classList.toggle('active');
+                burger.classList.toggle('active');
+            });
+
+            // Close nav when a link is clicked (for mobile)
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (nav.classList.contains('active')) {
+                        nav.classList.remove('active');
+                        burger.classList.remove('active');
+                    }
+                });
+            });
+
+            // Smooth scrolling for all anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    const headerOffset = document.querySelector('.header').offsetHeight; // Height of fixed header
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                    const offsetPosition = elementPosition - headerOffset - 20; // Added 20px for extra space
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                });
+            });
+        });
+    </script>
+
+</body></html>
