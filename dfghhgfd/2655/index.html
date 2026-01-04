@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en" style="pointer-events: auto;"><head style="pointer-events: auto;">
+    <meta charset="UTF-8" style="pointer-events: auto;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" style="pointer-events: auto;">
+    <title style="pointer-events: auto;">Kaiya Reed - Creative Technologist</title>
+    <link rel="icon" href="https://images.unsplash.com/photo-1549646549-fb93108ff280?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=32&amp;q=10" style="pointer-events: auto;">
+    <style style="pointer-events: auto;">
+        @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;600;900&family=Quicksand:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%);
+            --secondary-gradient: linear-gradient(135deg, #4ECDC4 0%, #C7F0BD 100%);
+            --dark-bg: #1A1A2E;
+            --dark-card: #2E2C4B;
+            --text-light: #F0F0F0;
+            --text-dark: #A0A0A0;
+            --accent-pink: #FF6B6B;
+            --accent-yellow: #FFE66D;
+            --accent-teal: #4ECDC4;
+            --border-radius: 1.5rem;
+            --shadow-1: 0 4px 15px rgba(0, 0, 0, 0.2);
+            --shadow-2: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Unbounded', cursive;
+            font-weight: 900;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: clamp(2.5rem, 8vw, 5rem); }
+        h2 { font-size: clamp(2rem, 6vw, 3.5rem); }
+        h3 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+        p { font-size: clamp(1rem, 2vw, 1.15rem); }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-teal);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .container {
+            width: min(90%, 1400px);
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+
+        section {
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-family: 'Unbounded', cursive;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-1);
+            text-transform: uppercase;
+        }
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: var(--dark-bg);
+            border: none;
+        }
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-2);
+            filter: brightness(1.1);
+        }
+        .btn-secondary {
+            background: none;
+            border: 2px solid var(--accent-teal);
+            color: var(--accent-teal);
+        }
+        .btn-secondary:hover {
+            background: var(--accent-teal);
+            color: var(--dark-bg);
+            box-shadow: var(--shadow-2);
+        }
+        .section-header {
+            margin-bottom: 4rem;
+            color: var(--text-light);
+            text-align: center;
+        }
+        .section-header h2 {
+            position: relative;
+            display: inline-block;
+            letter-spacing: 2px;
+            padding-bottom: 0.5rem;
+        }
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-gradient);
+            border-radius: 5px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-1);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        nav .logo {
+            font-family: 'Unbounded', cursive;
+            font-weight: 900;
+            font-size: 1.8rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--shadow-1);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+        nav ul li a {
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 3px;
+            background: var(--accent-yellow);
+            bottom: -8px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        nav ul li a:hover {
+            color: var(--accent-yellow);
+        }
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: var(--text-light);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                position: absolute;
+                top: 0;
+                right: -100%;
+                background: var(--dark-bg);
+                width: 70%;
+                height: 100vh;
+                padding-top: 8rem;
+                align-items: center;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+                transition: right 0.5s ease-in-out;
+            }
+            nav ul.active {
+                right: 0;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+        }
+
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.9)), url('https://images.unsplash.com/photo-1510519138101-570d1dca3d66?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        #hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(26,26,46,0) 0%, rgba(26,26,46,0.8) 70%, var(--dark-bg) 100%);
+            z-index: 1;
+        }
+        #hero .hero-content {
+            z-index: 2;
+            position: relative;
+            transform: translateY(-50px);
+            animation: fadeIn 1.5s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-70px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #hero h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            text-shadow: 0 5px 20px rgba(255, 107, 107, 0.3);
+        }
+        #hero p {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            color: var(--text-dark);
+            opacity: 0.9;
+        }
+        #hero .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* About Section */
+        #about {
+            background: var(--dark-card);
+            padding: 10rem 0;
+            position: relative;
+        }
+        #about .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        #about .about-img {
+            text-align: center;
+            position: relative;
+        }
+        #about .about-img img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-2);
+            filter: grayscale(80%);
+            transition: all 0.5s ease;
+        }
+        #about .about-img img:hover {
+            filter: grayscale(0%);
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+        #about .about-text h3 {
+            color: var(--accent-teal);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+        }
+        #about .about-text p {
+            color: var-----------;
+            margin-bottom: 1.5rem;
+        }
+        #about .about-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+        #about .about-skills span {
+            background: var(--dark-bg);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--accent-yellow);
+            box-shadow: var(--shadow-1);
+            transition: all 0.3s ease;
+        }
+        #about .about-skills span:hover {
+            background: var(--accent-yellow);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 992px) {
+            #about .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            #about .about-img {
+                order: -1;
+            }
+        }
+
+        /* Services Section */
+        #services {
+            background: var(--dark-bg);
+            padding: 10rem 0;
+        }
+        #services .service-card {
+            background: var(--dark-card);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-1);
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        #services .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        #services .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        #services .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-2);
+            border-color: rgba(255,255,255,0.15);
+        }
+        #services .service-card .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            filter: drop-shadow(0 5px 10px rgba(78, 205, 196, 0.3));
+        }
+        #services .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-yellow);
+        }
+        #services .service-card p {
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        /* Portfolio Section */
+        #portfolio {
+            background: var(--dark-card);
+            padding: 10rem 0;
+        }
+        #portfolio .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        #portfolio .project-card {
+            background: var(--dark-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-1);
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+        }
+        #portfolio .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-2);
+        }
+        #portfolio .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+        #portfolio .project-card:hover img {
+            transform: scale(1.05);
+        }
+        #portfolio .project-card .project-info {
+            padding: 2rem;
+        }
+        #portfolio .project-card h3 {
+            margin-bottom: 0.8rem;
+            color: var(--accent-pink);
+            font-size: 1.8rem;
+        }
+        #portfolio .project-card p {
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        #portfolio .project-card .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        #portfolio .project-card .project-tags span {
+            background: var(--dark-bg);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        #portfolio .project-card .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        #portfolio .project-card .project-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-teal);
+            font-weight: 600;
+        }
+        #portfolio .project-card .project-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        /* Testimonials Section */
+        #testimonials {
+            background: var(--dark-bg);
+            padding: 10rem 0;
+        }
+        #testimonials .testimonial-slider {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        #testimonials .testimonial-card {
+            background: var(--dark-card);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-1);
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        #testimonials .testimonial-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 3px solid var(--accent-teal);
+            box-shadow: var(--shadow-1);
+        }
+        #testimonials .testimonial-card p {
+            font-style: italic;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+        #testimonials .testimonial-card h4 {
+            color: var(--accent-yellow);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        #testimonials .testimonial-card span {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+        #testimonials .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-2);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--dark-card);
+            padding: 10rem 0;
+            text-align: center;
+        }
+        #contact .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        #contact h2 {
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+        }
+        #contact p {
+            color: var(--text-dark);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        #contact .contact-form {
+            background: var(--dark-bg);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-2);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        #contact .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        #contact .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent-teal);
+            font-weight: 600;
+        }
+        #contact .form-group input,
+        #contact .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            background: #3A385B;
+            color: var(--text-light);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        #contact .form-group input:focus,
+        #contact .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--accent-yellow), inset 0 2px 5px rgba(0,0,0,0.5);
+            background: #46446b;
+        }
+        #contact .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        #contact .form-group button {
+            width: 100%;
+            border: none;
+            display: block;
+            margin-top: 2rem;
+        }
+        #contact .social-links {
+            margin-top: 4rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        #contact .social-links a {
+            font-size: 2rem;
+            color: var(--accent-teal);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        #contact .social-links a:hover {
+            color: var(--accent-yellow);
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            background: #10101C;
+            padding: 4rem 0 2rem 0;
+            color: var(--text-dark);
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        footer .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        footer .footer-logo {
+            font-family: 'Unbounded', cursive;
+            font-weight: 900;
+            font-size: 2rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--shadow-1);
+        }
+        footer .footer-nav ul,
+        footer .footer-social ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        footer .footer-nav a {
+            color: var(--text-dark);
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+        footer .footer-nav a:hover {
+            color: var(--text-light);
+            text-decoration: underline;
+        }
+        footer .footer-social a {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+        }
+        footer .footer-social a:hover {
+            color: var(--accent-teal);
+        }
+        footer .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            width: 100%;
+            max-width: 800px;
+        }
+    </style>
+    <!-- Font Awesome for Icons (using latest v6 kit) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" style="pointer-events: auto;"></script>
+</head>
+<body style="pointer-events: auto;">
+    <nav style="pointer-events: auto;">
+        <div class="container" style="pointer-events: auto;">
+            <a href="#" class="logo" style="pointer-events: auto;">Kaiya.</a>
+            <div class="menu-toggle" aria-label="Toggle navigation" style="pointer-events: auto;">
+                <span style="pointer-events: auto;"></span>
+                <span style="pointer-events: auto;"></span>
+                <span style="pointer-events: auto;"></span>
+            </div>
+            <ul class="nav-links" style="pointer-events: auto;">
+                <li style="pointer-events: auto;"><a href="#hero" style="pointer-events: auto;">Home</a></li>
+                <li style="pointer-events: auto;"><a href="#about" style="pointer-events: auto;">About</a></li>
+                <li style="pointer-events: auto;"><a href="#services" style="pointer-events: auto;">Services</a></li>
+                <li style="pointer-events: auto;"><a href="#portfolio" style="pointer-events: auto;">Portfolio</a></li>
+                <li style="pointer-events: auto;"><a href="#testimonials" style="pointer-events: auto;">Testimonials</a></li>
+                <li style="pointer-events: auto;"><a href="#contact" style="pointer-events: auto;">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="hero" style="pointer-events: auto;">
+        <div class="container hero-content" style="pointer-events: auto;">
+            <p style="pointer-events: auto;">Hello, I'm</p>
+            
+            <p style="pointer-events: auto;">A Creative Technologist crafting engaging digital experiences and solving complex problems with elegant code and innovative design, based in the future (2026).</p><p style="pointer-events: auto;">A Creative Technologist crafting engaging digital experiences and solving complex problems with elegant code and innovative design, based in the future (2026).</p>
+            <div class="hero-buttons" style="pointer-events: auto;">
+                <a href="#portfolio" class="btn btn-primary" style="pointer-events: auto;">View My Work</a>
+                <a href="#contact" class="btn btn-secondary" style="pointer-events: auto;">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" style="pointer-events: auto;">
+        <div class="container" style="pointer-events: auto;">
+            <div class="section-header" style="pointer-events: auto;">
+                <h2 style="pointer-events: auto;">About Me</h2>
+            </div>
+            <div class="about-content" style="pointer-events: auto;">
+                <div class="about-img" style="pointer-events: auto;">
+                    <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Kaiya Reed working at a computer" style="pointer-events: auto;">
+                </div>
+                <div class="about-text" style="pointer-events: auto;">
+                    <h3 style="pointer-events: auto;">Pioneering the Digital Frontier</h3>
+                    <p style="pointer-events: auto;">I am Kaiya Reed, a multidisciplinary creative technologist with a passion for bringing innovative ideas to life through code and design. With a foundation laid over a decade ago and evolved aggressively into the landscape of 2026, my expertise spans across full-stack development, UX/UI, and interactive media.</p>
+                    <p style="pointer-events: auto;">My journey began with a fascination for how technology shapes human experience, leading me to specialize in crafting seamless, intuitive, and aesthetically pleasing digital products. From dynamic web applications to immersive interactive installations, I thrive on challenges that push the boundaries of what's possible.</p>
+                    <p style="pointer-events: auto;">I believe in a user-centric approach, ensuring every project not only meets its technical objectives but also deeply resonates with its audience. Let's build the future, together.</p>
+                    <div class="about-skills" style="pointer-events: auto;">
+                        <span style="pointer-events: auto;">JavaScript ES14</span>
+                        <span style="pointer-events: auto;">TypeScript</span>
+                        <span style="pointer-events: auto;">React 20</span>
+                        <span style="pointer-events: auto;">Next.js 16</span>
+                        <span style="pointer-events: auto;">Web Components V4</span>
+                        <span style="pointer-events: auto;">Node.js</span>
+                        <span style="pointer-events: auto;">Cloud Computing (Azure/GCP)</span>
+                        <span style="pointer-events: auto;">AI/ML Integration</span>
+                        <span style="pointer-events: auto;">3D Web (Three.js/WebGL)</span>
+                        <span style="pointer-events: auto;">UI/UX Design</span>
+                        <span style="pointer-events: auto;">Motion Graphics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" style="pointer-events: auto;">
+        <div class="container" style="pointer-events: auto;">
+            <div class="section-header" style="pointer-events: auto;">
+                <h2 style="pointer-events: auto;">My Expertise</h2>
+            </div>
+            <div class="grid-3" style="pointer-events: auto;">
+                <div class="service-card" style="pointer-events: auto;">
+                    <i class="fa-solid fa-code icon" style="pointer-events: auto;"></i>
+                    <h3 style="pointer-events: auto;">Full-Stack Development</h3>
+                    <p style="pointer-events: auto;">Building robust and scalable web applications from front to back. Specializing in modern JavaScript frameworks and serverless architectures.</p>
+                </div>
+                <div class="service-card" style="pointer-events: auto;">
+                    <i class="fa-solid fa-paintbrush icon" style="pointer-events: auto;"></i>
+                    <h3 style="pointer-events: auto;">UI/UX Design</h3>
+                    <p style="pointer-events: auto;">Crafting intuitive and engaging user interfaces with a focus on experience-led design principles for seamless interactions.</p>
+                </div>
+                <div class="service-card" style="pointer-events: auto;">
+                    <i class="fa-solid fa-cube icon" style="pointer-events: auto;"></i>
+                    <h3 style="pointer-events: auto;">3D &amp; Interactive Web</h3>
+                    <p style="pointer-events: auto;">Developing immersive 3D experiences and interactive installations using WebGL, Three.js, and emerging AR/VR technologies.</p>
+                </div>
+                <div class="service-card" style="pointer-events: auto;">
+                    <i class="fa-solid fa-brain icon" style="pointer-events: auto;"></i>
+                    <h3 style="pointer-events: auto;">AI Integration</h3>
+                    <p style="pointer-events: auto;">Integrating intelligent AI/ML models to enhance application functionality, user personalization, and data-driven insights.</p>
+                </div>
+                <div class="service-card" style="pointer-events: auto;">
+                    <i class="fa-solid fa-mobile-alt icon" style="pointer-events: auto;"></i>
+                    <h3 style="pointer-events: auto;">Responsive Design</h3>
+                    <p style="pointer-events: auto;">Ensuring flawless performance and aesthetics across all devices and screen sizes, from quantum displays to wearables.</p>
+                </div>
+                <div class="service-card" style="pointer-events: auto;">
+                    <i class="fa-solid fa-cloud icon" style="pointer-events: auto;"></i>
+                    <h3 style="pointer-events: auto;">Cloud Architecture</h3>
+                    <p style="pointer-events: auto;">Designing and implementing scalable, secure, and cost-effective cloud solutions for global deployments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" style="pointer-events: auto;">
+        <div class="container" style="pointer-events: auto;">
+            <div class="section-header" style="pointer-events: auto;">
+                <h2 style="pointer-events: auto;">Recent Works</h2>
+            </div>
+            <div class="project-grid" style="pointer-events: auto;">
+                
+                <div class="project-card" style="pointer-events: auto;">
+                    <img src="https://images.unsplash.com/photo-1635324838407-7729f64bf0a3?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Quantum AI Dashboard Interface" style="pointer-events: auto;">
+                    <div class="project-info" style="pointer-events: auto;">
+                        <h3 style="pointer-events: auto;">Quantum AI Dashboard</h3>
+                        <p style="pointer-events: auto;">A sophisticated data visualization dashboard for quantum computing resource management and predictive analytics.</p>
+                        <div class="project-tags" style="pointer-events: auto;">
+                            <span style="pointer-events: auto;">AI/ML</span>
+                            <span style="pointer-events: auto;">Next.js</span>
+                            <span style="pointer-events: auto;">D3.js</span>
+                            <span style="pointer-events: auto;">Node.js</span>
+                        </div>
+                        <div class="project-links" style="pointer-events: auto;">
+                            <a href="#" target="_blank" style="pointer-events: auto;"><i class="fa-solid fa-external-link-alt" style="pointer-events: auto;"></i> View Project</a>
+                            <a href="#" target="_blank" style="pointer-events: auto;"><i class="fa-brands fa-github" style="pointer-events: auto;"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" style="pointer-events: auto;">
+                    <img src="https://images.unsplash.com/photo-1549060279-7e16daf10271?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Eco-Living Smart Home App" style="pointer-events: auto;">
+                    <div class="project-info" style="pointer-events: auto;">
+                        <h3 style="pointer-events: auto;">Eco-Living Smart Home</h3>
+                        <p style="pointer-events: auto;">An IoT-enabled mobile and web application for managing sustainable smart home devices and energy consumption.</p>
+                        <div class="project-tags" style="pointer-events: auto;">
+                            <span style="pointer-events: auto;">IoT</span>
+                            <span style="pointer-events: auto;">React Native</span>
+                            <span style="pointer-events: auto;">GraphQL</span>
+                            <span style="pointer-events: auto;">Figma</span>
+                        </div>
+                        <div class="project-links" style="pointer-events: auto;">
+                            <a href="#" target="_blank" style="pointer-events: auto;"><i class="fa-solid fa-external-link-alt" style="pointer-events: auto;"></i> View Project</a>
+                            <a href="#" target="_blank" style="pointer-events: auto;"><i class="fa-brands fa-github" style="pointer-events: auto;"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" style="pointer-events: auto;">
+        <div class="container" style="pointer-events: auto;">
+            <div class="section-header" style="pointer-events: auto;">
+                <h2 style="pointer-events: auto;">What Clients Say</h2>
+            </div>
+            <div class="testimonial-slider" style="pointer-events: auto;">
+                <div class="testimonial-card" style="pointer-events: auto;">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=80&amp;h=80&amp;q=80" alt="Client Sarah Chen" style="pointer-events: auto;">
+                    <p style="pointer-events: auto;">"Kaiya's vision and technical prowess transformed our complex ideas into a market-leading product. Her attention to detail and proactive communication made the entire process a pleasure."</p>
+                    <h4 style="pointer-events: auto;">Sarah Chen</h4>
+                    <span style="pointer-events: auto;">CEO, Quantum Innovations</span>
+                </div>
+                <div class="testimonial-card" style="pointer-events: auto;">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=80&amp;h=80&amp;q=80" alt="Client David Lee" style="pointer-events: auto;">
+                    <p style="pointer-events: auto;">"From concept to deployment, Kaiya delivered beyond our expectations. The interactive web experience she built has significantly boosted our user engagement and brand perception."</p>
+                    <h4 style="pointer-events: auto;">David Lee</h4>
+                    <span style="pointer-events: auto;">Marketing Director, Immersive Worlds</span>
+                </div>
+                <div class="testimonial-card" style="pointer-events: auto;">
+                    <img src="https://images.unsplash.com/photo-1509305717616-bb4d283626e2?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=80&amp;h=80&amp;q=80" alt="Client Anya Sharma" style="pointer-events: auto;">
+                    <p style="pointer-events: auto;">"Working with Kaiya is a masterclass in efficiency and creativity. She understood our needs perfectly and delivered a cutting-edge solution that was both beautiful and highly functional."</p>
+                    <h4 style="pointer-events: auto;">Anya Sharma</h4>
+                    <span style="pointer-events: auto;">Lead Product Manager, NeoConnect</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="pointer-events: auto;">
+        <div class="container contact-content" style="pointer-events: auto;">
+            <div class="section-header" style="pointer-events: auto;">
+                <h2 style="pointer-events: auto;">Let's Collaborate</h2>
+            </div>
+            <p style="pointer-events: auto;">Ready to bring your next big idea to life? I'm always excited to discuss new projects, partnerships, or just connect over a shared passion for innovative technology. Reach out and let's create something extraordinary.</p>
+            <div class="contact-form" style="pointer-events: auto;">
+                <form action="YOUR_FORM_SUBMISSION_ENDPOINT" method="POST" style="pointer-events: auto;">
+                    <div class="form-group" style="pointer-events: auto;">
+                        <label for="name" style="pointer-events: auto;">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required="" style="pointer-events: auto;">
+                    </div>
+                    <div class="form-group" style="pointer-events: auto;">
+                        <label for="email" style="pointer-events: auto;">Your Email</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required="" style="pointer-events: auto;">
+                    </div>
+                    <div class="form-group" style="pointer-events: auto;">
+                        <label for="subject" style="pointer-events: auto;">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="Project Inquiry, Collaboration, etc." required="" style="pointer-events: auto;">
+                    </div>
+                    <div class="form-group" style="pointer-events: auto;">
+                        <label for="message" style="pointer-events: auto;">Your Message</label>
+                        <textarea id="message" name="message" placeholder="Tell me about your project or idea..." required="" style="pointer-events: auto;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="pointer-events: auto;">Send Message</button>
+                </form>
+            </div>
+            <div class="social-links" style="pointer-events: auto;">
+                <a href="#" target="_blank" aria-label="LinkedIn" style="pointer-events: auto;"><i class="fab fa-linkedin-in" style="pointer-events: auto;"></i></a>
+                <a href="#" target="_blank" aria-label="GitHub" style="pointer-events: auto;"><i class="fab fa-github" style="pointer-events: auto;"></i></a>
+                <a href="#" target="_blank" aria-label="Twitter" style="pointer-events: auto;"><i class="fab fa-twitter" style="pointer-events: auto;"></i></a>
+                <a href="#" target="_blank" aria-label="Dribbble" style="pointer-events: auto;"><i class="fab fa-dribbble" style="pointer-events: auto;"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer style="pointer-events: auto;">
+        <div class="container footer-content" style="pointer-events: auto;">
+            <a href="#" class="footer-logo" style="pointer-events: auto;">Kaiya.</a>
+            <nav class="footer-nav" style="pointer-events: auto;">
+                <ul style="pointer-events: auto;">
+                    <li style="pointer-events: auto;"><a href="#hero" style="pointer-events: auto;">Home</a></li>
+                    <li style="pointer-events: auto;"><a href="#about" style="pointer-events: auto;">About</a></li>
+                    <li style="pointer-events: auto;"><a href="#services" style="pointer-events: auto;">Services</a></li>
+                    <li style="pointer-events: auto;"><a href="#portfolio" style="pointer-events: auto;">Portfolio</a></li>
+                    <li style="pointer-events: auto;"><a href="#contact" style="pointer-events: auto;">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="footer-social" style="pointer-events: auto;">
+                <ul style="pointer-events: auto;">
+                    <li style="pointer-events: auto;"><a href="#" target="_blank" aria-label="LinkedIn" style="pointer-events: auto;"><i class="fab fa-linkedin-in" style="pointer-events: auto;"></i></a></li>
+                    <li style="pointer-events: auto;"><a href="#" target="_blank" aria-label="GitHub" style="pointer-events: auto;"><i class="fab fa-github" style="pointer-events: auto;"></i></a></li>
+                    <li style="pointer-events: auto;"><a href="#" target="_blank" aria-label="Twitter" style="pointer-events: auto;"><i class="fab fa-twitter" style="pointer-events: auto;"></i></a></li>
+                    <li style="pointer-events: auto;"><a href="#" target="_blank" aria-label="Dribbble" style="pointer-events: auto;"><i class="fab fa-dribbble" style="pointer-events: auto;"></i></a></li>
+                </ul>
+            </div>
+            <div class="footer-bottom" style="pointer-events: auto;">
+                <p style="pointer-events: auto;">© 2026 Kaiya Reed. All rights reserved. Designed with passion for a future-forward world.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script style="pointer-events: auto;">
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+                document.body.classList.toggle('no-scroll');
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+
+
+</body></html>
