@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AetherFlow - Digital Solutions for Tomorrow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0A0A0F;
+            --secondary-bg: #1A1A2E;
+            --accent-color-1: #6A3AEC;
+            --accent-color-2: #3EE0C2;
+            --text-color-light: #E0E0E0;
+            --text-color-dark: #A0A0A0;
+            --gradient-hero: linear-gradient(135deg, var(--accent-color-1) 0%, var(--accent-color-2) 100%);
+            --gradient-card: linear-gradient(145deg, #1A1A2E 0%, #2C2C4A 100%);
+            --border-radius-large: 15px;
+            --border-radius-medium: 10px;
+            --font-family-primary: 'Poppins', sans-serif;
+            --font-family-secondary: 'Montserrat', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-primary);
+            color: var(--text-color-light);
+            background-color: var(--primary-bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: var(--gradient-hero);
+            color: var(--primary-bg);
+            text-decoration: none;
+            border-radius: var(--border-radius-medium);
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 20px rgba(106, 58, 236, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(106, 58, 236, 0.4);
+        }
+
+        .btn.btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent-color-1);
+            color: var(--text-color-light);
+            box-shadow: none;
+        }
+
+        .btn.btn-outline:hover {
+            background: var(--accent-color-1);
+            box-shadow: 0 5px 15px rgba(106, 58, 236, 0.4);
+            transform: translateY(-3px);
+            color: var(--primary-bg);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-secondary);
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-color-light);
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; }
+        h2 { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 40px;}
+        h3 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+        h4 { font-size: clamp(1.2rem, 2vw, 1.8rem); }
+
+        p {
+            margin-bottom: 20px;
+            color: var(--text-color-dark);
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--primary-bg);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-family-secondary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--accent-color-2);
+            margin-left: 5px;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-menu ul li {
+            margin-left: 40px;
+        }
+
+        .nav-menu ul li a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-hero);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu ul li a:hover {
+            color: var(--accent-color-1);
+        }
+
+        .nav-menu ul li a:hover::after,
+        .nav-menu ul li a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--primary-bg);
+            padding: 150px 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af647?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(10, 10, 15, 0.7), rgba(10, 10, 15, 0.9));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: #fff;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -15px;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-hero);
+            border-radius: 2px;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--text-color-light);
+            margin-bottom: 40px;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Solutions Section */
+        .solutions {
+            background-color: var(--secondary-bg);
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solutions::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--accent-color-1) 0%, transparent 70%);
+            opacity: 0.1;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .solutions::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--accent-color-2) 0%, transparent 70%);
+            opacity: 0.1;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .solutions-card {
+            background: var(--gradient-card);
+            padding: 40px;
+            border-radius: var(--border-radius-large);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solutions-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.03);
+            transform: rotate(45deg);
+            z-index: 0;
+            transition: opacity 0.5s ease;
+            opacity: 0;
+        }
+
+        .solutions-card:hover::before {
+            opacity: 1;
+        }
+        
+        .solutions-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .solutions-card .icon {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            line-height: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .solutions-card h3 {
+            margin-bottom: 20px;
+            color: var(--text-color-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        .solutions-card p {
+            font-size: 1rem;
+            color: var(--text-color-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* About Us Section */
+        .about-us {
+            background-color: var(--primary-bg);
+            padding: 120px 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .about-text p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: var(--border-radius-large);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            transition: transform 0.5s ease;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.03);
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 4px solid var(--accent-color-1);
+            border-radius: var(--border-radius-large);
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: var(--secondary-bg);
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+            align-items: center;
+        }
+
+        .feature-block {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .feature-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-block .icon {
+            font-size: 2.5rem;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .feature-block h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--text-color-light);
+        }
+
+        .feature-block p {
+            font-size: 0.95rem;
+            color: var(--text-color-dark);
+        }
+
+        .features-image img {
+            max-width: 100%;
+            border-radius: var(--border-radius-large);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            filter: grayscale(20%);
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .features-image img:hover {
+            transform: translateY(-10px) scale(1.02);
+            filter: grayscale(0%);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--primary-bg);
+            padding: 120px 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 40px 0;
+        }
+
+        .testimonial-card {
+            background: var(--gradient-card);
+            border-radius: var(--border-radius-large);
+            padding: 35px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        }
+
+        .testimonial-card blockquote {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-color-light);
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        .testimonial-card .author-info {
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .testimonial-card .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 3px solid var(--accent-color-2);
+        }
+
+        .testimonial-card .author-name {
+            font-weight: 600;
+            color: var(--accent-color-2);
+            display: block;
+        }
+
+        .testimonial-card .author-title {
+            font-size: 0.9rem;
+            color: var(--text-color-dark);
+            display: block;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-hero);
+            padding: 100px 0;
+            text-align: center;
+            border-radius: var(--border-radius-large);
+            margin: 0 auto 120px auto;
+            max-width: 1000px;
+            box-shadow: 0 20px 50px rgba(106, 58, 236, 0.4);
+            position: relative;
+            overflow: hidden;
+            background-size: 200% 200%;
+            animation: gradientShift 10s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zm0 60v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zm0 60v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM36 4v-2h-2v2h-4v2h4v4h2V6h4V4h-4zm0 60v-2h-2v2h-4v2h4v4h2v-4h4v-2h-4zM4 36v-2h-2v2h-4v2h4v4h2v-4h4v-2h-4zm-.006-4h.016l.006.004.008-.004h2.01l-1.01-2-1.01 2zM38 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM38 60v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM.006 34h-.016l-.006.004-.008-.004h-2.01l1.01-2 1.01 2zM36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zm0 60v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .cta-section .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            color: var(--primary-bg);
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            color: rgba(10, 10, 15, 0.8);
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .cta-section .btn {
+            background: var(--primary-bg);
+            color: var(--accent-color-1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .cta-section .btn:hover {
+            background: linear-gradient(to right, #1A1A2E, #2C2C4A);
+            color: var(--accent-color-2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--secondary-bg);
+            padding: 80px 0 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-column h4 {
+            color: var(--text-color-light);
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient-hero);
+            border-radius: 1px;
+        }
+
+        .footer-column p {
+            color: var(--text-color-dark);
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: var(--text-color-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .footer-column ul li a::before {
+            content: '─';
+            position: absolute;
+            left: -20px;
+            color: var(--accent-color-2);
+            opacity: 0;
+            transition: opacity 0.3s ease, left 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent-color-1);
+            padding-left: 20px;
+        }
+
+        .footer-column ul li a:hover::before {
+            opacity: 1;
+            left: 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: var(--text-color-dark);
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color-2);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            color: var(--text-color-dark);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .nav-menu ul {
+                display: none; /* Hide menu for smaller screens, controlled by JS for mobile nav */
+            }
+
+            .hero {
+                padding: 120px 0;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                order: -1; /* Image appears before text on mobile */
+                margin-bottom: 40px;
+            }
+
+            .about-text h2 {
+                text-align: center;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-text {
+                order: 1;
+            }
+
+            .features-image {
+                margin-bottom: 40px;
+            }
+
+            .cta-section {
+                margin-bottom: 80px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 80px 0;
+            }
+
+            h1 { font-size: clamp(2rem, 8vw, 3.5rem); }
+            h2 { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+
+            .hero {
+                padding: 80px 0;
+            }
+
+            .hero h1 {
+                margin-bottom: 20px;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 30px;
+            }
+
+            .hero .btn-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header .logo {
+                margin-bottom: 15px;
+            }
+
+            .solutions-card, .testimonial-card {
+                padding: 30px;
+            }
+
+            .cta-section {
+                padding: 80px 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-column h4::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .footer-column ul li a {
+                padding-left: 0;
+            }
+
+            .footer-column ul li a::before {
+                display: none;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        /* Burger Menu for Mobile */
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .burger-menu span {
+            height: 3px;
+            width: 25px;
+            background: var(--text-color-light);
+            margin-bottom: 4px;
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        @media (max-width: 992px) {
+            .burger-menu {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none; /* Hide default nav */
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--secondary-bg);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.5s ease-in-out;
+                z-index: 999;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            }
+
+            .nav-menu.open {
+                right: 0;
+                display: flex;
+            }
+
+            .nav-menu ul {
+                flex-direction: column;
+                text-align: center;
+                width: 100%;
+                display: flex;
+            }
+
+            .nav-menu ul li {
+                margin: 20px 0;
+            }
+
+            .nav-menu ul li a {
+                font-size: 1.5rem;
+                padding: 10px 0;
+                display: block;
+            }
+
+            .burger-menu.open span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .burger-menu.open span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .burger-menu.open span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+        }
+
+        /* FontAwesome Icons */
+        @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animated-section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animated-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">Aether<span>Flow</span></a>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="#solutions">Solutions</a></li>
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="burger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container hero-content animated-section">
+            <h1>Revolutionizing Digital Experiences for a Smarter Future</h1>
+            <p>At AetherFlow, we craft cutting-edge digital solutions that propel businesses forward. From intelligent platforms to seamless user interfaces, we build the future, today.</p>
+            <div class="btn-group">
+                <a href="#solutions" class="btn">Explore Our Solutions</a>
+                <a href="#contact" class="btn btn-outline">Get a Free Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="solutions section-padding">
+        <div class="container animated-section">
+            <h2 class="text-center">Our Core Digital Solutions</h2>
+            <div class="solutions-grid">
+                <div class="solutions-card">
+                    <div class="icon"><i class="fas fa-cubes"></i></div>
+                    <h3>AI & Machine Learning</h3>
+                    <p>Harness the power of AI to automate processes, gain insights, and deliver personalized experiences. We build intelligent systems that learn and adapt.</p>
+                </div>
+                <div class="solutions-card">
+                    <div class="icon"><i class="fas fa-code"></i></div>
+                    <h3>Custom Software Development</h3>
+                    <p>Tailored software solutions designed to meet your unique business challenges and objectives. Scalable, secure, and built for performance.</p>
+                </div>
+                <div class="solutions-card">
+                    <div class="icon"><i class="fas fa-globe"></i></div>
+                    <h3>Cloud Infrastructure & DevOps</h3>
+                    <p>Migrate to the cloud with confidence. We provide robust cloud strategies, deployment, and ongoing DevOps support for unparalleled efficiency.</p>
+                </div>
+                <div class="solutions-card">
+                    <div class="icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Mobile & Web Applications</h3>
+                    <p>Engage your audience with intuitive and high-performing mobile and web applications. We focus on user experience and seamless integration.</p>
+                </div>
+                <div class="solutions-card">
+                    <div class="icon"><i class="fas fa-lock"></i></div>
+                    <h3>Cybersecurity & Data Privacy</h3>
+                    <p>Protect your critical assets with our advanced cybersecurity strategies and data privacy compliance solutions, ensuring peace of mind.</p>
+                </div>
+                <div class="solutions-card">
+                    <div class="icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Data Analytics & Visualization</h3>
+                    <p>Transform raw data into actionable insights. Our data experts help you make informed decisions through powerful analytics and interactive dashboards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about-us" class="about-us section-padding">
+        <div class="container animated-section">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Innovating for a Connected Tomorrow</h2>
+                    <p>Founded in 2020 by a team of visionary technologists, AetherFlow began with a simple mission: to bridge the gap between complex technology and accessible solutions. We believe that innovation should serve humanity, creating tangible value and fostering growth.</p>
+                    <p>Over the years, we've grown into a global team of diverse experts, passionate about pushing the boundaries of what's possible. Our collaborative approach, unwavering commitment to quality, and client-centric philosophy have earned us a reputation as a trusted partner in digital transformation.</p>
+                    <p>We are not just developers; we are architects of the future, driven by a desire to craft elegant, efficient, and impactful solutions that thrive in an ever-evolving digital landscape.</p>
+                    <a href="#contact" class="btn">Join Our Journey</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Team collaborating on digital solutions">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features section-padding">
+        <div class="container animated-section">
+            <h2 class="text-center">Why Choose AetherFlow?</h2>
+            <div class="features-grid">
+                <div class="features-text">
+                    <div class="feature-block">
+                        <div class="icon"><i class="fas fa-lightbulb"></i></div>
+                        <div>
+                            <h4>Innovative & Future-Awaited</h4>
+                            <p>We stay ahead of the curve, integrating the latest technologies and methodologies to ensure your solutions are not just current, but future-proof.</p>
+                        </div>
+                    </div>
+                    <div class="feature-block">
+                        <div class="icon"><i class="fas fa-users-cog"></i></div>
+                        <div>
+                            <h4>Client-Centric Approach</h4>
+                            <p>Your vision is our blueprint. We work hand-in-hand with you, from concept to deployment, ensuring solutions perfectly align with your goals and expectations.</p>
+                        </div>
+                    </div>
+                    <div class="feature-block">
+                        <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                        <div>
+                            <h4>Robust Security & Scalability</h4>
+                            <p>Building secure and scalable systems is fundamental to our process. We ensure your digital assets are protected and can grow with your business.</p>
+                        </div>
+                    </div>
+                    <div class="feature-block">
+                        <div class="icon"><i class="fas fa-handshake"></i></div>
+                        <div>
+                            <h4>Transparent & Agile Processes</h4>
+                            <p>We believe in full transparency and leverage agile development methodologies to deliver results efficiently, with continuous feedback and iteration.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="features-image">
+                    <img src="https://images.unsplash.com/photo-1542831371-d3a39dfa4356?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Code on screen, representing robust development.">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section-padding">
+        <div class="container animated-section">
+            <h2 class="text-center">What Our Clients Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <blockquote>"AetherFlow transformed our outdated infrastructure into a lean, cloud-native powerhouse. Their AI integration has revolutionized our data processing, giving us an edge we never thought possible."</blockquote>
+                    <div class="author-info">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29329?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Client Avatar" class="author-avatar">
+                        <div>
+                            <span class="author-name">Sarah Chen</span>
+                            <span class="author-title">CEO, InnovateX Corp.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <blockquote>"The mobile application developed by AetherFlow exceeded all our expectations. It's not just functional, it's a joy to use, and our customer engagement metrics have skyrocketed."</blockquote>
+                    <div class="author-info">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cfce54b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80" alt="Client Avatar" class="author-avatar">
+                        <div>
+                            <span class="author-name">David Lee</span>
+                            <span class="author-title">Founder, GlobalConnect</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <blockquote>"Their cybersecurity expertise is unparalleled. AetherFlow implemented a robust defense system that has protected us from numerous threats, allowing us to focus on our core business."</blockquote>
+                    <div class="author-info">
+                        <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80" alt="Client Avatar" class="author-avatar">
+                        <div>
+                            <span class="author-name">Dr. Emily White</span>
+                            <span class="author-title">CTO, SecureData Inc.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="contact" class="cta-section animated-section">
+        <div class="container cta-content">
+            <h2>Ready to Transform Your Digital Landscape?</h2>
+            <p>Let's collaborate on building innovative solutions that drive growth and redefine your digital presence. Get in touch with our experts today!</p>
+            <a href="mailto:info@aetherflow.com" class="btn">Start Your Project Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>AetherFlow</h4>
+                    <p>Pioneering digital transformation through innovative AI, software, and cloud solutions since 2020.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#solutions">Solutions</a></li>
+                        <li><a href="#about-us">About Us</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">AI & ML Development</a></li>
+                        <li><a href="#">Custom Software</a></li>
+                        <li><a href="#">Cloud & DevOps</a></li>
+                        <li><a href="#">Mobile App Development</a></li>
+                        <li><a href="#">Cybersecurity Consulting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><a href="mailto:info@aetherflow.com"><i class="fas fa-envelope"></i> info@aetherflow.com</a></li>
+                        <li><a href="tel:+1234567890"><i class="fas fa-phone-alt"></i> +1 (234) 567-890</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Tech Drive, Innovation City, CA 90210</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 AetherFlow. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+                // Close mobile menu if open
+                if (document.querySelector('.nav-menu').classList.contains('open')) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // Active link highlighting on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-menu ul li a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const burgerMenu = document.querySelector('.burger-menu');
+        const navMenu = document.querySelector('.nav-menu');
+
+        function toggleMobileMenu() {
+            burgerMenu.classList.toggle('open');
+            navMenu.classList.toggle('open');
+            document.body.classList.toggle('no-scroll');
+        }
+
+        burgerMenu.addEventListener('click', toggleMobileMenu);
+
+        // Intersection Observer for animations
+        const animatedSections = document.querySelectorAll('.animated-section');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2 // Trigger when 20% of the section is visible
+        };
+
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Optional: Stop observing after animation for performance
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        animatedSections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // Initial check for hero section visibility for styling
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('hero').classList.add('is-visible');
+        });
+
+    </script>
+</body>
+</html>
