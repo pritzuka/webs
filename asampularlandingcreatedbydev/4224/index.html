@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Ascent - Elevate Your Digital Presence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --accent-color: #28a745;
+            --dark-bg: #1a202c;
+            --light-bg: #f8f9fa;
+            --text-color-dark: #cbd5e0;
+            --text-color-light: #4a5568;
+            --gradient-start: #0f2027;
+            --gradient-middle: #203a43;
+            --gradient-end: #2c5364;
+            --font-heading: 'Oswald', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-dark: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--text-color-light);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+
+        body.dark-mode {
+            background: var(--gradient-start);
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-middle) 50%, var(--gradient-end) 100%);
+            color: var(--text-color-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-light);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        body.dark-mode header {
+            background-color: rgba(26, 32, 44, 0.95);
+            box-shadow: var(--shadow-dark);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: clamp(1rem, 2vw, 2.5rem);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color-light);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .nav-links a {
+            color: var(--text-color-dark);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            justify-content: space-between;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-color-light);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .nav-toggle span {
+            background-color: var(--text-color-dark);
+        }
+
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            margin-left: 2rem;
+        }
+
+        .theme-switch {
+            display: inline-block;
+            height: 20px;
+            position: relative;
+            width: 40px;
+        }
+
+        .theme-switch input {
+            display: none;
+        }
+
+        .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: 0.4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            background-color: #fff;
+            bottom: 2px;
+            content: "";
+            height: 16px;
+            left: 2px;
+            position: absolute;
+            transition: 0.4s;
+            width: 16px;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-middle) 50%, var(--gradient-end) 100%);
+        }
+
+        .hero::before {
+            content: "";
+            background: url('https://images.unsplash.com/photo-1510915228340-e22d08a637f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            text-shadow: var(--shadow-dark);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: var(--shadow-dark);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+        }
+
+        .btn:hover {
+            background: darken(var(--primary-color), 10%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6);
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--gradient-end);
+        }
+
+        body.dark-mode .section-title {
+            color: var(--primary-color);
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        body.dark-mode .feature-card {
+            background-color: var(--dark-bg);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 10px rgba(0, 123, 255, 0.2));
+        }
+
+        .feature-card h3 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: var(--text-color-light);
+        }
+
+        body.dark-mode .feature-card p {
+            color: var(--text-color-dark);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            color: var(--gradient-end);
+        }
+
+        body.dark-mode .about-text h2 {
+            color: var(--primary-color);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: var(--text-color-light);
+        }
+
+        body.dark-mode .about-text p {
+            color: var(--text-color-dark);
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: var(--shadow-dark);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        body.dark-mode .service-card {
+            background-color: var(--dark-bg);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card .icon {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .icon {
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 2.8vw, 2rem);
+            margin-bottom: 1rem;
+            color: var(--gradient-end);
+        }
+
+        body.dark-mode .service-card h3 {
+            color: var(--primary-color);
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1.5rem;
+        }
+
+        .service-card ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+            color: var(--text-color-light);
+            text-align: left;
+        }
+
+        body.dark-mode .service-card ul li {
+            color: var(--text-color-dark);
+        }
+
+        .service-card ul li::before {
+            content: '✓';
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: 700;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--primary-color);
+            padding: 6rem 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        body.dark-mode .testimonials {
+             background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-middle) 100%);
+        }
+
+        .testimonials .section-title {
+            color: #fff;
+            margin-bottom: 3rem;
+        }
+
+        .testimonial-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 1rem;
+        }
+
+        .testimonial-card {
+            flex: 0 0 100%;
+            width: 100%;
+            scroll-snap-align: center;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-right: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .testimonial-card:last-child {
+            margin-right: 0;
+        }
+
+        .testimonial-details {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .testimonial-details img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            margin-right: 1rem;
+        }
+
+        .testimonial-details .client-info h4 {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .testimonial-details .client-info span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* CTA section */
+        .cta {
+            background: var(--gradient-start);
+            background: linear-gradient(90deg, var(--gradient-end) 0%, var(--primary-color) 100%);
+            padding: 5rem 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        body.dark-mode .cta {
+            background: var(--gradient-start);
+            background: linear-gradient(90deg, var(--gradient-middle) 0%, var(--gradient-end) 100%);
+        }
+
+        .cta h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--text-color-dark);
+            padding: 4rem 0 2rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .footer-col p {
+            margin-bottom: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-color-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: var(--text-color-dark);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.98);
+                box-shadow: var(--shadow-light);
+                padding: 1rem 0;
+            }
+
+            body.dark-mode .nav-links {
+                background-color: rgba(26, 32, 44, 0.98);
+                box-shadow: var(--shadow-dark);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .nav-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .nav-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .theme-switch-wrapper {
+                margin-left: 1rem;
+            }
+
+            .hero {
+                height: 80vh;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                order: -1; /* Image first on mobile */
+                margin-bottom: 2rem;
+            }
+
+            .testimonial-slider {
+                padding-bottom: 2rem; /* Give space for scrollbar on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Quantum Ascent</a>
+                <div class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox" />
+                            <div class="slider round"></div>
+                        </label>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1>Elevate Your Digital Presence Beyond Limits</h1>
+            <p>Quantum Ascent provides cutting-edge web solutions, digital marketing, and strategic insights designed to propel your business into the future.</p>
+            <a href="#services" class="btn">Discover Our Services</a>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Quantum Ascent?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=80&h=80&q=80" alt="Responsive Design Icon">
+                    <h3>Responsive & Modern Design</h3>
+                    <p>Crafting stunning, mobile-first websites that look great and perform flawlessly on any device.</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9491?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=80&h=80&q=80" alt="Code Icon">
+                    <h3>Future-Proof Development</h3>
+                    <p>Utilizing the latest technologies and best practices to build robust and scalable web applications.</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=80&h=80&q=80" alt="SEO Icon">
+                    <h3>Strategic SEO & Growth</h3>
+                    <p>Implementing powerful SEO strategies to boost your online visibility and drive organic traffic.</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1582296068529-67990520627d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=80&h=80&q=80" alt="Support Icon">
+                    <h3>Dedicated Support</h3>
+                    <p>Providing continuous support and maintenance to ensure your digital assets always perform optimally.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Quantum Ascent</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Team working together">
+                </div>
+                <div class="about-text">
+                    <h2>Innovate. Create. Elevate.</h2>
+                    <p>At Quantum Ascent, we believe in the power of transformative digital experiences. Founded in 2026, our mission is to empower businesses with cutting-edge web development, sophisticated digital marketing, and insightful analytics to achieve their full online potential.</p>
+                    <p>Our team comprises visionary designers, expert developers, and strategic marketing specialists, all united by a passion for innovation. We don't just build websites; we craft digital ecosystems that drive engagement, convert visitors, and accelerate growth. Partner with us and experience the ascent of your brand.</p>
+                    <a href="#contact" class="btn">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Our Core Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon">💻</div>
+                    <h3>Web Development</h3>
+                    <p>Bespoke website design and development, e-commerce solutions, and custom web applications tailored to your specific needs.</p>
+                    <ul>
+                        <li>Full-Stack Development</li>
+                        <li>CMS Integration (WordPress, Shopify)</li>
+                        <li>Progressive Web Apps (PWAs)</li>
+                        <li>API Development & Integration</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="icon">📈</div>
+                    <h3>Digital Marketing</h3>
+                    <p>Comprehensive strategies to enhance your online visibility, drive traffic, and convert leads into loyal customers.</p>
+                    <ul>
+                        <li>Search Engine Optimization (SEO)</li>
+                        <li>Social Media Marketing (SMM)</li>
+                        <li>Pay-Per-Click (PPC) Campaigns</li>
+                        <li>Content Marketing & Strategy</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="icon">📊</div>
+                    <h3>Analytics & Optimization</h3>
+                    <p>Unlocking insights from your data to refine strategies, improve user experience, and maximize ROI.</p>
+                    <ul>
+                        <li>Google Analytics Integration</li>
+                        <li>Conversion Rate Optimization (CRO)</li>
+                        <li>A/B Testing & User Surveys</li>
+                        <li>Performance Audits</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="icon">☁️</div>
+                    <h3>Cloud Solutions & Hosting</h3>
+                    <p>Secure, scalable, and high-performance cloud hosting and infrastructure management.</p>
+                    <ul>
+                        <li>Cloud Hosting (AWS, Azure, GCP)</li>
+                        <li>Server Management</li>
+                        <li>CDN Integration</li>
+                        <li>Cybersecurity Measures</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <p>"Quantum Ascent transformed our online presence. Their team's dedication to understanding our brand and delivering a truly exceptional website was beyond impressive. Our sales have skyrocketed since launch!"</p>
+                    <div class="testimonial-details">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=80&h=80&q=80" alt="Client 1">
+                        <div class="client-info">
+                            <h4>Jane Doe</h4>
+                            <span>CEO, Innovative Solutions Inc.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"From initial concept to final deployment, Quantum Ascent provided unparalleled expertise. Their SEO strategies were particularly effective, placing us at the top of search results in a highly competitive market."</p>
+                    <div class="testimonial-details">
+                        <img src="https://images.unsplash.com/photo-1544723795-3fb6469e380f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=80&h=80&q=80" alt="Client 2">
+                        <div class="client-info">
+                            <h4>John Smith</h4>
+                            <span>Marketing Director, Global Ventures LLC</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"The custom web application Quantum Ascent built for us streamlines our operations perfectly. It's intuitive, robust, and has saved us countless hours. Their support post-launch has also been phenomenal."</p>
+                    <div class="testimonial-details">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29329?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=80&h=80&q=80" alt="Client 3">
+                        <div class="client-info">
+                            <h4>Emily White</h4>
+                            <span>Founder, TechInnovate Hub</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="cta">
+        <div class="container">
+            <h2>Ready to Elevate Your Digital Future?</h2>
+            <p>Let's discuss how Quantum Ascent can transform your online presence and help you achieve your business goals. Reach out today for a free consultation.</p>
+            <a href="mailto:info@quantumascent.com" class="btn">Start Your Ascent</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Quantum Ascent</h4>
+                    <p>Empowering businesses with cutting-edge web solutions and strategic digital growth.</p>
+                    <div class="social-icons">
+                        <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/facebook-new.png" alt="Facebook icon" width="24" height="24"></a>
+                         <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/twitterx.png" alt="Twitter icon" width="24" height="24"></a>
+                        <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/linkedin.png" alt="LinkedIn icon" width="24" height="24"></a>
+                        <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/instagram-new--v1.png" alt="Instagram icon" width="24" height="24"></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="#services">Web Development</a></li>
+                        <li><a href="#services">Digital Marketing</a></li>
+                        <li><a href="#services">SEO Optimization</a></li>
+                        <li><a href="#services">Cloud Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <p>123 Ascent Avenue, Digital City, 90210</p>
+                    <p>Email: <a href="mailto:info@quantumascent.com" style="color:var(--text-color-dark); text-decoration: none;">info@quantumascent.com</a></p>
+                    <p>Phone: <a href="tel:+1234567890" style="color:var(--text-color-dark); text-decoration: none;">+1 (234) 567-890</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; <span id="currentYear"></span> Quantum Ascent. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Nav Toggle
+            const navToggle = document.getElementById('navToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            navToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+
+            // Close nav when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        navToggle.classList.remove('active');
+                    }
+                });
+            });
+
+            // Sticky Header (optional, if header is not fixed)
+            // const header = document.querySelector('header');
+            // window.addEventListener('scroll', () => {
+            //     if (window.scrollY > 50) {
+            //         header.classList.add('scrolled');
+            //     } else {
+            //         header.classList.remove('scrolled');
+            //     }
+            // });
+
+            // Dark Mode Toggle
+            const themeSwitch = document.getElementById('checkbox');
+            const body = document.body;
+
+            const enableDarkMode = () => {
+                body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'enabled');
+            };
+
+            const disableDarkMode = () => {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'disabled');
+            };
+
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                enableDarkMode();
+                themeSwitch.checked = true;
+            }
+
+            themeSwitch.addEventListener('change', () => {
+                if (themeSwitch.checked) {
+                    enableDarkMode();
+                } else {
+                    disableDarkMode();
+                }
+            });
+
+            // Update Current Year in Footer
+            const currentYearSpan = document.getElementById('currentYear');
+            currentYearSpan.textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
