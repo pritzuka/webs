@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en" style="pointer-events: auto;"><head style="pointer-events: auto;">
+    <meta charset="UTF-8" style="pointer-events: auto;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" style="pointer-events: auto;">
+    <title style="pointer-events: auto;">AL Azeez Azad Hotel - Authentic Indian Delicacies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" style="pointer-events: auto;">
+    <style style="pointer-events: auto;">
+        :root {
+            --primary-color: #A0522D; /* Sienna */
+            --secondary-color: #F4A460; /* Sandy Brown */
+            --tertiary-color: #FFF8DC; /* Cornsilk */
+            --dark-color: #362222;
+            --light-color: #FFFFFF;
+            --text-color: #555;
+            --heading-font: 'Playfair Display', serif;
+            --body-font: 'Montserrat', sans-serif;
+            --spacing-unit: 1.5rem;
+            --border-radius: 8px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--body-font);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--tertiary-color);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--dark-color);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--heading-font);
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
+        h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h3 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 0.8rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: var(--box-shadow);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .section {
+            padding: calc(var(--spacing-unit) * 4) 0;
+            position: relative;
+            z-index: 1;
+        }
+        .section:nth-child(even) {
+            background-color: var(--light-color);
+        }
+
+        /* Header */
+        .main-header {
+            background-color: var(--dark-color);
+            padding: var(--spacing-unit) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--heading-font);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--light-color);
+            letter-spacing: 1px;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-unit);
+        }
+
+        .main-nav a {
+            color: var(--light-color);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1546793665-c74683f339c1?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            color: var(--light-color);
+            margin-bottom: var(--spacing-unit);
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Us Section */
+        .about-us .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            align-items: center;
+        }
+
+        .about-us-image {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .about-us-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .about-us-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .about-us-content h2 {
+            margin-bottom: var(--spacing-unit);
+        }
+        .about-us-content p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Dishes Section */
+        .dishes h2, .testimonials h2, .booking h2, .contact h2 {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .dish-card {
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dish-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .dish-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .dish-card-content {
+            padding: var(--spacing-unit);
+        }
+
+        .dish-card-content h3 {
+            font-size: 1.7rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .dish-card-content p {
+            font-size: 0.95rem;
+            color: var(--text-color);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            color: var(--light-color);
+            text-align: center;
+        }
+
+        .testimonials h2 {
+            color: var(--light-color);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: calc(var(--spacing-unit) * 1.5);
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: var(--spacing-unit);
+            font-size: 1rem;
+        }
+
+        .testimonial-card .author {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        .testimonial-card .rating {
+            color: gold;
+            margin-bottom: 0.5rem;
+        }
+
+
+        /* Booking Section */
+        .booking {
+            background-color: var(--tertiary-color);
+        }
+
+        .booking form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--light-color);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-unit);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            grid-column: span 2;
+        }
+
+        .form-group.half-width {
+            grid-column: span 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: var(--border-radius);
+            font-family: var(--body-font);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(var(--primary-color), 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .booking .btn {
+            grid-column: span 2;
+            width: auto;
+            justify-self: center;
+        }
+
+        /* Contact Section */
+        .contact .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            align-items: flex-start;
+        }
+
+        .contact-info, .contact-map {
+            background-color: var(--light-color);
+            padding: calc(var(--spacing-unit) * 1.5);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p strong {
+            margin-right: 0.8rem;
+            color: var(--dark-color);
+        }
+
+        .contact-map {
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: var(--border-radius);
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: calc(var(--spacing-unit) * 3) 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            text-align: left;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .footer-column h4 {
+            color: var(--secondary-color);
+            margin-bottom: var(--spacing-unit);
+            font-size: 1.2rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.7rem;
+        }
+
+        .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--spacing-unit);
+            margin-top: var(--spacing-unit);
+        }
+
+        .social-links a {
+            color: var(--light-color);
+            font-size: 1.5rem;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-unit);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: calc(var(--spacing-unit) * 2);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Utility classes for icons (simulated) */
+        .icon-phone::before { content: '📞 '; }
+        .icon-envelope::before { content: '📧 '; }
+        .icon-map-marker::before { content: '📍 '; }
+        .icon-star::before { content: '⭐ '; }
+        .icon-facebook::before { content: '📘 '; }
+        .icon-twitter::before { content: '🐦 '; }
+        .icon-instagram::before { content: '📸 '; }
+        .icon-linkedin::before { content: '🔗 '; }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-header .container {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+            }
+            .main-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero-content h1 {
+                font-size: clamp(2rem, 8vw, 3.5rem);
+            }
+            .hero p {
+                font-size: clamp(1rem, 3vw, 1.2rem);
+            }
+            .about-us .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .about-us-image {
+                order: -1; /* Image first on mobile */
+            }
+            .booking form {
+                grid-template-columns: 1fr;
+            }
+            .form-group.half-width {
+                grid-column: span 1;
+            }
+            .contact .container {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                text-align: center;
+            }
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-nav ul {
+                gap: 0.8rem;
+            }
+            .btn {
+                padding: 0.7rem 1.5rem;
+            }
+            .dish-card-content h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body style="pointer-events: auto;">
+    <header class="main-header" style="pointer-events: auto;">
+        <div class="container" style="pointer-events: auto;">
+            <a href="#" class="logo" style="pointer-events: auto;">AL Azeez </a>
+            <nav class="main-nav" style="pointer-events: auto;">
+                <ul style="pointer-events: auto;">
+                    <li style="pointer-events: auto;"><a href="#hero" style="pointer-events: auto;">Home</a></li>
+                    <li style="pointer-events: auto;"><a href="#about" style="pointer-events: auto;">About Us</a></li>
+                    <li style="pointer-events: auto;"><a href="#dishes" style="pointer-events: auto;">Our Dishes</a></li>
+                    <li style="pointer-events: auto;"><a href="#testimonials" style="pointer-events: auto;">Reviews</a></li>
+                    <li style="pointer-events: auto;"><a href="#booking" style="pointer-events: auto;">Book A Table</a></li>
+                    <li style="pointer-events: auto;"><a href="#contact" style="pointer-events: auto;">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main style="pointer-events: auto;">
+        <section id="hero" class="hero" style="pointer-events: auto;">
+            <div class="hero-content" style="pointer-events: auto;">
+                <h1 style="pointer-events: auto;">Experience Authentic Indian Flavors at AL Azeez </h1>
+                <p style="pointer-events: auto;">Journey through a culinary landscape of rich spices, vibrant aromas, and delectable tastes. We bring you the true essence of Indian cuisine.</p>
+                <a href="#dishes" class="btn" style="pointer-events: auto;">Explore Our Menu</a>
+                <a href="#booking" class="btn" style="margin-left: 1rem; pointer-events: auto;">Book A Table</a>
+            </div>
+        </section>
+
+        <section id="about" class="section about-us" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <div class="about-us-content" style="pointer-events: auto;">
+                    <h2 style="pointer-events: auto;">Our Legacy of Taste and Hospitality</h2>
+                    <p style="pointer-events: auto;">AL Azeez Azad is more than just a hotel; it's a celebration of Indian heritage and culinary excellence. Nestled in the heart of the city, we've dedicated ourselves to perfecting the art of Indian cooking, passed down through generations. Our chefs, masters of traditional recipes, blend authentic spices with fresh, local ingredients to create dishes that tell a story.</p>
+                    <p style="pointer-events: auto;">From the moment you step in, you'll be enveloped in an ambiance that reflects the warmth and richness of India. We are committed to providing an unforgettable dining experience, ensuring every guest feels like royalty. Come, be a part of our story, and savor the magic.</p>
+                    <a href="#contact" class="btn" style="pointer-events: auto;">Find Us</a>
+                </div>
+                <div class="about-us-image" style="pointer-events: auto;">
+                    <img src="https://images.unsplash.com/photo-1616803798934-8c8808169970?q=80&amp;w=2670&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Elegant Indian dining room interior" style="pointer-events: auto;">
+                </div>
+            </div>
+        </section>
+
+        <section id="dishes" class="section dishes" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <h2 style="pointer-events: auto;">Our Delicious Indian Delicacies</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0px auto 3rem; font-size: 1.1rem; pointer-events: auto;">Indulge in a symphony of flavors with our meticulously crafted dishes. From aromatic biryanis to rich curries and tandoori delights, every bite is a journey to India.</p>
+                <div class="dishes-grid" style="pointer-events: auto;">
+                    <div class="dish-card" style="pointer-events: auto;">
+                        <img src="https://images.unsplash.com/photo-1589302636904-efde0a8501e4?q=80&amp;w=2670&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Chicken Biryani" style="pointer-events: auto;">
+                        <div class="dish-card-content" style="pointer-events: auto;">
+                            <h3 style="pointer-events: auto;">Aromatic Chicken Biryani</h3>
+                            <p style="pointer-events: auto;">A classic, fragrant basmati rice dish cooked with tender chicken, infused with saffron and a blend of secret spices.</p>
+                        </div>
+                    </div>
+                    <div class="dish-card" style="pointer-events: auto;">
+                        <img src="https://images.unsplash.com/photo-1668748366914-46328325a74e?q=80&amp;w=2574&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Butter Chicken" style="pointer-events: auto;">
+                        <div class="dish-card-content" style="pointer-events: auto;">
+                            <h3 style="pointer-events: auto;">Creamy Butter Chicken</h3>
+                            <p style="pointer-events: auto;">Succulent pieces of chicken cooked in a rich, creamy tomato-based sauce, lightly spiced and utterly delicious.</p>
+                        </div>
+                    </div>
+                    <div class="dish-card" style="pointer-events: auto;">
+                        <img src="https://images.unsplash.com/photo-1563212891-b3b3a0e676b2?q=80&amp;w=2670&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Paneer Tikka" style="pointer-events: auto;">
+                        <div class="dish-card-content" style="pointer-events: auto;">
+                            <h3 style="pointer-events: auto;">Spicy Paneer Tikka</h3>
+                            <p style="pointer-events: auto;">Cubes of cottage cheese marinated in a spicy yogurt mixture, skewered and grilled to perfection in a tandoor.</p>
+                        </div>
+                    </div>
+                    <div class="dish-card" style="pointer-events: auto;">
+                        <img src="https://images.unsplash.com/photo-1626074943360-31620c02b291?q=80&amp;w=2670&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Naan Bread" style="pointer-events: auto;">
+                        <div class="dish-card-content" style="pointer-events: auto;">
+                            <h3 style="pointer-events: auto;">Freshly Baked Naan</h3>
+                            <p style="pointer-events: auto;">Soft, fluffy Indian bread, baked in our clay oven, perfect for scooping up our delicious curries.</p>
+                        </div>
+                    </div>
+                    <div class="dish-card" style="pointer-events: auto;">
+                        <img src="https://images.unsplash.com/photo-1626074943485-6bb9f1e1a5f6?q=80&amp;w=2670&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Vegetable Korma" style="pointer-events: auto;">
+                        <div class="dish-card-content" style="pointer-events: auto;">
+                            <h3 style="pointer-events: auto;">Exotic Vegetable Korma</h3>
+                            <p style="pointer-events: auto;">A rich and creamy stew of mixed vegetables, nuts, and exotic spices, truly a delight for the senses.</p>
+                        </div>
+                    </div>
+                    <div class="dish-card" style="pointer-events: auto;">
+                        <img src="https://images.unsplash.com/photo-1601050608034-70678b66e31c?q=80&amp;w=2670&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Samosas" style="pointer-events: auto;">
+                        <div class="dish-card-content" style="pointer-events: auto;">
+                            <h3 style="pointer-events: auto;">Crispy Vegetable Samosas</h3>
+                            <p style="pointer-events: auto;">Deep-fried pastry filled with spiced potatoes and peas, served with tangy chutneys – a perfect appetizer.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section testimonials" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <h2 style="pointer-events: auto;">What Our Guests Say</h2>
+                <div class="testimonial-grid" style="pointer-events: auto;">
+                    <div class="testimonial-card" style="pointer-events: auto;">
+                        <p class="rating" style="pointer-events: auto;">⭐ ⭐ ⭐ ⭐ ⭐</p>
+                        <p style="pointer-events: auto;">"Absolutely breathtaking! The chicken biryani was out of this world, and the service was impeccable. A true taste of India!"</p>
+                        <span class="author" style="pointer-events: auto;">- Sarah J.</span>
+                    </div>
+                    <div class="testimonial-card" style="pointer-events: auto;">
+                        <p class="rating" style="pointer-events: auto;">⭐ ⭐ ⭐ ⭐ ⭐</p>
+                        <p style="pointer-events: auto;">"Every dish at AL Azeez Azad is a masterpiece. The butter chicken is a must-try. Such a cozy and authentic ambiance."</p>
+                        <span class="author" style="pointer-events: auto;">- Rohit K.</span>
+                    </div>
+                    <div class="testimonial-card" style="pointer-events: auto;">
+                        <p class="rating" style="pointer-events: auto;">⭐ ⭐ ⭐ ⭐ ⭐</p>
+                        <p style="pointer-events: auto;">"We celebrated our anniversary here, and it was perfect. The staff were attentive, and the food, simply divine. Highly recommended!"</p>
+                        <span class="author" style="pointer-events: auto;">- Emily R.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="booking" class="section booking" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <h2 style="pointer-events: auto;">Reserve Your Table</h2>
+                <p style="text-align: center; max-width: 700px; margin: 0px auto 3rem; font-size: 1.1rem; pointer-events: auto;">Planning a special evening or a casual meal? Book your table in advance and let us prepare a memorable experience for you. Call 1234567890 for reservation </p>
+                
+            </div>
+        </section>
+
+        <section id="contact" class="section contact" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <h2 style="pointer-events: auto;">Connect With Us</h2>
+                <div class="contact-info" style="pointer-events: auto;">
+                    <h3 style="pointer-events: auto;">Get in Touch</h3>
+                    <p style="pointer-events: auto;"><strong class="icon-map-marker" style="pointer-events: auto;">Address:</strong> 123 Spice Route, Culinary City, Food District, 10001</p>
+                    <p style="pointer-events: auto;"><strong class="icon-phone" style="pointer-events: auto;">Phone:</strong> +1 (555) 123-4567</p>
+                    <p style="pointer-events: auto;"><strong class="icon-envelope" style="pointer-events: auto;">Email:</strong> info@alazeezazad.com</p>
+                    <p style="pointer-events: auto;"><strong class="icon-phone" style="pointer-events: auto;">Hours:</strong> Mon - Sun: 11:00 AM - 10:00 PM</p>
+                </div>
+                <div class="contact-map" style="pointer-events: auto;">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.2982181745226!2d144.96305751531835!3d-37.81627997975191!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642cc4e96c469%3A0x634215286cd4ac9!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1703666666666!5m2!1sen!2sau" allowfullscreen="" loading="lazy" style="pointer-events: auto;"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer" style="pointer-events: auto;">
+        <div class="container footer-grid" style="pointer-events: auto;">
+            <div class="footer-column" style="pointer-events: auto;">
+                <h4 style="pointer-events: auto;">AL Azeez Azad</h4>
+                <p style="pointer-events: auto;">Where tradition meets taste. Experience the true spirit of Indian hospitality and an unforgettable culinary journey.</p>
+                <div class="social-links" style="pointer-events: auto;">
+                    <a href="#" aria-label="Facebook" style="pointer-events: auto;"><span class="icon-facebook" style="pointer-events: auto;"></span></a>
+                    <a href="#" aria-label="Twitter" style="pointer-events: auto;"><span class="icon-twitter" style="pointer-events: auto;"></span></a>
+                    <a href="#" aria-label="Instagram" style="pointer-events: auto;"><span class="icon-instagram" style="pointer-events: auto;"></span></a>
+                    <a href="#" aria-label="LinkedIn" style="pointer-events: auto;"><span class="icon-linkedin" style="pointer-events: auto;"></span></a>
+                </div>
+            </div>
+            <div class="footer-column" style="pointer-events: auto;">
+                <h4 style="pointer-events: auto;">Quick Links</h4>
+                <ul style="pointer-events: auto;">
+                    <li style="pointer-events: auto;"><a href="#about" style="pointer-events: auto;">About Us</a></li>
+                    <li style="pointer-events: auto;"><a href="#dishes" style="pointer-events: auto;">Our Menu</a></li>
+                    <li style="pointer-events: auto;"><a href="#testimonials" style="pointer-events: auto;">Guest Reviews</a></li>
+                    <li style="pointer-events: auto;"><a href="#booking" style="pointer-events: auto;">Reservations</a></li>
+                    <li style="pointer-events: auto;"><a href="#contact" style="pointer-events: auto;">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column" style="pointer-events: auto;">
+                <h4 style="pointer-events: auto;">Contact Info</h4>
+                <ul style="pointer-events: auto;">
+                    <li style="pointer-events: auto;"><a href="https://maps.app.goo.gl/YourLocationhere" target="_blank" rel="noopener noreferrer" style="pointer-events: auto;"><span class="icon-map-marker" style="pointer-events: auto;"></span> 123 Spice Route, Culinary City</a></li>
+                    <li style="pointer-events: auto;"><a href="tel:+15551234567" style="pointer-events: auto;"><span class="icon-phone" style="pointer-events: auto;"></span> +1 (555) 123-4567</a></li>
+                    <li style="pointer-events: auto;"><a href="mailto:info@alazeezazad.com" style="pointer-events: auto;"><span class="icon-envelope" style="pointer-events: auto;"></span> info@alazeezazad.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom" style="pointer-events: auto;">
+            <p style="pointer-events: auto;">© 2026 AL Azeez Azad. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script style="pointer-events: auto;">
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple form submission handler (for demonstration)
+        const bookingForm = document.querySelector('#booking form');
+        if (bookingForm) {
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Table booking request submitted! We will contact you shortly to confirm.');
+                bookingForm.reset(); // Clear the form after submission
+            });
+        }
+    </script>
+
+</body></html>
