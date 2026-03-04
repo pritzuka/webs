@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Flux - Redefining Digital Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00e0ff; /* Neon Cyan */
+            --secondary-color: #ff00ea; /* Neon Magenta */
+            --background-dark: #0a0a0f;
+            --background-light: #15151a;
+            --text-color-light: #e0e0e0;
+            --text-color-dark: #a0a0a0;
+            --gradient-1: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-radial: radial-gradient(circle at top left, var(--primary-color) 0%, transparent 50%), radial-gradient(circle at bottom right, var(--secondary-color) 0%, transparent 50%);
+            --border-radius-large: 1.5rem;
+            --border-radius-medium: 0.75rem;
+            --spacing-unit: 1rem;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-smooth: always;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color-light);
+            background-color: var(--background-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            background-image: var(--gradient-radial);
+            background-size: 200% 200%;
+            background-attachment: fixed;
+            animation: backgroundShift 20s infinite alternate linear;
+        }
+
+        @keyframes backgroundShift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-color);
+            margin-bottom: 0.5em;
+            text-shadow: 0 0 8px rgba(0, 224, 255, 0.5);
+        }
+
+        h1 { font-size: clamp(2.5rem, 8vw, 5rem); }
+        h2 { font-size: clamp(2rem, 6vw, 3.5rem); }
+        h3 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+
+        p {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            margin-bottom: 1em;
+            color: var(--text-color-dark);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 2);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: var(--border-radius-medium);
+            background: var(--gradient-1);
+            color: var(--background-dark);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 0 15px rgba(0, 224, 255, 0.4);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: right;
+        }
+
+        .btn:hover {
+            color: var(--background-dark);
+            box-shadow: 0 0 25px rgba(255, 0, 234, 0.6);
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+            background-color: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 224, 255, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(10, 10, 15, 0.95);
+            border-bottom: 1px solid rgba(255, 0, 234, 0.3);
+        }
+
+        .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.05em;
+            text-shadow: 0 0 10px rgba(0, 224, 255, 0.6);
+        }
+
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: calc(var(--spacing-unit) * 2);
+        }
+
+        .nav-link {
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1627845115291-c91f1737e1a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcyNTZ8MHwxfHNlYXJjaHw1OXx8Y2liZXJwdW5rJTIwdGVjaHxlbnwxfHx8fHwxNzAzNDUxNzU3fDA&ixlib=rb-4.0.3&q=80&w=1080') center center/cover no-repeat;
+            filter: brightness(0.2) grayscale(0.5);
+            transform: scale(1.1);
+            animation: zoomOut 20s infinite alternate forwards;
+            z-index: -1;
+        }
+
+        @keyframes zoomOut {
+            0% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .hero-content {
+            z-index: 1;
+            max-width: 900px;
+            animation: fadeIn 2s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-color-light);
+            text-shadow: 0 0 5px rgba(0, 224, 255, 0.3);
+        }
+
+        /* Section Universal Styling */
+        section {
+            padding: calc(var(--spacing-unit) * 6) calc(var(--spacing-unit) * 2);
+            position: relative;
+            background-color: var(--background-dark);
+            border-bottom: 1px solid rgba(0, 224, 255, 0.1);
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--background-light);
+            border-bottom: 1px solid rgba(255, 0, 234, 0.1);
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            position: relative;
+            padding-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 224, 255, 0.6);
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            text-align: center;
+        }
+
+        .feature-card {
+            background-color: var(--background-light);
+            padding: calc(var(--spacing-unit) * 3);
+            border-radius: var(--border-radius-large);
+            border: 1px solid rgba(0, 224, 255, 0.2);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: var(--gradient-1);
+            opacity: 0.1;
+            transform: rotate(45deg);
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.2;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--secondary-color);
+            box-shadow: 0 12px 40px rgba(255, 0, 234, 0.4);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(0, 224, 255, 0.7);
+        }
+
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-unit);
+            font-size: 1.8rem;
+        }
+
+        .feature-card p {
+            color: var(--text-color-dark);
+            font-size: 1rem;
+            flex-grow: 1;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: calc(var(--spacing-unit) * 4);
+            align-items: center;
+        }
+
+        .about-text {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-text h3 {
+            color: var(--secondary-color);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            text-shadow: 0 0 8px rgba(255, 0, 234, 0.5);
+        }
+
+        .about-text p {
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-large);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--primary-color);
+            animation: glowBorder 5s infinite alternate ease-in-out;
+        }
+
+        @keyframes glowBorder {
+            0% { border-color: var(--primary-color); box-shadow: 0 0 15px var(--primary-color), 0 0 30px rgba(0, 224, 255, 0.5); }
+            50% { border-color: var(--secondary-color); box-shadow: 0 0 15px var(--secondary-color), 0 0 30px rgba(255, 0, 234, 0.5); }
+            100% { border-color: var(--primary-color); box-shadow: 0 0 15px var(--primary-color), 0 0 30px rgba(0, 224, 255, 0.5); }
+        }
+
+
+        @media (min-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr 1fr;
+                text-align: left;
+            }
+            .about-text {
+                margin: 0;
+            }
+        }
+
+        /* Services Section */
+        .services-carousel-wrapper {
+            position: relative;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .services-carousel {
+            display: flex;
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: calc(var(--spacing-unit) * 2);
+            padding-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .services-carousel::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .services-carousel::-webkit-scrollbar-track {
+            background: var(--background-light);
+            border-radius: 10px;
+        }
+
+        .services-carousel::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 224, 255, 0.5);
+        }
+
+        .service-card {
+            flex: 0 0 350px; /* Fixed width for snapping */
+            scroll-snap-align: start;
+            background-color: var(--background-light);
+            padding: calc(var(--spacing-unit) * 3);
+            border-radius: var(--border-radius-large);
+            border: 1px solid rgba(255, 0, 234, 0.2);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 12px 40px rgba(0, 224, 255, 0.4);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 12px rgba(255, 0, 234, 0.7);
+        }
+
+        .service-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: var(--spacing-unit);
+            font-size: 1.6rem;
+        }
+
+        .service-card p {
+            color: var(--text-color-dark);
+            font-size: 1rem;
+            flex-grow: 1;
+        }
+
+        .service-card .btn {
+            margin-top: calc(var(--spacing-unit) * 2);
+            align-self: flex-start;
+            font-size: 0.9rem;
+            padding: 0.6rem 1.5rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--background-dark);
+            padding: calc(var(--spacing-unit) * 6) calc(var(--spacing-unit) * 2);
+            border-bottom: 1px solid rgba(0, 224, 255, 0.1);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+        }
+
+        .testimonial-card {
+            background-color: var(--background-light);
+            padding: calc(var(--spacing-unit) * 2.5);
+            border-radius: var(--border-radius-medium);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 0, 234, 0.1);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: var(--text-color-light);
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .testimonial-card .author {
+            display: flex;
+            align-items: center;
+            margin-top: calc(var(--spacing-unit) * 1.5);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .testimonial-card .author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: var(--spacing-unit);
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 224, 255, 0.5);
+        }
+
+        .testimonial-card .author span {
+            display: block;
+            line-height: 1.2;
+        }
+        .testimonial-card .author .name {
+            font-size: 1.1em;
+            color: var(--primary-color);
+        }
+        .testimonial-card .author .title {
+            font-size: 0.9em;
+            color: var(--text-color-dark);
+            font-weight: 400;
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+            background-color: var(--background-light);
+            padding-bottom: calc(var(--spacing-unit) * 8);
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            display: grid;
+            gap: calc(var(--spacing-unit) * 1.5);
+            background-color: var(--background-dark);
+            padding: calc(var(--spacing-unit) * 4);
+            border-radius: var(--border-radius-large);
+            border: 1px solid rgba(0, 224, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--background-light);
+            border: 1px solid rgba(0, 224, 255, 0.3);
+            border-radius: var(--border-radius-medium);
+            color: var(--text-color-light);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 15px rgba(255, 0, 234, 0.4);
+            background-color: rgba(255, 0, 234, 0.05);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: rgba(10, 10, 15, 0.95);
+            color: var(--text-color-dark);
+            padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
+            border-top: 1px solid rgba(255, 0, 234, 0.2);
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            text-align: left;
+        }
+
+        .footer-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.05em;
+            text-shadow: 0 0 10px rgba(0, 224, 255, 0.6);
+            margin-bottom: var(--spacing-unit);
+            text-align: center;
+        }
+
+        .footer-description {
+            font-size: 0.9em;
+            max-width: 300px;
+            margin: 0 auto var(--spacing-unit) auto;
+            color: var(--text-color-dark);
+            text-align: center;
+        }
+
+        .footer-links h4, .social-media h4 {
+            color: var(--secondary-color);
+            margin-bottom: var(--spacing-unit);
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px rgba(255, 0, 234, 0.3);
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links ul li a {
+            color: var(--text-color-dark);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-media {
+            text-align: center;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: calc(var(--spacing-unit) * 1.5);
+            margin-top: var(--spacing-unit);
+        }
+
+        .social-icons a {
+            font-size: 1.8rem;
+            color: var(--text-color-dark);
+            transition: transform 0.3s ease, color 0.3s ease;
+            text-shadow: 0 0 5px rgba(0, 224, 255, 0.3);
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px) scale(1.1);
+            text-shadow: 0 0 15px rgba(0, 224, 255, 0.8);
+        }
+
+        .footer-bottom {
+            margin-top: calc(var(--spacing-unit) * 3);
+            padding-top: calc(var(--spacing-unit) * 2);
+            border-top: 1px solid rgba(0, 224, 255, 0.1);
+            font-size: 0.9em;
+            color: var(--text-color-dark);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar-nav {
+                margin-top: var(--spacing-unit);
+                flex-direction: column;
+                width: 100%;
+                display: none; /* Hidden by default for mobile menu */
+            }
+
+            .navbar-nav.active {
+                display: flex;
+            }
+
+            .nav-item {
+                margin: 0.5rem 0;
+            }
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                font-size: 2rem;
+                color: var(--primary-color);
+                position: absolute;
+                right: calc(var(--spacing-unit) * 2);
+                top: calc(var(--spacing-unit) * 1.5);
+            }
+
+            .navbar-nav.active {
+                border-top: 1px solid rgba(0, 224, 255, 0.2);
+                padding-top: var(--spacing-unit);
+            }
+
+            .hero {
+                height: auto;
+                min-height: 80vh;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 10vw, 4rem);
+            }
+
+            .hero p {
+                font-size: clamp(1rem, 3vw, 1.2rem);
+            }
+
+            .feature-card {
+                padding: calc(var(--spacing-unit) * 2);
+            }
+
+            .service-card {
+                flex: 0 0 90%;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-description, .footer-links, .social-media {
+                margin: 0 auto calc(var(--spacing-unit) * 2) auto;
+            }
+            .footer-links ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem 1rem;
+            }
+        }
+
+        /* Hamburger Icon */
+        .hamburger {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .navbar-nav { display: none; flex-direction: column; width: 100%; }
+            .navbar-nav.active { display: flex; }
+            .nav-item { margin: 0.5rem 0; text-align: center; }
+            .navbar { flex-wrap: wrap; }
+        }
+
+        /* Keyframe animations for section visibility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="navbar" id="navbar">
+        <a href="#" class="navbar-brand">Quantum Flux</a>
+        <div class="hamburger" id="hamburger-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav class="navbar-nav" id="nav-links">
+            <li class="nav-item"><a href="#hero" class="nav-link active">Home</a></li>
+            <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
+            <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
+            <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+            <li class="nav-item"><a href="#testimonials" class="nav-link">Testimonials</a></li>
+            <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="hero">
+            <div class="hero-content">
+                <h1>Unlock the Next Dimension of Digital Experience</h1>
+                <p>Quantum Flux is pioneering the future of web development, creating immersive, high-performance, and visually stunning digital solutions for the year 2026 and beyond.</p>
+                <a href="#services" class="btn">Explore Our Solutions</a>
+            </div>
+        </section>
+
+        <section class="features reveal" id="features">
+            <div class="container">
+                <h2>Core Innovations</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-brain feature-icon"></i>
+                        <h3>AI-Powered Intelligence</h3>
+                        <p>Integrating cutting-edge artificial intelligence for smarter, more adaptive user interfaces and backend processes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-cubes feature-icon"></i>
+                        <h3>Immersive 3D Interfaces</h3>
+                        <p>Leveraging WebGL and advanced rendering techniques to deliver truly interactive and spatial web experiences.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt feature-icon"></i>
+                        <h3>Quantum-Grade Security</h3>
+                        <p>Implementing next-generation encryption and decentralized protocols to ensure unparalleled data protection.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-rocket feature-icon"></i>
+                        <h3>Hyper-Optimized Performance</h3>
+                        <p>Engineered for speed, our platforms offer lightning-fast load times and seamless interactions across all devices.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-hand-holding-usd feature-icon"></i>
+                        <h3>Decentralized Finance Integration</h3>
+                        <p>Seamlessly connect with blockchain and DeFi platforms for secure and transparent digital transactions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-vr-cardboard feature-icon"></i>
+                        <h3>Augmented Reality Interactivity</h3>
+                        <p>Bridging the physical and digital with augmented reality features for enriched user engagement.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about reveal" id="about">
+            <div class="container">
+                <h2>About Quantum Flux</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Pioneering the Future, One Line of Code at a Time</h3>
+                        <p>At Quantum Flux, we are not just building websites; we are crafting digital ecosystems designed for tomorrow's challenges. Founded in 2024, our team of visionary developers, designers, and AI specialists are dedicated to pushing the boundaries of what's possible on the web.</p>
+                        <p>Our philosophy revolves around innovation, sustainability, and user-centric design. We believe that technology should be an extension of human potential, intuitive yet powerful, engaging yet efficient. From groundbreaking enterprise solutions to captivating interactive experiences, we empower businesses and individuals to thrive in the complex digital landscape of 2026.</p>
+                        <a href="#contact" class="btn">Join Our Journey</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1596541223943-4dc79c09aa47?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcyNTZ8MHwxfHNlYXJjaHw0OXx8d2ViJTIwZGV2ZWxvcG1lbnQlMjBmdXR1cmV8ZW58MXx8fHwxNzAzNDUxNzU3fDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Futuristic web development interface">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services reveal" id="services">
+            <div class="container">
+                <h2>Our Quantum Solutions</h2>
+                <div class="services-carousel-wrapper">
+                    <div class="services-carousel">
+                        <div class="service-card">
+                            <i class="fas fa-globe service-icon"></i>
+                            <h3>Advanced Web Platforms</h3>
+                            <p>Developing scalable, secure, and lightning-fast web applications with modular architectures and real-time capabilities.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-mobile-alt service-icon"></i>
+                            <h3>Progressive Web Apps (PWAs)</h3>
+                            <p>Building installable, offline-capable, and engaging PWAs that deliver app-like experiences directly from the web.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-chart-line service-icon"></i>
+                            <h3>Data Visualization & Analytics</h3>
+                            <p>Transforming complex datasets into intuitive, interactive visual stories that drive informed decision-making.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-robot service-icon"></i>
+                            <h3>AI & Machine Learning Integration</h3>
+                            <p>Enhancing user experiences and operational efficiency with intelligent automation, personalization, and predictive analytics.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-shield-alt service-icon"></i>
+                            <h3>Cybersecurity Hardening</h3>
+                            <p>Fortifying your digital assets with advanced threat detection, intrusion prevention, and privacy-by-design principles.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-hands-helping service-icon"></i>
+                            <h3>Digital Transformation Consulting</h3>
+                            <p>Guiding businesses through their digital evolution with strategic roadmaps, technology adoption, and innovation frameworks.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials reveal" id="testimonials">
+            <div class="container">
+                <h2>What Our Clients Say</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <p>"Quantum Flux delivered an unparalleled platform that exceeded all our expectations. Their foresight into future tech is truly remarkable!"</p>
+                        <div class="author">
+                            <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcyNTZ8MHwxfHNlYXJjaHwyMHx8cG9ydHJhaXQlMjBmb3JtYWwlMjBtYWxlfGVufDF8fHwxNzAzNDUxNzU3fDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Client 1">
+                            <span>
+                                <span class="name">Elena Petrova</span>
+                                <span class="title">CEO, AstroCorp Dynamics</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"The immersive 3D interface they built for us revolutionized how our customers interact with our products. Simply brilliant!"</p>
+                        <div class="author">
+                            <img src="https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcyNTZ8MHwxfHNlYXJjaHwxNXx8cG9ydHJhaXQlMjBmb3JtYWwlMjB3b21hbnxlbnwxfHx8fHwxNzAzNDUxNzU3fDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Client 2">
+                            <span>
+                                <span class="name">Marcus Chen</span>
+                                <span class="title">CTO, Nexus Global</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"Their AI integration saved us countless hours and provided insights we never thought possible. A true game-changer for our operations."</p>
+                        <div class="author">
+                            <img src="https://images.unsplash.com/photo-1544723795-3fb6469e3802?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcyNTZ8MHwxfHNlYXJjaHwyMnx8cG9ydHJhaXQlMjBmb3JtYWwlMjBtYWxlfGVufDF8fHwxNzAzNDUxNzU3fDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Client 3">
+                            <span>
+                                <span class="name">Dr. Anya Sharma</span>
+                                <span class="title">Lead Scientist, BioGen Innovations</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact reveal" id="contact">
+            <div class="container">
+                <h2>Connect with the Future</h2>
+                <p>Ready to transform your digital presence? Reach out to the Quantum Flux team and let's craft something extraordinary together.</p>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" required placeholder="name@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required placeholder="Project Inquiry / Partnership / Other">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" required placeholder="Tell us about your innovative idea..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Quantum Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div>
+                <a href="#" class="footer-brand">Quantum Flux</a>
+                <p class="footer-description">Pioneering the next wave of digital innovation, creating future-proof solutions for 2026 and beyond.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#contact">Contact Support</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="social-media">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Quantum Flux. All Rights Reserved. Designed for the Future.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navbar = document.getElementById('navbar');
+            const navLinks = document.getElementById('nav-links');
+            const hamburger = document.getElementById('hamburger-menu');
+            const navItems = navLinks.querySelectorAll('.nav-link');
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Hamburger menu toggle
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Close mobile menu when a link is clicked
+            navItems.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    // Add active class to current nav item
+                    navItems.forEach(item => item.classList.remove('active'));
+                    link.classList.add('active');
+                });
+            });
+
+            // Section reveal on scroll
+            const revealSections = document.querySelectorAll('.reveal');
+            const observerOptions = {
+                root: null,
+                threshold: 0.15 // Adjust as needed
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Stop observing once revealed
+                    }
+                });
+            }, observerOptions);
+
+            revealSections.forEach(section => {
+                observer.observe(section);
+            });
+
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        // Calculate offset for fixed header
+                        const headerOffset = navbar.offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                        
+                        // Update active class for nav links
+                        navItems.forEach(item => item.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+
+            // Set active nav link on scroll
+            const sections = document.querySelectorAll('section');
+            const options = {
+                root: null,
+                threshold: 0.3 // Adjust as needed
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navItems.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${entry.target.id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
