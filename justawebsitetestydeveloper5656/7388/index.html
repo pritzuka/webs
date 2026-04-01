@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en" style="pointer-events: auto;"><head style="pointer-events: auto;">
+    <meta charset="UTF-8" style="pointer-events: auto;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" style="pointer-events: auto;">
+    <title style="pointer-events: auto;">Irfan - Web Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet" style="pointer-events: auto;">
+    <style style="pointer-events: auto;">
+        :root {
+            --primary-color: #6a00ff; /* Deep Purple */
+            --secondary-color: #00bcd4; /* Cyan */
+            --accent-color: #ff9800; /* Orange */
+            --dark-bg: #121212; /* Dark Gray */
+            --light-text: #e0e0e0;
+            --mid-text: #b0b0b0;
+            --card-bg: #1e1e1e;
+            --border-color: #333;
+            --font-display: 'Montserrat', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--light-text);
+            background-color: var(--dark-bg);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            color: var(--light-text);
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
+        h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h3 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .text-gradient {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        .section-padding {
+            padding: 6rem 0;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--dark-bg);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light-text);
+        }
+
+        .logo .dot {
+            color: var(--primary-color);
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-item a {
+            color: var(--mid-text);
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-item a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-item a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #001f3f, #000000); /* Dark blue to black */
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1542831371-dce2d68112de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NDU2MjF8MHwxfHNlYXJjaHw0OXx8Y29kaW5nJTIwYmFja2dyb3VuZHxlbnwwfHxofHwxNzE4NzQ2Nzc3fDA&ixlib=rb-4.0.3&q=80&w=1080') no-repeat center center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            margin-bottom: 0.4em;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            color: var(--mid-text);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero .btn {
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 350px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            filter: grayscale(80%) brightness(80%);
+            transition: all 0.5s ease;
+        }
+
+        .about-image img:hover {
+            filter: grayscale(0%) brightness(100%);
+            transform: scale(1.02);
+        }
+
+        .about-text h2 {
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--mid-text);
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-item {
+            background-color: var(--dark-bg);
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Services Section */
+        .services {
+            background-color: var(--dark-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .services .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-card svg {
+            color: var(--primary-color);
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .service-card p {
+            color: var(--mid-text);
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8rem; /* Adjust for aesthetic spacing */
+        }
+
+        .portfolio .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 5;
+            background-color: var(--card-bg);
+        }
+
+        .portfolio-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            color: var(--light-text);
+        }
+
+        .portfolio-info p {
+            color: var(--mid-text);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-tags span {
+            background-color: rgba(var(--primary-color-rgb), 0.2);
+            color: var(--primary-color);
+            padding: 0.3em 0.8em;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .portfolio-links a {
+            margin-right: 1.2rem;
+            font-size: 1rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .portfolio-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--dark-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .testimonials .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+        }
+
+        .testimonial-card .quote-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: var(--mid-text);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+        }
+
+        .author-details h4 {
+            margin: 0;
+            color: var(--light-text);
+            font-size: 1.15rem;
+        }
+
+        .author-details span {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--card-bg);
+        }
+
+        .contact .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .contact-details div {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            color: var(--mid-text);
+        }
+
+        .contact-details div svg {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+        }
+
+        .contact-details div p {
+            margin: 0;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            font-size: 1.8rem;
+            color: var(--mid-text);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            background-color: var(--dark-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-form h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            color: var(--light-text);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background-color: #2a2a2a;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--light-text);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(var(--secondary-color-rgb), 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-form .btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-bg);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: var(--mid-text);
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-credits {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--mid-text);
+        }
+
+        .footer-credits p {
+            margin: 0;
+        }
+
+        /* Dark/Light Mode Toggle (Optional, not requested but good practice) */
+        /* You can add a button to trigger this with JS */
+        /* For example:
+        body.light-mode {
+            background-color: #f0f0f0;
+            color: #333;
+            --dark-bg: #f0f0f0;
+            --light-text: #333;
+            --mid-text: #555;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
+        }
+        */
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .nav-list {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+
+            .hero {
+                height: auto;
+                min-height: 80vh;
+                padding-top: 6rem;
+                padding-bottom: 4rem;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.5rem, 9vw, 4rem);
+            }
+
+            .hero p {
+                font-size: clamp(1rem, 3vw, 1.3rem);
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image img {
+                max-width: 100%;
+            }
+
+            .section-padding {
+                padding: 4rem 0;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service-card, .portfolio-item, .testimonial-card, .contact-form {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Social Icons (using FontAwesome for example, requiring CDN) */
+        /* This CSS assumes FontAwesome is linked in the HTML head */
+        /* Example: <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> */
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuCIh2+ScAUcpvaGBGoiFhv2DEhwQfMS+kFccctJjK/m1tw==" crossorigin="anonymous" referrerpolicy="no-referrer" style="pointer-events: auto;">
+</head>
+<body style="pointer-events: auto;">
+    <header class="header scrolled" style="pointer-events: auto;">
+        <div class="container" style="pointer-events: auto;">
+            <nav class="navbar" style="pointer-events: auto;">
+                <a href="#" class="logo" style="pointer-events: auto;">Irfan<span class="dot" style="pointer-events: auto;">.in</span></a>
+                <ul class="nav-list" style="pointer-events: auto;">
+                    <li class="nav-item" style="pointer-events: auto;"><a href="#home" style="pointer-events: auto;">Home</a></li>
+                    <li class="nav-item" style="pointer-events: auto;"><a href="#about" style="pointer-events: auto;">About</a></li>
+                    <li class="nav-item" style="pointer-events: auto;"><a href="#services" style="pointer-events: auto;">Services</a></li>
+                    <li class="nav-item" style="pointer-events: auto;"><a href="#portfolio" style="pointer-events: auto;">Portfolio</a></li>
+                    <li class="nav-item" style="pointer-events: auto;"><a href="#testimonials" style="pointer-events: auto;">Testimonials</a></li>
+                    <li class="nav-item" style="pointer-events: auto;"><a href="#contact" style="pointer-events: auto;">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main style="pointer-events: auto;">
+        <section id="home" class="hero" style="pointer-events: auto;">
+            <div class="hero-content" style="pointer-events: auto;">
+                <h1 style="pointer-events: auto;">Hi, I'm <span class="text-gradient" style="pointer-events: auto;">Irfan</span></h1>
+                <p style="pointer-events: auto;">A passionate Web Developer crafting immersive digital experiences with clean code and innovative design. Let's build something amazing together!</p>
+                <a href="#portfolio" class="btn" style="pointer-events: auto;">View My Work</a>
+            </div>
+        </section>
+
+        <section id="about" class="about section-padding" style="pointer-events: auto;">
+            <div class="container about-content" style="pointer-events: auto;">
+                <div class="about-image" style="pointer-events: auto;">
+                    <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w0NDU2MjF8MHwxfHNlYXJjaHw4Nnx8ZGV2ZWxvcGVyJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzE4NzQ2Nzg1fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="Irfan - Web Developer Portrait" style="pointer-events: auto;">
+                </div>
+                <div class="about-text" style="pointer-events: auto;">
+                    <h2 style="pointer-events: auto;">About <span class="text-gradient" style="pointer-events: auto;">Me</span></h2>
+                    <p style="pointer-events: auto;">Irfan here, a dedicated web developer with over 5 years of experience in creating responsive, user-friendly, and high-performance websites. My journey in web development began with a fascination for how code can bring ideas to life, transforming complex concepts into intuitive digital solutions.</p>
+                    <p style="pointer-events: auto;">My expertise spans across the full stack, from conceptualizing dynamic front-end interfaces to architecting robust back-end systems. I thrive on continuous learning and adapting to the ever-evolving web landscape, always eager to embrace new technologies and best practices.</p>
+                    <h3 style="pointer-events: auto;">My Key Skills:</h3>
+                    <div class="skills-grid" style="pointer-events: auto;">
+                        <span class="skill-item" style="pointer-events: auto;">HTML5</span>
+                        <span class="skill-item" style="pointer-events: auto;">CSS3 (Sass, Less)</span>
+                        <span class="skill-item" style="pointer-events: auto;">JavaScript (ES6+)</span>
+                        <span class="skill-item" style="pointer-events: auto;">React.js</span>
+                        <span class="skill-item" style="pointer-events: auto;">Node.js</span>
+                        <span class="skill-item" style="pointer-events: auto;">Express.js</span>
+                        <span class="skill-item" style="pointer-events: auto;">Python (Django, Flask)</span>
+                        <span class="skill-item" style="pointer-events: auto;">PHP (Laravel)</span>
+                        <span class="skill-item" style="pointer-events: auto;">SQL (PostgreSQL, MySQL)</span>
+                        <span class="skill-item" style="pointer-events: auto;">NoSQL (MongoDB)</span>
+                        <span class="skill-item" style="pointer-events: auto;">Git/GitHub</span>
+                        <span class="skill-item" style="pointer-events: auto;">Responsive Design</span>
+                        <span class="skill-item" style="pointer-events: auto;">RESTful APIs</span>
+                        <span class="skill-item" style="pointer-events: auto;">Cloud Deployment (AWS, Heroku)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services section-padding" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <div class="section-header" style="pointer-events: auto;">
+                    <h2 style="pointer-events: auto;">My <span class="text-gradient" style="pointer-events: auto;">Services</span></h2>
+                    <p style="pointer-events: auto;">Offering a range of web development services to help you achieve your digital goals.</p>
+                </div>
+                <div class="services-grid" style="pointer-events: auto;">
+                    <div class="service-card" style="pointer-events: auto;">
+                        <i class="fas fa-desktop" style="pointer-events: auto;"></i>
+                        <h3 style="pointer-events: auto;">Front-end Development</h3>
+                        <p style="pointer-events: auto;">Building engaging and interactive user interfaces using modern frameworks like React.js, ensuring a seamless user experience across all devices.</p>
+                    </div>
+                    <div class="service-card" style="pointer-events: auto;">
+                        <i class="fas fa-server" style="pointer-events: auto;"></i>
+                        <h3 style="pointer-events: auto;">Back-end Development</h3>
+                        <p style="pointer-events: auto;">Crafting robust and scalable server-side applications with Node.js, Python, or PHP, focusing on performance, security, and data integrity.</p>
+                    </div>
+                    <div class="service-card" style="pointer-events: auto;">
+                        <i class="fas fa-mobile-alt" style="pointer-events: auto;"></i>
+                        <h3 style="pointer-events: auto;">Responsive Web Design</h3>
+                        <p style="pointer-events: auto;">Designing and developing websites that adapt flawlessly to any screen size, providing an optimal viewing experience for every user.</p>
+                    </div>
+                    <div class="service-card" style="pointer-events: auto;">
+                        <i class="fas fa-database" style="pointer-events: auto;"></i>
+                        <h3 style="pointer-events: auto;">Database Management</h3>
+                        <p style="pointer-events: auto;">Expertise in designing, implementing, and managing databases (SQL &amp; NoSQL) to ensure efficient data storage and retrieval for your applications.</p>
+                    </div>
+                    <div class="service-card" style="pointer-events: auto;">
+                        <i class="fas fa-cloud" style="pointer-events: auto;"></i>
+                        <h3 style="pointer-events: auto;">Cloud Deployment &amp; DevOps</h3>
+                        <p style="pointer-events: auto;">Deploying and managing applications on cloud platforms like AWS and Heroku, implementing CI/CD pipelines for continuous integration and delivery.</p>
+                    </div>
+                    <div class="service-card" style="pointer-events: auto;">
+                        <i class="fas fa-cogs" style="pointer-events: auto;"></i>
+                        <h3 style="pointer-events: auto;">API Integration</h3>
+                        <p style="pointer-events: auto;">Seamlessly integrating third-party APIs and building custom RESTful APIs to extend functionality and connect different services.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="portfolio section-padding" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <div class="section-header" style="pointer-events: auto;">
+                    <h2 style="pointer-events: auto;">My Recent <span class="text-gradient" style="pointer-events: auto;">Projects</span></h2>
+                    <p style="pointer-events: auto;">A showcase of some of my work, demonstrating my skills and passion for web development.</p>
+                </div>
+                <div class="portfolio-grid" style="pointer-events: auto;">
+                    <div class="portfolio-item" style="pointer-events: auto;">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.OQa327RGwSnibdUdRIu7MQHaEd?o=7rm=3&amp;rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt="E-commerce Platform" style="pointer-events: auto;">
+                        <div class="portfolio-info" style="pointer-events: auto;">
+                            <h3 style="pointer-events: auto;">Modern E-commerce Platform</h3>
+                            <p style="pointer-events: auto;">A full-stack e-commerce solution with product management, user authentication, and secure payment processing.</p>
+                            <div class="portfolio-tags" style="pointer-events: auto;">
+                                <span style="pointer-events: auto;">React</span>
+                                <span style="pointer-events: auto;">Node.js</span>
+                                <span style="pointer-events: auto;">MongoDB</span>
+                                <span style="pointer-events: auto;">Stripe API</span>
+                            </div>
+                            <div class="portfolio-links" style="pointer-events: auto;">
+                                <a href="#" target="_blank" style="pointer-events: auto;">Live Demo <i class="fas fa-external-link-alt" style="pointer-events: auto;"></i></a>
+                                <a href="#" target="_blank" style="pointer-events: auto;">GitHub <i class="fab fa-github" style="pointer-events: auto;"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials section-padding" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <div class="section-header" style="pointer-events: auto;">
+                    <h2 style="pointer-events: auto;">Client <span class="text-gradient" style="pointer-events: auto;">Testimonials</span></h2>
+                    <p style="pointer-events: auto;">Hear what my clients have to say about my work and dedication.</p>
+                </div>
+                <div class="testimonial-grid" style="pointer-events: auto;">
+                    <div class="testimonial-card" style="pointer-events: auto;">
+                        <span class="quote-icon" style="pointer-events: auto;"><i class="fas fa-quote-left" style="pointer-events: auto;"></i></span>
+                        <p style="pointer-events: auto;">"Irfan delivered an exceptional e-commerce site. His attention to detail, communication, and technical prowess made the entire process smooth and results-driven. Highly recommend!"</p>
+                        <div class="testimonial-author" style="pointer-events: auto;">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734bbd3?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w0NDU2MjF8MHwxfHNlYXJjaHw4Nnx8YnVzaW5lc3N3b21hbnxlbnwwfHx8fDE3MTg3NDY4NTJ8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="Client 1" style="pointer-events: auto;">
+                            <div class="author-details" style="pointer-events: auto;">
+                                <h4 style="pointer-events: auto;">Sarah J.</h4>
+                                <span style="pointer-events: auto;">CEO, Thrive Brands</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card" style="pointer-events: auto;">
+                        <span class="quote-icon" style="pointer-events: auto;"><i class="fas fa-quote-left" style="pointer-events: auto;"></i></span>
+                        <p style="pointer-events: auto;">"Working with Irfan was a pleasure. He took our complex requirements for an analytics dashboard and turned them into an intuitive and high-performing application. Truly a top-tier developer."</p>
+                        <div class="testimonial-author" style="pointer-events: auto;">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w0NDU2MjF8MHwxfHNlYXJjaHwyNnx8YnVzaW5lc3NtYW58ZW58MHx8fHwxNzE4NzQ2Nzg1fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="Client 2" style="pointer-events: auto;">
+                            <div class="author-details" style="pointer-events: auto;">
+                                <h4 style="pointer-events: auto;">Michael P.</h4>
+                                <span style="pointer-events: auto;">Product Manager, DataWave Solutions</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card" style="pointer-events: auto;">
+                        <span class="quote-icon" style="pointer-events: auto;"><i class="fas fa-quote-left" style="pointer-events: auto;"></i></span>
+                        <p style="pointer-events: auto;">"Irfan's ability to understand our vision and translate it into a stunning and functional website was remarkable. His code quality is excellent, and he's always available for support."</p>
+                        <div class="testimonial-author" style="pointer-events: auto;">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w0NDU2MjF8MHwxfHNlYXJjaHwzM3x8YnVzaW5lc3N3b21hbnxlbnwwfHx8fDE3MTg3NDY5MjF8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="Client 3" style="pointer-events: auto;">
+                            <div class="author-details" style="pointer-events: auto;">
+                                <h4 style="pointer-events: auto;">Emily R.</h4>
+                                <span style="pointer-events: auto;">Founder, Creative Flow Studio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact section-padding" style="pointer-events: auto;">
+            <div class="container" style="pointer-events: auto;">
+                <div class="section-header" style="pointer-events: auto;">
+                    <h2 style="pointer-events: auto;">Get in <span class="text-gradient" style="pointer-events: auto;">Touch</span></h2>
+                    <p style="pointer-events: auto;">Have a project in mind? Let's connect and discuss how I can help bring your vision to life.</p>
+                </div>
+                <div class="contact-content" style="pointer-events: auto;">
+                    <div class="contact-info" style="pointer-events: auto;">
+                        <h3 style="pointer-events: auto;">Let's Create Something Amazing!</h3>
+                        <p style="color: var(--mid-text); margin-bottom: 2.5rem; pointer-events: auto;">I'm always open to new opportunities and collaborations. Feel free to reach out through any of the channels below.</p>
+                        <div class="contact-details" style="pointer-events: auto;">
+                            <div style="pointer-events: auto;">
+                                <i class="fas fa-envelope" style="pointer-events: auto;"></i>
+                                <p style="pointer-events: auto;">irfan.developer@example.com</p>
+                            </div>
+                            <div style="pointer-events: auto;">
+                                <i class="fas fa-phone-alt" style="pointer-events: auto;"></i>
+                                <p style="pointer-events: auto;">+1 (555) 123-4567</p>
+                            </div>
+                            <div style="pointer-events: auto;">
+                                <i class="fas fa-map-marker-alt" style="pointer-events: auto;"></i>
+                                <p style="pointer-events: auto;">Anywhere, Earth (Remote)</p>
+                            </div>
+                        </div>
+                        <div class="social-links" style="pointer-events: auto;">
+                            <a href="https://github.com/irfandev" target="_blank" aria-label="GitHub" style="pointer-events: auto;"><i class="fab fa-github" style="pointer-events: auto;"></i></a>
+                            <a href="https://linkedin.com/in/irfandev" target="_blank" aria-label="LinkedIn" style="pointer-events: auto;"><i class="fab fa-linkedin-in" style="pointer-events: auto;"></i></a>
+                            <a href="https://twitter.com/irfandev" target="_blank" aria-label="Twitter" style="pointer-events: auto;"><i class="fab fa-twitter" style="pointer-events: auto;"></i></a>
+                            <a href="https://instagram.com/irfandev" target="_blank" aria-label="Instagram" style="pointer-events: auto;"><i class="fab fa-instagram" style="pointer-events: auto;"></i></a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" style="pointer-events: auto;">
+        <div class="container" style="pointer-events: auto;">
+            <div class="footer-content" style="pointer-events: auto;">
+                <div class="footer-col" style="pointer-events: auto;">
+                    <h4 style="pointer-events: auto;">Irfan.Dev</h4>
+                    <p style="color: var(--mid-text); pointer-events: auto;">Crafting exceptional web experiences from concept to deployment.</p>
+                </div>
+                <div class="footer-col" style="pointer-events: auto;">
+                    <h4 style="pointer-events: auto;">Quick Links</h4>
+                    <ul style="pointer-events: auto;">
+                        <li style="pointer-events: auto;"><a href="#home" style="pointer-events: auto;">Home</a></li>
+                        <li style="pointer-events: auto;"><a href="#about" style="pointer-events: auto;">About</a></li>
+                        <li style="pointer-events: auto;"><a href="#services" style="pointer-events: auto;">Services</a></li>
+                        <li style="pointer-events: auto;"><a href="#portfolio" style="pointer-events: auto;">Portfolio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col" style="pointer-events: auto;">
+                    <h4 style="pointer-events: auto;">Resources</h4>
+                    <ul style="pointer-events: auto;">
+                        <li style="pointer-events: auto;"><a href="#" style="pointer-events: auto;">Blog (Coming Soon)</a></li>
+                        <li style="pointer-events: auto;"><a href="#" style="pointer-events: auto;">Resume</a></li>
+                        <li style="pointer-events: auto;"><a href="#contact" style="pointer-events: auto;">Hire Me</a></li>
+                        <li style="pointer-events: auto;"><a href="#" style="pointer-events: auto;">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col" style="pointer-events: auto;">
+                    <h4 style="pointer-events: auto;">Connect</h4>
+                    <ul style="pointer-events: auto;">
+                        <li style="pointer-events: auto;">Email: <a href="mailto:irfan.developer@example.com" style="pointer-events: auto;">irfan.developer@example.com</a></li>
+                        <li style="pointer-events: auto;">Phone: <a href="tel:+15551234567" style="pointer-events: auto;">+1 (555) 123-4567</a></li>
+                        <li style="pointer-events: auto;"><a href="https://linkedin.com/in/irfandev" target="_blank" style="pointer-events: auto;">LinkedIn</a></li>
+                        <li style="pointer-events: auto;"><a href="https://github.com/irfandev" target="_blank" style="pointer-events: auto;">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-credits" style="pointer-events: auto;">
+                <p style="pointer-events: auto;">© 2026 Irfan. All rights reserved.</p>
+                <p style="pointer-events: auto;">Designed and Developed by Irfan with <i class="fas fa-heart" style="color: rgb(226, 85, 85); pointer-events: auto;"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <script style="pointer-events: auto;">
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-list a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Optional: Add a 'scrolled' class to header on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        // Add CSS for .header.scrolled if you add this script
+        /* .header.scrolled {
+            background-color: rgba(18, 18, 18, 0.95);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        } */
+    </script>
+
+</body></html>
