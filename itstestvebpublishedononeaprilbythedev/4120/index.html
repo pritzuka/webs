@@ -1,0 +1,1275 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent1: #e74c3c;
+            --accent2: #3498db;
+            --accent3: #2ecc71;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --shadow: rgba(0,0,0,0.1);
+            --border: #ddd;
+            --spacing: 60px;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --font-size: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f8f9fa;
+            transition: background-color 0.3s;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent1);
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--accent2);
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            margin-bottom: 0.5em;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+        }
+
+        h3 {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--accent1));
+            color: white;
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(16px);
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            max-width: 600px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: var(--accent2);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            background: var(--accent3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: var(--spacing) 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            background: var(--accent1);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .feature-title {
+            margin-bottom: 0.5rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: var(--spacing) 0;
+            background: linear-gradient(135deg, #f9f9f9, #e9e9e9);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .about-img {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: var(--spacing) 0;
+            background: white;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        /* Statistics Section */
+        .statistics {
+            padding: var(--spacing) 0;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: var(--spacing) 0;
+            background: linear-gradient(135deg, #ecf0f1, #f9f9f9);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        .pricing-title {
+            margin-bottom: 1rem;
+            color: var(--accent1);
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+
+        .pricing-btn {
+            display: inline-block;
+            background: var(--accent2);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .pricing-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: var(--spacing) 0;
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent1);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+        }
+
+        .form-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--accent1);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .form-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem 0;
+            background: var(--dark);
+            color: white;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-col {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: clamp(2rem, 4vw, 2.5rem);
+            }
+            
+            .hero p {
+                font-size: clamp(1rem, 3vw, 1.2rem);
+            }
+            
+            .features-grid, .testimonial-grid, .stats-grid, .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Creative Director & UI/UX Designer</h1>
+                <p>Crafting exceptional digital experiences that blend aesthetics with functionality</p>
+                <a href="#" class="hero-btn">View My Work</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="features">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">F</div>
+                    <h3>Brand Identity</h3>
+                    <p>Creating cohesive visual identities that resonate with target audiences</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">U</div>
+                    <h3>User Experience</h3>
+                    <p>Designing intuitive interfaces that enhance user engagement</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">D</div>
+                    <h3>Visual Design</h3>
+                    <p>Developing stunning visual compositions that captivate users</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1518734410660-0b5b3f9b2b0e?w=800&q=80" alt="Portfolio Designer">
+                </div>
+                <div>
+                    <p>With over 8 years of experience in creating award-winning digital products, I specialize in transforming complex ideas into elegant user experiences. My work has been featured in leading design publications and I've collaborated with startups and Fortune 500 companies to deliver exceptional digital solutions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="testimonials">
+        <div class="container">
+            <h2>What Clients Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <img src="https://images.unsplash.com/photo-1507525700995-ef4de728c699?w=80&q=80" alt="Client Avatar" class="testimonial-avatar">
+                    <p>"Working with Alex was a transformative experience. Their attention to detail and creative vision elevated our product to new heights."</p>
+                    <div class="testimonial-meta">
+                        <strong>Sarah Johnson</strong>
+                        <span>CEO, Tech Innovations Inc.</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <img src="https://images.unsplash.com/photo-1507525700995-ef4de728c699?w=80&q=80" alt="Client Avatar" class="testimonial-avatar">
+                    <p>"Alex's ability to balance aesthetics with functionality is unparalleled. They delivered our vision with precision and creativity."</p>
+                    <div class="testimonial-meta">
+                        <strong>Michael Chen</strong>
+                        <span>CTO, Creative Solutions LLC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="statistics">
+        <div class="container">
+            <h2>Portfolio Stats</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">45</div>
+                    <div>Projects Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">98</div>
+                    <div>Client Satisfaction</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">12</div>
+                    <div>Awards Won</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pricing">
+        <div class="container">
+            <h2>Pricing Plans</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="pricing-price">$49</div>
+                    <div>Basic Package</div>
+                    <ul>
+                        <li>1 Project</li>
+                        <li>2 Revisions</li>
+                        <li>Basic Support</li>
+                    </ul>
+                    <a href="#" class="pricing-btn">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Professional</h3>
+                    <div class="pricing-price">$129</div>
+                    <div>Premium Package</div>
+                    <ul>
+                        <li>Unlimited Projects</li>
+                        <li>Unlimited Revisions</li>
+                        <li>24/7 Support</li>
+                        <li>Portfolio Review</li>
+                    </ul>
+                    <a href="#" class="pricing-btn">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="pricing-price">$499</div>
+                    <div>Custom Solution</div>
+                    <ul>
+                        <li>Custom Development</li>
+                        <li>Team Collaboration</li>
+                        <li>Dedicated Support</li>
+                        <li>Monthly Strategy Sessions</li>
+                    </ul>
+                    <a href="#" class="pricing-btn">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Your Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Your Message"></textarea>
+                    </div>
+                    <button type="submit" class="form-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Portfolio</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Brand Identity</a></li>
+                        <li><a href="#">UX Design</a></li>
+                        <li><a href="#">UI Design</a></li>
+                        <li><a href="#">Visual Design</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <p>Email: contact@alexdesign.com<br>Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <p>&copy; 2026 Alex Design. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent1: #e74c3c;
+            --accent2: #3498db;
+            --accent3: #2ecc71;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --shadow: rgba(0,0,0,0.1);
+            --spacing: 60px;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --font-size: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f8f9fa;
+            transition: background-color 0.3s;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent1);
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--accent2);
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            margin-bottom: 0.5em;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+        }
+
+        h3 {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--accent1));
+            color: white;
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(16px);
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            max-width: 600px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: var(--accent2);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            background: var(--accent3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: var(--spacing) 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            background: var(--accent1);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .feature-title {
+            margin-bottom: 0.5rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: var(--spacing) 0;
+            background: linear-gradient(135deg, #f9f9f9, #e9e9e9);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .about-img {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: var(--spacing) 0;
+            background: white;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        /* Statistics Section */
+        .statistics {
+            padding: var(--spacing) 0;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: var(--spacing) 0;
+            background: linear-gradient(135deg, #ecf0f1, #f9f9f9);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        .pricing-title {
+            margin-bottom: 1rem;
+            color: var(--accent1);
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+
+        .pricing-btn {
+            display: inline-block;
+            background: var(--accent2);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .pricing-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: var(--spacing) 0;
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent1);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+        }
+
+        .form-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--accent1);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .form-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem 0;
+            background: var(--dark);
+            color: white;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-col {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: clamp(2rem, 4vw, 2.5rem);
+            }
+            
+            .hero p {
+                font-size: clamp(1rem, 3vw, 1.2rem);
+            }
+            
+            .features-grid, .testimonial-grid, .stats-grid, .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Creative Director & UI/UX Designer</h1>
+                <p>Crafting exceptional digital experiences that blend aesthetics with functionality</p>
+                <a href="#" class="hero-btn">View My Work</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="features">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">F</div>
+                    <h3>Brand Identity</h3>
+                    <p>Creating cohesive visual identities that resonate with target audiences</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">U</div>
+                    <h3>User Experience</h3>
+                    <p>Designing intuitive interfaces that enhance user engagement</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">D</div>
+                    <h3>Visual Design</h3>
+                    <p>Developing stunning visual compositions that captivate users</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1518734410660-0b5b3f9b2b0e?w=800&q=80" alt="Portfolio Designer">
+                </div>
+                <div>
+                    <p>With over 8 years of experience in creating award-winning digital products, I specialize in transforming complex ideas into elegant user experiences. My work has been featured in leading design publications and I've collaborated with startups and Fortune 500 companies to deliver exceptional digital solutions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="testimonials">
+        <div class="container">
+            <h2>What Clients Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <img src="https://images.unsplash.com/photo-1507525700995-ef4de728c699?w=80&q=80" alt="Client Avatar" class="testimonial-avatar">
+                    <p>"Working with Alex was a transformative experience. Their attention to detail and creative vision elevated our product to new heights."</p>
+                    <div class="testimonial-meta">
+                        <strong>Sarah Johnson</strong>
+                        <span>CEO, Tech Innovations Inc.</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <img src="https://images.unsplash.com/photo-1507525700995-ef4de728c699?w=80&q=80" alt="Client Avatar" class="testimonial-avatar">
+                    <p>"Alex's ability to balance aesthetics with functionality is unparalleled. They delivered our vision with precision and creativity."</p>
+                    <div class="testimonial-meta">
+                        <strong>Michael Chen</strong>
+                        <span>CTO, Creative Solutions LLC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="statistics">
+        <div class="container">
+            <h2>Portfolio Stats</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">45</div>
+                    <div>Projects Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">98</div>
+                    <div>Client Satisfaction</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">12</div>
+                    <div>Awards Won</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pricing">
+        <div class="container">
+            <h2>Pricing Plans</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="pricing-price">$49</div>
+                    <div>Basic Package</div>
+                    <ul>
+                        <li>1 Project</li>
+                        <li>2 Revisions</li>
+                        <li>Basic Support</li>
+                    </ul>
+                    <a href="#" class="pricing-btn">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Professional</h3>
+                    <div class="pricing-price">$129</div>
+                    <div>Premium Package</div>
+                    <ul>
+                        <li>Unlimited Projects</li>
+                        <li>Unlimited Revisions</li>
+                        <li>24/7 Support</li>
+                        <li>Portfolio Review</li>
+                    </ul>
+                    <a href="#" class="pricing-btn">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="pricing-price">$499</div>
+                    <div>Custom Solution</div>
+                    <ul>
+                        <li>Custom Development</li>
+                        <li>Team Collaboration</li>
+                        <li>Dedicated Support</li>
+                        <li>Monthly Strategy Sessions</li>
+                    </ul>
+                    <a href="#" class="pricing-btn">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Your Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Your Message"></textarea>
+                    </div>
+                    <button type="submit" class="form-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Portfolio</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Brand Identity</a></li>
+                        <li><a href="#">UX Design</a></li>
+                        <li><a href="#">UI Design</a></li>
+                        <li><a href="#">Visual Design</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <p>Email: contact@alexdesign.com<br>Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <p>&copy; 2026 Alex Design. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
