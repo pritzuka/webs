@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en" style="pointer-events: auto;"><head style="pointer-events: auto;">
+    <meta charset="UTF-8" style="pointer-events: auto;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" style="pointer-events: auto;">
+    <title style="pointer-events: auto;">Tekzbyte Tours &amp; Travels - Your Adventure Awaits!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet" style="pointer-events: auto;">
+    <style style="pointer-events: auto;">
+        :root {
+            --primary-color: #2F80ED;
+            --secondary-color: #56CCF2;
+            --accent-color: #27AE60;
+            --dark-color: #2D3748;
+            --light-color: #F7FAFC;
+            --text-color: #4A5568;
+            --white: #FFFFFF;
+            --gradient-blue: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-dark: linear-gradient(135deg, #2D3748 0%, #1A202C 100%);
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+            --border-radius: 12px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            line-height: 1.7;
+            background-color: var(--light-color);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-color);
+            margin-bottom: 0.8em;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: clamp(2.8rem, 6vw, 4.5rem); }
+        h2 { font-size: clamp(2rem, 4.5vw, 3.5rem); }
+        h3 { font-size: clamp(1.6rem, 3.5vw, 2.8rem); }
+        p { margin-bottom: 1em; }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-light);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-blue);
+            color: var(--white);
+            box-shadow: 0 8px 20px rgba(47, 128, 237, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(47, 128, 237, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            box-shadow: none;
+        }
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: var(--shadow-light);
+            transition: background-color 0.3s ease;
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+        }
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+        }
+        .navbar-brand span {
+            color: var(--primary-color);
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        .nav-item {
+            margin-left: 35px;
+        }
+        .nav-link {
+            color: var(--dark-color);
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1001;
+        }
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--dark-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            overflow: hidden;
+            background: var(--gradient-dark);
+        }
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: 1;
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 30px;
+        }
+        .hero h1 {
+            color: var(--white);
+            margin-bottom: 25px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            margin-bottom: 40px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            font-weight: 300;
+        }
+        .hero .btn {
+            font-size: 1.1rem;
+            padding: 16px 35px;
+        }
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--white);
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+            z-index: 2;
+        }
+        .scroll-down svg {
+            margin-top: 10px;
+            width: 24px;
+            height: 24px;
+            fill: var(--white);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* About Section */
+        .about {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            align-items: center;
+        }
+        .about-content h2 {
+            margin-bottom: 20px;
+        }
+        .about-content h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        .about-image {
+            position: relative;
+            padding: 20px;
+        }
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-hover);
+            transform: rotate(-3deg);
+            transition: transform 0.5s ease;
+        }
+        .about-image img:hover {
+            transform: rotate(0deg) scale(1.03);
+        }
+
+        /* Services section */
+        .services {
+            background: var(--gradient-dark);
+            color: var(--light-color);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .services h2 {
+            color: var(--white);
+            margin-bottom: 60px;
+        }
+        .services .container {
+            position: relative;
+            z-index: 10;
+        }
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .service-card {
+            background-color: var(--white);
+            color: var(--text-color);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        .service-card svg {
+            width: 60px;
+            height: 60px;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            background-color: #E2E8F0;
+            padding: 12px;
+            border-radius: 50%;
+        }
+        .service-card h3 {
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+        .service-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        .service-card .btn {
+            margin-top: 25px;
+            align-self: flex-start;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            color: var(--white);
+            background: var(--gradient-blue);
+            box-shadow: 0 4px 10px rgba(47, 128, 237, 0.2);
+        }
+        .service-card .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(47, 128, 237, 0.3);
+        }
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Unsplash image of ocean */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        /* Destinations Section */
+        .destinations h2 {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .destination-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .destination-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+        .destination-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .destination-card:hover img {
+            transform: scale(1.05);
+        }
+        .destination-info {
+            padding: 25px;
+            position: relative;
+            z-index: 2;
+        }
+        .destination-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        .destination-info .location {
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        .destination-info p {
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            color: #6C7A89;
+        }
+        .destination-card .btn {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: var(--dark-color);
+            color: var(--white);
+            text-align: center;
+            padding: 100px 0 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .testimonials h2 {
+            color: var(--white);
+            margin-bottom: 60px;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        .testimonial-card img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 0 0 5px rgba(47, 128, 237, 0.3);
+        }
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: #E2E8F0;
+        }
+        .testimonial-card .author {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1476514525597-cad3e09777-?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Mountain lake view */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.08;
+            z-index: 1;
+        }
+        .testimonials .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Call to Action */
+        .cta {
+            background: var(--gradient-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 80px 0;
+            border-radius: var(--border-radius);
+            margin: 0 auto;
+            max-width: 1200px;
+            position: relative;
+            bottom: -60px; /* Overlap with section below */
+            box-shadow: 0 15px 40px rgba(47, 128, 237, 0.4);
+            transform: translateY(0);
+            transition: transform 0.5s ease;
+        }
+        .cta:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(47, 128, 237, 0.5);
+        }
+        .cta h2 {
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+        .cta p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin-bottom: 35px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta .btn {
+            background-color: var(--accent-color);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+            border: 2px solid var(--accent-color);
+        }
+        .cta .btn:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #1A202C;
+            color: #E2E8F0;
+            padding: 150px 0 60px 0; /* Extra padding top to compensate for CTA overlap */
+            font-size: 0.95rem;
+            position: relative;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .footer-col h4 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        .footer-col ul li a {
+            color: #CBD5E0;
+            transition: color 0.3s ease;
+        }
+        .footer-col ul li a:hover {
+            color: var(--secondary-color);
+        }
+        .footer-col p {
+            line-height: 1.8;
+            color: #a0aec0;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        .social-icons svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a0aec0;
+        }
+
+
+        /* Media Queries */
+        @media (max-width: 992px) {
+            .navbar .container {
+                padding: 15px 25px;
+            }
+            .nav-menu {
+                flex-direction: column;
+                position: absolute;
+                top: 80px; /* Adjust based on navbar height */
+                left: 0;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                border-top: 1px solid #E2E8F0;
+                transform: translateY(-150%);
+                transition: transform 0.4s ease-in-out;
+                z-index: 999;
+                padding: 30px 25px;
+                box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            }
+            .nav-menu.active {
+                transform: translateY(0);
+            }
+            .nav-item {
+                margin: 0;
+                padding: 15px 0;
+                border-bottom: 1px solid #edf2f7;
+            }
+            .nav-item:last-child {
+                border-bottom: none;
+            }
+            .nav-link {
+                color: var(--dark-color);
+                font-size: 1.1rem;
+                display: block;
+                padding: 5px 0;
+            }
+            .nav-link::after {
+                background-color: var(--primary-color);
+                height: 3px;
+                width: 30%;
+            }
+            .nav-link:hover::after {
+                width: 50%;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+
+            .hero h1 {
+                font-size: clamp(2.5rem, 8vw, 4rem);
+            }
+            .hero p {
+                font-size: clamp(1rem, 3vw, 1.3rem);
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .about-image {
+                padding: 0;
+                order: -1; /* Image appears first on mobile */
+            }
+            .about-image img {
+                transform: none;
+            }
+            .about-image img:hover {
+                transform: scale(1.02);
+            }
+
+            .section-padding {
+                padding: 70px 0;
+            }
+
+            .cta {
+                padding: 60px 25px;
+                bottom: -40px;
+            }
+            .cta h2 {
+                font-size: clamp(1.8rem, 5vw, 2.8rem);
+            }
+
+            .footer {
+                padding-top: 100px;
+            }
+            .footer-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .footer-col {
+                text-align: center;
+            }
+            .footer-col ul {
+                padding: 0;
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar-brand {
+                font-size: 1.8rem;
+            }
+            .hero .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            .service-card, .destination-card, .testimonial-card {
+                padding: 30px;
+            }
+            .service-card svg {
+                width: 50px;
+                height: 50px;
+            }
+            .footer-col h4 {
+                margin-bottom: 15px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body style="pointer-events: auto;">
+
+    <!-- Navbar -->
+    <nav class="navbar" style="pointer-events: auto;">
+        <div class="container" style="pointer-events: auto;">
+            <a href="#" class="navbar-brand" style="pointer-events: auto;">Tekzbyte<span style="pointer-events: auto;"> Tours</span></a>
+            <div class="hamburger" style="pointer-events: auto;">
+                <span style="pointer-events: auto;"></span>
+                <span style="pointer-events: auto;"></span>
+                <span style="pointer-events: auto;"></span>
+            </div>
+            <ul class="nav-menu" style="pointer-events: auto;">
+                <li class="nav-item" style="pointer-events: auto;"><a href="#hero" class="nav-link" style="pointer-events: auto;">Home</a></li>
+                <li class="nav-item" style="pointer-events: auto;"><a href="#about" class="nav-link" style="pointer-events: auto;">About Us</a></li>
+                <li class="nav-item" style="pointer-events: auto;"><a href="#services" class="nav-link" style="pointer-events: auto;">Services</a></li>
+                <li class="nav-item" style="pointer-events: auto;"><a href="#destinations" class="nav-link" style="pointer-events: auto;">Destinations</a></li>
+                <li class="nav-item" style="pointer-events: auto;"><a href="#testimonials" class="nav-link" style="pointer-events: auto;">Reviews</a></li>
+                <li class="nav-item" style="pointer-events: auto;"><a href="#contact" class="btn btn-primary" style="pointer-events: auto;">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero" style="pointer-events: auto;">
+        <video autoplay="" muted="" loop="" class="hero-video" style="pointer-events: auto;">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-caravan-along-the-coast-4286-large.mp4" type="video/mp4" style="pointer-events: auto;">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-content" style="pointer-events: auto;">
+            <h1 style="pointer-events: auto;">Unlock Your Next Adventure with Tekzbyte Tours</h1>
+            <p style="pointer-events: auto;">From serene landscapes to amazing  thrilling explorations, we craft unforgettable journeys tailored just for you. Discover the world, one amazing trip at a time.</p>
+            <a href="#destinations" class="btn btn-primary" style="pointer-events: auto;">Explore Destinations</a>
+            <a href="#contact" class="btn btn-secondary" style="pointer-events: auto;">Plan Your Trip</a>
+        </div>
+        <a href="#about" class="scroll-down" style="pointer-events: auto;">
+            Scroll Down
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="pointer-events: auto;"><path d="M12 21l-8-9h6v-12h4v12h6l-8 9zM12 18.25l4.5-5.06h-3.5v-7.19h-2v7.19h-3.5l4.5 5.06z" style="pointer-events: auto;"></path></svg>
+        </a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding" style="pointer-events: auto;">
+        <div class="container about" style="pointer-events: auto;">
+            <div class="about-content" style="pointer-events: auto;">
+                <h2 style="pointer-events: auto;">Your Journey, Our Passion</h2>
+                <h3 style="pointer-events: auto;">Crafting memories that last a lifetime.</h3>
+                <p style="pointer-events: auto;">At Tekzbyte Tours, we believe travel is more than just visiting a new place; it’s about experiencing cultures, creating connections, and discovering new parts of yourself. With years of expertise in the travel industry, our dedicated team of travel enthusiasts designs bespoke itineraries that cater to every desire.</p>
+                <p style="pointer-events: auto;">We are committed to providing seamless, luxurious, and authentic travel experiences, whether you're seeking adventurous treks, relaxing beach holidays, cultural immersions, or business travel solutions. Your dream vacation starts here!</p>
+                <a href="#services" class="btn btn-primary" style="pointer-events: auto;">Our Expertise</a>
+            </div>
+            <div class="about-image" style="pointer-events: auto;">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.WI1JhSBfnkT1mIM0zK5yAgHaEO?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt="Tekzbyte Tours team planning a trip" style="pointer-events: auto;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section-padding services" style="pointer-events: auto;">
+        <div class="container" style="pointer-events: auto;">
+            <h2 style="pointer-events: auto;">Our Tailored Travel Services</h2>
+            <div class="service-grid" style="pointer-events: auto;">
+                <div class="service-card" style="pointer-events: auto;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="pointer-events: auto;"><path d="M12 2c-3.86 0-7 3.14-7 7 0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" style="pointer-events: auto;"></path></svg>
+                    <h3 style="pointer-events: auto;">Customized Itineraries</h3>
+                    <p style="pointer-events: auto;">We design personalized travel plans that perfectly match your interests, budget, and travel style. Every detail is crafted for your unique journey.</p>
+                    <a href="#contact" class="btn" style="pointer-events: auto;">Start Planning</a>
+                </div>
+                <div class="service-card" style="pointer-events: auto;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="pointer-events: auto;"><path d="M21 10h-2V7h-4V5H9v2H5v3H3v6h2v3h4v2h6v-2h4v-3h2v-6zM7 7h10v3H7V7zm10 8H7v-3h10v3z" style="pointer-events: auto;"></path></svg>
+                    <h3 style="pointer-events: auto;">Luxury Accommodations</h3>
+                    <p style="pointer-events: auto;">Experience the finest hotels, resorts, and unique stays handpicked for comfort, elegance, and exceptional service in every destination.</p>
+                    <a href="#contact" class="btn" style="pointer-events: auto;">View Options</a>
+                </div>
+                <div class="service-card" style="pointer-events: auto;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="pointer-events: auto;"><path d="M11 15h2v2h-2v-2zm0-8h2v6h-2v-6zm.99-5c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" style="pointer-events: auto;"></path></svg>
+                    <h3 style="pointer-events: auto;">24/7 Support</h3>
+                    <p style="pointer-events: auto;">Travel with peace of mind knowing our dedicated team is available around the clock to assist you with any needs or emergencies.</p>
+                    <a href="#contact" class="btn" style="pointer-events: auto;">Get Support</a>
+                </div>
+                <div class="service-card" style="pointer-events: auto;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="pointer-events: auto;"><path d="M12 11c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm0 9c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9zm2-10h-4v-.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V10z" style="pointer-events: auto;"></path></svg>
+                    <h3 style="pointer-events: auto;">Exclusive Tour Packages</h3>
+                    <p style="pointer-events: auto;">Explore unique, pre-arranged packages to exotic locations, complete with expert guides and enriching cultural activities.</p>
+                    <a href="#destinations" class="btn" style="pointer-events: auto;">View Tours</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="section-padding" style="pointer-events: auto;">
+        <div class="container" style="pointer-events: auto;">
+            <h2 style="pointer-events: auto;">Popular Destinations to Discover</h2>
+            <div class="destination-grid" style="pointer-events: auto;">
+                <div class="destination-card" style="pointer-events: auto;">
+                    <img src="https://images.unsplash.com/photo-1542055620-e290f1d63dd8?q=80&amp;w=2670&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Paris, France" style="pointer-events: auto;">
+                    <div class="destination-info" style="pointer-events: auto;">
+                        <h3 style="pointer-events: auto;">Romantic Paris Escape</h3>
+                        <p class="location" style="pointer-events: auto;">France</p>
+                        <p style="pointer-events: auto;">Immerse yourself in the city of love. Eiffel Tower, Louvre Museum, charming cafes and delightful gourmet experiences await.</p>
+                        <a href="#contact" class="btn btn-primary" style="pointer-events: auto;">Book Now</a>
+                    </div>
+                </div>
+                <div class="destination-card" style="pointer-events: auto;">
+                    <img src="https://images.unsplash.com/photo-1498188177309-84d59a72dfd5?q=80&amp;w=2940&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Kyoto, Japan" style="pointer-events: auto;">
+                    <div class="destination-info" style="pointer-events: auto;">
+                        <h3 style="pointer-events: auto;">Serene Kyoto Culture Tour</h3>
+                        <p class="location" style="pointer-events: auto;">Japan</p>
+                        <p style="pointer-events: auto;">Explore ancient temples, beautiful geisha districts, and tranquil gardens. A perfect blend of tradition and natural beauty.</p>
+                        <a href="#contact" class="btn btn-primary" style="pointer-events: auto;">Book Now</a>
+                    </div>
+                </div>
+                <div class="destination-card" style="pointer-events: auto;">
+                    <img src="https://images.unsplash.com/photo-1522079089988-fa0f4e2f694e?q=80&amp;w=2787&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Santorini, Greece" style="pointer-events: auto;">
+                    <div class="destination-info" style="pointer-events: auto;">
+                        <h3 style="pointer-events: auto;">Breathtaking Santorini Retreat</h3>
+                        <p class="location" style="pointer-events: auto;">Greece</p>
+                        <p style="pointer-events: auto;">Witness stunning sunsets, iconic white-washed villages, and crystal-clear Aegean waters. An idyllic island escape.</p>
+                        <a href="#contact" class="btn btn-primary" style="pointer-events: auto;">Book Now</a>
+                    </div>
+                </div>
+                <div class="destination-card" style="pointer-events: auto;">
+                    <img src="https://images.unsplash.com/photo-1507502700682-ee3374888126?q=80&amp;w=2940&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Machu Picchu, Peru" style="pointer-events: auto;">
+                    <div class="destination-info" style="pointer-events: auto;">
+                        <h3 style="pointer-events: auto;">Machu Picchu Adventure</h3>
+                        <p class="location" style="pointer-events: auto;">Peru</p>
+                        <p style="pointer-events: auto;">Trek through the Andes to discover the lost city of the Incas. An awe-inspiring journey through history and nature.</p>
+                        <a href="#contact" class="btn btn-primary" style="pointer-events: auto;">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials" style="pointer-events: auto;">
+        <div class="container" style="pointer-events: auto;">
+            <h2 style="pointer-events: auto;">What Our Travelers Say</h2>
+            <div class="testimonial-grid" style="pointer-events: auto;">
+                <div class="testimonial-card" style="pointer-events: auto;">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&amp;w=2787&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Client 1" style="pointer-events: auto;">
+                    <p style="pointer-events: auto;">"Tekzbyte Tours planned our honeymoon, and it was simply magical! Every detail was perfect, from the luxury hotel to the private guided tours. Truly unforgettable."</p>
+                    <div class="author" style="pointer-events: auto;">- Jane &amp; John Doe, Maldives</div>
+                </div>
+                <div class="testimonial-card" style="pointer-events: auto;">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&amp;w=2788&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Client 2" style="pointer-events: auto;">
+                    <p style="pointer-events: auto;">"I've traveled with many agencies, but Tekzbyte stands out. Their knowledge of local cultures and hidden gems made my solo trip to Southeast Asia so enriching."</p>
+                    <div class="author" style="pointer-events: auto;">- Sarah Chen, Solo Adventurer</div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="contact" class="cta" style="pointer-events: auto;">
+        <div class="container" style="pointer-events: auto;">
+            <h2 style="pointer-events: auto;">Ready to Discover Your Next Journey?</h2>
+            <p style="pointer-events: auto;">Let Tekzbyte Tours craft an extraordinary travel experience tailored just for you. Contact us today to start planning your dream adventure.</p>
+            <a href="mailto:info@tekzbytetours.com" class="btn" style="pointer-events: auto;">Get a Free Quote</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="pointer-events: auto;">
+        <div class="container" style="pointer-events: auto;">
+            <div class="footer-grid" style="pointer-events: auto;">
+                <div class="footer-col" style="pointer-events: auto;">
+                    <h4 style="pointer-events: auto;">Tekzbyte Tours</h4>
+                    <p style="pointer-events: auto;">Your premier partner in crafting bespoke travel experiences nationwide. Adventure awaits!</p>
+                    <div class="social-icons" style="pointer-events: auto;">
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook" style="pointer-events: auto;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="pointer-events: auto;"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.812c-3.267 0-3.188 4.093-3.188 4.093v2.907z" style="pointer-events: auto;"></path></svg>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" aria-label="Twitter" style="pointer-events: auto;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="pointer-events: auto;"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.792-1.574 2.168-2.722-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.392 0-6.148 2.755-6.148 6.147 0 .482.054.95.145 1.396-5.111-.252-9.637-2.785-12.686-6.64-.528.905-.833 1.957-.833 3.224 0 2.147 1.099 4.044 2.768 5.148-.203-.007-.39-.015-.592-.057v.08c0 2.986 2.127 5.474 4.939 6.04-.411.111-.849.172-1.296.172-.34 0-.67-.04-.993-.095.783 2.443 3.065 4.223 5.795 4.272-2.115 1.664-4.764 2.668-7.697 2.668-.501 0-.999-.03-1.488-.088 2.922 1.871 6.059 2.955 9.173 2.955 11.056 0 17.103-9.123 17.103-17.103 0-.26-.006-.518-.018-.775 1.17-.842 2.172-1.892 2.973-3.15z" style="pointer-events: auto;"></path></svg>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram" style="pointer-events: auto;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="pointer-events: auto;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.669 4.772-4.919 4.919-.058 1.265-.07 1.645-.07 4.85s.012 3.584.07 4.85c.148 3.225 1.669 4.772 4.919 4.919.058 1.265.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.669 4.772-4.919 4.919-.058 1.265-.07 1.645-.07 4.85s.012 3.584.07 4.85c.148 3.252 1.691 4.771 4.919 4.919 1.266.058 1.644.07 4.85.07s3.584-.012 4.85-.07c3.252-.148 4.771-1.691 4.919-4.919.058-1.265.07-1.645.07-4.85s-.012-3.584-.07-4.85c-.148-3.252-1.691-4.771-4.919-4.919-1.266-.058-1.644-.07-4.85-.07zm0 8.012c-2.762 0-5 2.239-5 5s2.238 5 5 5 5-2.239 5-5-2.238-5-5-5zm0 8.012c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3zm5.338-11.459c-.895 0-1.62-.725-1.62-1.62s.725-1.62 1.62-1.62 1.62.725 1.62 1.62-.725 1.62-1.62 1.62z" style="pointer-events: auto;"></path></svg>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn" style="pointer-events: auto;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="pointer-events: auto;"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" style="pointer-events: auto;"></path></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-col" style="pointer-events: auto;">
+                    <h4 style="pointer-events: auto;">Quick Links</h4>
+                    <ul style="pointer-events: auto;">
+                        <li style="pointer-events: auto;"><a href="#about" style="pointer-events: auto;">About Us</a></li>
+                        <li style="pointer-events: auto;"><a href="#services" style="pointer-events: auto;">Our Services</a></li>
+                        <li style="pointer-events: auto;"><a href="#destinations" style="pointer-events: auto;">Destinations</a></li>
+                        <li style="pointer-events: auto;"><a href="#testimonials" style="pointer-events: auto;">Client Reviews</a></li>
+                        <li style="pointer-events: auto;"><a href="#" style="pointer-events: auto;">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col" style="pointer-events: auto;">
+                    <h4 style="pointer-events: auto;">Support</h4>
+                    <ul style="pointer-events: auto;">
+                        <li style="pointer-events: auto;"><a href="#contact" style="pointer-events: auto;">Contact Us</a></li>
+                        <li style="pointer-events: auto;"><a href="#" style="pointer-events: auto;">Privacy Policy</a></li>
+                        <li style="pointer-events: auto;"><a href="#" style="pointer-events: auto;">Terms of Service</a></li>
+                        <li style="pointer-events: auto;"><a href="#" style="pointer-events: auto;">Booking Conditions</a></li>
+                        <li style="pointer-events: auto;"><a href="#" style="pointer-events: auto;">Site Map</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col" style="pointer-events: auto;">
+                    <h4 style="pointer-events: auto;">Contact Info</h4>
+                    <p style="pointer-events: auto;">123 Adventure Lane, Wanderlust City, WL 54321</p>
+                    <p style="pointer-events: auto;">Email: <a href="mailto:info@tekzbytetours.com" style="pointer-events: auto;">info@tekzbytetours.com</a></p>
+                    <p style="pointer-events: auto;">Phone: <a href="tel:+1234567890" style="pointer-events: auto;">+1 (234) 567-890</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom" style="pointer-events: auto;">
+                © 2026 Tekzbyte Tours. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script style="pointer-events: auto;">
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const offset = document.querySelector('.navbar').offsetHeight; // Adjust for fixed navbar height
+                        const bodyRect = document.body.getBoundingClientRect().top;
+                        const elementRect = targetElement.getBoundingClientRect().top;
+                        const elementPosition = elementRect - bodyRect;
+                        const offsetPosition = elementPosition - offset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+</body></html>
