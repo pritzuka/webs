@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mushora AI - Chat with 1000+ AI Models</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6a0572; /* Deep Purple */
+            --secondary-color: #a020f0; /* Purple */
+            --accent-color: #e0b0ff; /* Light Purple */
+            --text-dark: #2c0032; /* Very Dark Purple */
+            --text-light: #f0e6fa; /* Off-white Purple */
+            --background-dark: #1a001d; /* Darkest Purple */
+            --background-light: #f7f0fc; /* Lightest Purple */
+            --gradient-1: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            --gradient-2: linear-gradient(135deg, var(--primary-color), var(--text-dark));
+
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 3rem;
+            --spacing-xl: 5rem;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+
+        p {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient-1);
+            color: var(--text-light);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            background: var(--gradient-2);
+        }
+
+        .section-padding {
+            padding: var(--spacing-xl) 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--background-dark);
+            padding: var(--spacing-md) 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            letter-spacing: -1px;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-lg);
+        }
+
+        .navbar .nav-links a {
+            color: var(--text-light);
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-2);
+            color: var(--text-light);
+            padding-top: calc(var(--spacing-xl) * 2);
+            padding-bottom: var(--spacing-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: rgba(var(--secondary-color) / 0.1);
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 0;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: var(--spacing-md);
+            color: var(--accent-color);
+            font-weight: 700;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            max-width: 800px;
+            margin: 0 auto var(--spacing-lg) auto;
+            opacity: 0.9;
+        }
+
+        .hero-image {
+            width: clamp(250px, 70vw, 600px);
+            height: auto;
+            margin-top: var(--spacing-xl);
+            border-radius: 20px;
+            box-shadow: 0 151px 30px rgba(0, 0, 0, 0.5);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Features Section */
+        .features {
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            position: relative;
+        }
+
+        /* Diagonal background effect */
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1); /* Use secondary color for the diagonal fill */
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            z-index: 0;
+        }
+
+        .features .container {
+            z-index: 1;
+            position: relative;
+        }
+
+        .features h2 {
+            color: var(--accent-color);
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: var(--spacing-xl);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: var(--spacing-lg);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(var(--secondary-color) / 0.2);
+            clip-path: circle(0% at 50% 50%);
+            transition: clip-path 0.5s ease-out;
+            z-index: -1;
+        }
+
+        .feature-card:hover::before {
+            clip-path: circle(75% at 50% 50%);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(var(--secondary-color) / 0.3);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-md);
+            display: block;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card h3 {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            opacity: 0.8;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background-color: var(--background-light);
+            color: var(--text-dark);
+        }
+
+        .how-it-works h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: var(--spacing-xl);
+            color: var(--primary-color);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            position: relative;
+        }
+
+        .steps-grid::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 2px;
+            background: var(--accent-color);
+            z-index: 0;
+            display: none; /* Hidden on mobile, shown on larger screens */
+        }
+
+        .step-card {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: var(--spacing-lg);
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(var(--primary-color) / 0.15);
+        }
+
+        .step-card .step-number {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-1);
+            color: var(--text-light);
+            border-radius: 50%;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 3px solid var(--accent-color);
+        }
+
+        .step-card h3 {
+            color: var(--secondary-color);
+            font-size: 1.4rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: var(--gradient-1);
+            color: var(--text-light);
+        }
+
+        .testimonials h2 {
+            color: var(--accent-color);
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .testimonial-carousel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: var(--spacing-lg);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(var(--text-dark) / 0.4);
+        }
+
+        .testimonial-card .quote {
+            font-style: italic;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .testimonial-card .quote::before {
+            content: '“';
+            font-size: 4rem;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--accent-color);
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .testimonial-card .author {
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-top: var(--spacing-sm);
+        }
+
+        .testimonial-card .author-title {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* CTA Section */
+        .cta {
+            background-color: var(--background-light);
+            text-align: center;
+        }
+
+        .cta .container {
+            background: var(--gradient-1);
+            border-radius: 25px;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            color: var(--text-light);
+            box-shadow: 0 15px 50px rgba(var(--primary-color) / 0.3);
+            transform: translateY(var(--spacing-lg)); /* Lift off from previous section */
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta h2 {
+            color: var(--accent-color);
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            max-width: 700px;
+            margin: 0 auto var(--spacing-lg) auto;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            padding-top: calc(var(--spacing-xl) * 2); /* Account for CTA lift */
+            padding-bottom: var(--spacing-lg);
+            text-align: center;
+            position: relative;
+        }
+
+        .footer .container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xl);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            text-align: left;
+        }
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-md);
+            letter-spacing: -1px;
+            display: block;
+        }
+
+        .footer-col h4 {
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-md);
+            font-size: 1.2rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .footer-col ul li a {
+            color: var(--text-light);
+            opacity: 0.8;
+            transition: color 0.3s ease, opacity 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-color);
+            opacity: 1;
+            text-decoration: none;
+        }
+
+        .social-links {
+            margin-top: var(--spacing-md);
+            display: flex;
+            gap: var(--spacing-sm);
+            justify-content: center;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.8rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            text-decoration: none;
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        .newsletter {
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .newsletter p {
+            margin-bottom: var(--spacing-md);
+            opacity: 0.9;
+        }
+
+        .newsletter form {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-sm);
+        }
+
+        .newsletter input[type="email"] {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: none;
+            border-radius: 50px;
+            width: 250px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            outline: none;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .newsletter input[type="email"]::placeholder {
+            color: var(--text-light);
+            opacity: 0.7;
+        }
+
+        .newsletter input[type="email"]:focus {
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 3px var(--accent-color);
+        }
+
+
+        .copyright {
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-md);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none; /* Hide nav links on small screens */
+            }
+
+            .steps-grid.gap-md {
+                gap: var(--spacing-md);
+            }
+
+            .steps-grid::after {
+                display: none; /* Hide line on small screens */
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-col h4 {
+                text-align: center;
+            }
+
+            .footer-col ul {
+                padding-left: 0;
+            }
+
+            .newsletter form {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .newsletter input[type="email"] {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .steps-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .steps-grid::after {
+                display: block;
+            }
+        }
+
+        /* Font Awesome for icons */
+        @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">Mushora AI</a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Unlock Infinite Insights with Mushora AI</h1>
+            <p>Chat with over 1000+ specialized AI models simultaneously. Get diverse perspectives, cross-referenced solutions, and truly comprehensive answers to your most complex questions.</p>
+            <a href="#contact" class="btn">Start Your AI Conversation Today</a>
+            <img src="https://images.unsplash.com/photo-1596542718915-d72b26090e51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80" alt="Futuristic AI Brain" class="hero-image">
+        </div>
+    </header>
+
+    <section id="features" class="features section-padding text-center">
+        <div class="container">
+            <h2>Why Choose Mushora AI?</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>1000+ AI Personalities</h3>
+                    <p>Access a vast network of AI models, each with specialized knowledge and unique analysis capabilities, offering unparalleled depth.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-comments"></i>
+                    <h3>Unified Discussion Panel</h3>
+                    <p>Witness real-time discussions between AIs. Their collective insights are synthesized into a cohesive, easy-to-understand result.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Innovative Perspective</h3>
+                    <p>Break free from single-AI biases. Our multi-AI approach guarantees diverse viewpoints and thoroughly vetted information.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Enhanced Accuracy</h3>
+                    <p>Leverage the power of consensus. Multiple AIs scrutinize data, leading to higher accuracy and more reliable outcomes.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-magic"></i>
+                    <h3>Effortless Complexity</h3>
+                    <p>Translate intricate problems into clear, actionable insights. Mushora AI handles the complexity so you don't have to.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Future-Proof Solutions</h3>
+                    <p>Stay ahead with cutting-edge AI. Our platform continuously integrates the latest models to keep you at the forefront of innovation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works section-padding text-center">
+        <div class="container">
+            <h2>Experience the Power of Collective AI Intelligence</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Pose Your Question</h3>
+                    <p>Simply type your query into our intuitive interface, no matter how simple or complex.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>AI Models Engage</h3>
+                    <p>Your question is distributed to a curated group of 1000+ specialized AI models.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Observe the Discussion</h3>
+                    <p>Witness the AIs analyze, debate, and refine their answers in a dynamic, transparent process.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Receive Comprehensive Results</h3>
+                    <p>A final, synthesized answer, enriched by cross-model validation, is presented to you.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h3>Explore Deeper</h3>
+                    <p>Drill down into specific AI perspectives or adjust parameters for more nuanced insights.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">6</div>
+                    <h3>Integrate & Innovate</h3>
+                    <p>Use Mushora AI's collective intelligence to supercharge your projects and decision-making.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials section-padding text-center">
+        <div class="container">
+            <h2>What Our Trailblazers Say</h2>
+            <div class="testimonial-carousel">
+                <div class="testimonial-card">
+                    <p class="quote">"Mushora AI is a game-changer. I’ve never seen such depth and nuance in AI responses. It's like having a super-powered think tank at my fingertips."</p>
+                    <p class="author">Dr. Anya Sharma</p>
+                    <p class="author-title">Lead AI Researcher, Synapse Labs</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="quote">"Complex problem-solving used to take days. With Mushora AI, I get consolidated, multi-faceted solutions in minutes. Truly revolutionary for business strategy."</p>
+                    <p class="author">Mark Chen</p>
+                    <p class="author-title">CEO, Quantum Dynamics Inc.</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="quote">"Finally, an AI that understands the value of diverse opinions. The fact that I can see the argument develop between models is incredibly insightful."</p>
+                    <p class="author">Emily Rodriguez</p>
+                    <p class="author-title">Freelance Innovator & Consultant</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="cta section-padding">
+        <div class="container">
+            <h2>Ready to Elevate Your AI Experience?</h2>
+            <p>Join the future of intelligence. Sign up now and unleash the collective power of 1000+ AI models.</p>
+            <a href="#" class="btn">Get Started for Free</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="footer-logo">Mushora AI</a>
+                    <p>Reimagining intelligence through collective AI discussion.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">API Access</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col newsletter">
+                    <h4>Stay Connected</h4>
+                    <p>Subscribe to our newsletter for the latest updates and AI insights.</p>
+                    <form>
+                        <input type="email" placeholder="Your email address">
+                        <button type="submit" class="btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2026 Mushora AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Navbar scroll effect - example (customize as needed)
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) { // Adjust value as needed
+                    navbar.style.backgroundColor = 'rgba(26, 0, 29, 0.9)'; /* Slightly transparent dark */
+                    navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.4)';
+                } else {
+                    navbar.style.backgroundColor = 'var(--background-dark)';
+                    navbar.style.boxShadow = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
