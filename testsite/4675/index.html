@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumFlow Solutions - Innovating Tomorrow's Digital Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Exo+2:wght=400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4A00E0;
+            --secondary-color: #8E2DE2;
+            --accent-color: #00D2FF;
+            --dark-background: #1A1A2E;
+            --light-background: #E0F7FA;
+            --text-light: #E0E0E0;
+            --text-dark: #333333;
+            --gradient-main: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-cta: linear-gradient(45deg, var(--accent-color) 0%, #007bff 100%);
+            --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-dark: 0 15px 40px rgba(0, 0, 0, 0.3);
+            --border-radius: 12px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-light);
+            background-color: var(--dark-background);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 clamp(1rem, 5vw, 2rem);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-dark);
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--gradient-main);
+            color: var(--text-light);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--gradient-cta);
+            color: var(--dark-background);
+            border: none;
+            box-shadow: 0 5px 20px rgba(0, 210, 255, 0.4);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 210, 255, 0.6);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 700;
+            color: var(--text-light);
+            line-height: 1.2;
+        }
+
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            position: relative;
+            z-index: 2;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Header */
+        .main-header {
+            background-color: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 35px;
+            margin-right: 10px;
+        }
+
+        .nav_list {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav_link {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav_link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav_link:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            height: 3px;
+            width: 25px;
+            background-color: var(--text-light);
+            margin-bottom: 5px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: url('https://images.unsplash.com/photo-1620207418302-cf56c07a3c9b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcwMTZ8MHwxfHNlYXJjaHwyMHx8c3BhY2UlMjB0ZWNofGVufDF8fHx8fDE3MTc4Mjg0NDl8MA&ixlib=rb-4.0.3&q=80&w=1080') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 46, 0.7);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeInScale 1s ease-out forwards;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--accent-color), #ffffff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            margin-bottom: 2.5rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons .btn {
+            margin: 0 1rem;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* About Section */
+        .about-section {
+            background-color: var(--dark-background);
+            padding: 8rem 0;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-content {
+            padding-right: 2rem;
+        }
+
+        .about-content h2 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .about-content p {
+            margin-bottom: 1.2rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-dark);
+            transform: rotateZ(3deg);
+            transition: transform 0.5s ease;
+        }
+        .about-image img:hover {
+            transform: rotateZ(0deg) scale(1.03);
+        }
+
+        /* Services Section */
+        .services-section {
+            background-color: #282845;
+            padding: 8rem 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            place-items: center;
+        }
+
+        .service-card {
+            background-color: #1A1A2E;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-dark);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(74, 0, 224, 0.4);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(74, 0, 224, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            z-index: 0;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border-color: var(--accent-color);
+        }
+
+        .service-card i {
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            background: -webkit-linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+            flex-grow: 1;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Font Awesome for icons */
+        @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+
+        /* Portfolio Section */
+        .portfolio-section {
+            background-color: var(--dark-background);
+            padding: 8rem 0;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .portfolio-item {
+            background-color: #282845;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-dark);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+        }
+
+        .portfolio-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(26, 26, 46, 0.8) 0%, rgba(26, 26, 46, 0) 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .portfolio-item:hover::before {
+            opacity: 1;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            vertical-align: middle;
+            transition: transform 0.4s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+            background: linear-gradient(to top, rgba(26, 26, 46, 1) 0%, rgba(26, 26, 46, 0.7) 100%);
+        }
+
+        .portfolio-item:hover .portfolio-info {
+            transform: translateY(0);
+        }
+
+        .portfolio-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .portfolio-info p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .portfolio-btn {
+            display: block;
+            margin-top: 1rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .portfolio-btn i {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+        .portfolio-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background-color: #282845;
+            padding: 8rem 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .testimonial-card {
+            background-color: #1A1A2E;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-dark);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+        }
+
+        .testimonial-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto;
+            border: 3px solid var(--accent-color);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+
+        .testimonial-card .client-name {
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-top: auto; /* Push name to bottom */
+        }
+        .testimonial-card .client-title {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: var(--dark-background);
+            padding: 8rem 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info h2 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            gap: 15px;
+        }
+
+        .contact-info-item i {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+        }
+
+        .contact-info-item a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-info-item a:hover {
+            color: var(--accent-color);
+        }
+
+        .contact-form {
+            background-color: #282845;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.7rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(74, 0, 224, 0.5);
+            border-radius: 8px;
+            background-color: #1A1A2E;
+            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.3);
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .contact-form .btn {
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: #1A1A2E;
+            color: var(--text-light);
+            padding: 4rem 0 2rem;
+            font-size: 0.95rem;
+            text-align: center;
+            border-top: 1px solid rgba(74, 0, 224, 0.2);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+            text-align: left;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .footer-col p,
+        .footer-col ul {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .footer-col ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 0;
+            height: 1px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-col ul li a:hover::after {
+            width: 100%;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(74, 0, 224, 0.2);
+            font-size: 0.85rem;
+            color: rgba(224, 224, 224, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .nav_list {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(26, 26, 46, 0.95);
+                backdrop-filter: blur(8px);
+                padding: 1.5rem 0;
+                border-top: 1px solid rgba(74, 0, 224, 0.4);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav_list.active {
+                display: flex;
+            }
+
+            .nav_link {
+                padding: 0.8rem 0;
+                text-align: center;
+                border-bottom: 1px solid rgba(74, 0, 224, 0.2);
+            }
+            .nav_link:last-child {
+                border-bottom: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-content {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+            .about-image img {
+                margin: 0 auto;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: clamp(2.5rem, 8vw, 3.8rem);
+            }
+            .hero-content p {
+                font-size: clamp(1rem, 3vw, 1.3rem);
+            }
+            .hero-buttons .btn {
+                margin: 1rem 0.5rem;
+                display: block;
+                width: 70%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo">QuantumFlow Solutions</a>
+            <nav>
+                <ul class="nav_list">
+                    <li><a href="#hero" class="nav_link">Home</a></li>
+                    <li><a href="#about" class="nav_link">About Us</a></li>
+                    <li><a href="#services" class="nav_link">Services</a></li>
+                    <li><a href="#portfolio" class="nav_link">Portfolio</a></li>
+                    <li><a href="#testimonials" class="nav_link">Testimonials</a></li>
+                    <li><a href="#contact" class="nav_link">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="container hero-content">
+            <h1>Ignite Your Digital Future with QuantumFlow</h1>
+            <p>We craft cutting-edge web experiences and robust digital solutions that transcend expectations. Partner with us to revolutionize your online presence.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary">Explore Our Services</a>
+                <a href="#contact" class="btn btn-secondary">Get a Free Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-heading">About QuantumFlow Solutions</h2>
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2>Innovating the Web Since 2020</h2>
+                    <p>At QuantumFlow Solutions, we believe in the power of transformative technology. Founded by a team of visionary developers and designers, our mission is to deliver unparalleled web solutions that drive growth and foster engagement.</p>
+                    <p>We specialize in creating intuitive, high-performance websites, bespoke web applications, and dynamic digital strategies. Our approach is collaborative and client-centric, ensuring every project reflects your unique vision and objectives. We thrive on challenges and are committed to staying at the forefront of digital innovation.</p>
+                    <a href="#contact" class="btn btn-primary">Learn More About Us</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1596547146440-27671d18f579?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcwMTZ8MHwxfHNlYXJjaHw0fHxkaWdpdGFsJTIwdGVhbXxlbnwxfHx8fHwxNzE3ODI4NDQ4fDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Team members collaborating on a digital project">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2 class="section-heading">Our Cutting-Edge Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-desktop"></i>
+                    <h3>Custom Web Development</h3>
+                    <p>From captivating landing pages to complex enterprise platforms, we build responsive, scalable, and secure websites tailored to your exact needs. We use modern frameworks to deliver robust solutions.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Performance Optimization</h3>
+                    <p>Ensure your website loads at lightning speed and performs flawlessly. We optimize code, assets, and server configurations to enhance user experience and search engine rankings.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-palette"></i>
+                    <h3>UI/UX Design Excellence</h3>
+                    <p>Crafting intuitive and visually stunning user interfaces (UI) and engaging user experiences (UX) is at the core of what we do. We design with your users in mind.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-server"></i>
+                    <h3>Cloud & Hosting Solutions</h3>
+                    <p>Leverage the power of the cloud for resilient, scalable, and high-availability hosting. We provide comprehensive setup, migration, and management services on leading platforms.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Security & Maintenance</h3>
+                    <p>Protect your digital assets with our robust security protocols and ongoing maintenance plans. We keep your systems up-to-date and safeguarded against evolving threats.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Digital Strategy & SEO</h3>
+                    <p>Beyond development, we help you define and execute a winning digital strategy, including advanced SEO techniques to ensure your target audience finds you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="container">
+            <h2 class="section-heading">Our Recent Innovative Projects</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1550005707-160a2233f20b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcwMTZ8MHwxfHNlYXJjaHwyfHx3ZWIlMjBwcm9qZWN0JTIwZGVzaWdufGVufDF8fHx8fDE3MTc4Mjg0NDZ8MA&ixlib=rb-4.0.3&q=80&w=1080" alt="futuristic website interface">
+                    <div class="portfolio-info">
+                        <h3>Cosmic Explorer App</h3>
+                        <p>An interactive educational web application for exploring celestial bodies and astronomical data.</p>
+                        <a href="#" class="portfolio-btn">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1620207418302-cf56c07a3c9b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcwMTZ8MHwxfHNlYXJjaHwyMHx8d2ViJTIwYXBwbGljYXRpb258ZW58DF8fHx8fDE3MTc4Mjg0NDl8MA&ixlib=rb-4.0.3&q=80&w=1080" alt="data visualization dashboard">
+                    <div class="portfolio-info">
+                        <h3>Synapse AI Dashboard</h3>
+                        <p>A sophisticated data analytics dashboard with real-time reporting for a leading AI firm.</p>
+                        <a href="#" class="portfolio-btn">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4cd085?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcwMTZ8MHwxfHNlYXJjaHwxNXx8ZWNvbW1lcmNlJTIwbGFuZGluZyUyMHBhZ2V8ZW58MHx8fHwxNzE3ODI4NDQ4fDA&ixlib=rb-4.0.3&q=80&w=1080" alt="e-commerce website design">
+                    <div class="portfolio-info">
+                        <h3>Bloom & Thrive E-commerce</h3>
+                        <p>A beautifully designed and highly optimized e-commerce platform for a sustainable lifestyle brand.</p>
+                        <a href="#" class="portfolio-btn">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                 <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcwMTZ8MHwxfHNlYXJjaHwxMHx8Y29kZSUyMGRldmVsb3BtZW50fGVufDB8fHx8fDE3MTc4Mjg0NDh8MA&ixlib=rb-4.0.3&q=80&w=1080" alt="coding on multiple monitors">
+                    <div class="portfolio-info">
+                        <h3>Project Nexus Portal</h3>
+                        <p>An internal enterprise portal for project management and team collaboration with custom integrations.</p>
+                        <a href="#" class="portfolio-btn">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1629904853716-95cebce91c5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcwMTZ8MHwxfHNlYXJjaHwxNHx8bW9iaWxlJTIwYXBwJTIwd2ViJTIwZGVzaWdufGVufDB8fHx8fDE3MTc4Mjg0NDh8MA&ixlib=rb-4.0.3&q=80&w=1080" alt="mobile application interface">
+                    <div class="portfolio-info">
+                        <h3>EcoConnect Mobile App</h3>
+                        <p>A hybrid mobile application built with web technologies to connect users with local environmental initiatives.</p>
+                        <a href="#" class="portfolio-btn">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1549692520-acc66822be88?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcwMTZ8MHwxfHNlYXJjaHw3fHx3ZWIlMjBjb2RpbmclMjBzY3JlZW58ZW58MHx8fHwxNzE3ODI4OTg0fDA&ixlib=rb-4.0.3&q=80&w=1080" alt="futuristic code on monitor">
+                    <div class="portfolio-info">
+                        <h3>QuantumMind AI Landing Page</h3>
+                        <p>A sleek and engaging landing page designed to effectively launch an advanced AI research platform.</p>
+                        <a href="#" class="portfolio-btn">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <h2 class="section-heading">What Our Clients Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcwMTZ8MHwxfHNlYXJjaHw0fHxtYW4lMjBwb3J0cmFpdHxlbnwwfHx8fHwxNzE3ODI4NDQ1fDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Client 1">
+                    <p>"QuantumFlow took our complex vision and turned it into an elegant, functional reality. Their expertise in UI/UX and backend development was truly impressive. They delivered beyond our expectations, and our users love the new platform."</p>
+                    <span class="client-name">Alex M.</span>
+                    <span class="client-title">CEO, InnovateTech</span>
+                </div>
+                <div class="testimonial-card">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29329?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcwMTZ8MHwxfHNlYXJjaHwxNnx8d29tYW4lMjBwb3J0cmFpdHxlbnwwfHx8fHwxNzE3ODI4NDQ1fDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Client 2">
+                    <p>"The team at QuantumFlow revitalized our online presence. Their strategic advice and seamless execution led to a significant increase in our customer engagement and conversions. A truly professional and talented group!"</p>
+                    <span class="client-name">Sarah L.</span>
+                    <span class="client-title">Marketing Director, GlobalReach</span>
+                </div>
+                <div class="testimonial-card">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjcwMTZ8MHwxfHNlYXJjaHwxM3x8cHJvZmVzc2lvbmFsJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzE3ODI4NDQ4fDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Client 3">
+                    <p>"We needed a robust and scalable web application, and QuantumFlow delivered. Their project management was excellent, communication clear, and the end product was exactly what we envisioned. Highly recommend!"</p>
+                    <span class="client-name">David K.</span>
+                    <span class="client-title">CTO, DataMotion Corp.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-heading">Let's Build Something Amazing Together</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Get in Touch</h2>
+                    <p>Have a project in mind or just want to say hello? We'd love to hear from you. Fill out the form or reach out through our contact details:</p>
+                    <div class="contact-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>123 Digital Avenue, Suite 400, Innovation City, IL 60601</p>
+                    </div>
+                    <div class="contact-info-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:info@quantumflow.solutions">info@quantumflow.solutions</a>
+                    </div>
+                    <div class="contact-info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>QuantumFlow Solutions</h4>
+                <p>Innovating Tomorrow's Digital Experience. We craft bespoke web solutions that empower businesses to thrive in the digital age.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#portfolio">Our Portfolio</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services">Web Development</a></li>
+                    <li><a href="#services">UI/UX Design</a></li>
+                    <li><a href="#services">Digital Strategy</a></li>
+                    <li><a href="#services">Cloud Solutions</a></li>
+                    <li><a href="#services">Maintenance</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Digital Ave, Innovation City</p>
+                <p><i class="fas fa-phone-alt"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> info@quantumflow.solutions</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 QuantumFlow Solutions. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger');
+            const navList = document.querySelector('.nav_list');
+            const navLinks = document.querySelectorAll('.nav_link');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navList.classList.toggle('active');
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navList.classList.contains('active')) {
+                        hamburger.classList.remove('active');
+                        navList.classList.remove('active');
+                    }
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Header scroll effect
+            const header = document.querySelector('.main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.style.backgroundColor = 'rgba(26, 26, 46, 0.95)';
+                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.4)';
+                } else {
+                    header.style.backgroundColor = 'rgba(26, 26, 46, 0.8)';
+                    header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.3)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
